@@ -21,3 +21,8 @@ https://pixelfrog-assets.itch.io/pixel-adventure-1
 2. Check **Advanced Settings** (top-right corner).
 3. Go to **Display > Window**.
 4. Un-check **DPI > Allow hiDPI**.
+
+# Tappy Plane
+Initial project setup: Open Project > Project Settings.  
+Go to Display > Window. Set Viewport Width to 480, and Height to 854.  
+Change Handheld > Orientation to **Portrait**.
