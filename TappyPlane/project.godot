@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="TappyPlane"
+run/main_scene="res://game/game.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
@@ -18,6 +19,7 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=480
 window/size/viewport_height=854
+window/dpi/allow_hidpi=false
 window/handheld/orientation=1
 
 [rendering]
