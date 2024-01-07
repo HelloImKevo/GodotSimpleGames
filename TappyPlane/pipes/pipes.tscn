@@ -17,6 +17,7 @@ rotation = 3.14159
 position = Vector2(2.08165e-12, 80)
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-position = Vector2(79, 0)
+position = Vector2(-32, 0)
+rect = Rect2(-10, -10, 120, 20)
 
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_screen_exited"]
