@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3s3jarsblept"]
+[gd_scene load_steps=7 format=3 uid="uid://d3s3jarsblept"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_8mvgv"]
 [ext_resource type="Texture2D" uid="uid://cipn3jachofck" path="res://assets/background/rocks_2.png" id="1_y1i6m"]
 [ext_resource type="PackedScene" uid="uid://bh6to4cyow4el" path="res://plane_cb/plane_cb.tscn" id="2_u2rx7"]
 [ext_resource type="PackedScene" uid="uid://58mvkh7l2x2w" path="res://pipes/pipes.tscn" id="3_wyk8c"]
+[ext_resource type="PackedScene" uid="uid://wktbiy8o2cpp" path="res://game_over/game_over.tscn" id="5_qbgre"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n6i4d"]
 size = Vector2(543, 20)
@@ -38,5 +39,9 @@ position = Vector2(520, 540)
 wait_time = 1.2
 autostart = true
 
-[connection signal="on_plane_died" from="PlaneCB" to="." method="_on_plane_died"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameOver" parent="CanvasLayer" instance=ExtResource("5_qbgre")]
+visible = false
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

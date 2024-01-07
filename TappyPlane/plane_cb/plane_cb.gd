@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-signal on_plane_died
+# signal on_plane_died
 
 
 @onready var animation_player = $AnimationPlayer
@@ -38,6 +38,6 @@ func fly() -> void:
 func die() -> void:
 	animated_sprite_2d.stop()
 	# Notify observers that the Plane has died.
-	on_plane_died.emit()
+	GameManager.on_game_over.emit()
 	# Stop physics engine for the Plane.
 	set_physics_process(false)

@@ -1,6 +1,10 @@
 extends Node
 
 
+# Signal Hub / Event Bus / Event Manager.
+signal on_game_over
+
+
 # Load at compile time (baked into game).
 var game_scene: PackedScene = preload("res://game/game.tscn")
 var main_scene: PackedScene = preload("res://main/main.tscn")

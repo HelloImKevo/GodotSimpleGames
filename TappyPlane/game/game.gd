@@ -12,6 +12,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	GameManager.on_game_over.connect(on_game_over)
 	spawn_pipes()
 
 
@@ -37,5 +38,5 @@ func _on_spawn_timer_timeout():
 
 
 # Signal invoked when the Plane has died (from plane_cb).
-func _on_plane_died():
-	GameManager.load_main_scene()
+func on_game_over():
+	pass

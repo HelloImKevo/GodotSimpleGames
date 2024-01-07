@@ -11,7 +11,7 @@ var _can_press_space: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	on_game_over()
+	GameManager.on_game_over.connect(on_game_over)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
