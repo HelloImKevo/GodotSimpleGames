@@ -38,4 +38,5 @@ position = Vector2(520, 540)
 wait_time = 1.2
 autostart = true
 
+[connection signal="on_plane_died" from="PlaneCB" to="." method="_on_plane_died"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

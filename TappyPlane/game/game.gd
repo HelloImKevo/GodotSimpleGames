@@ -34,3 +34,8 @@ func spawn_pipes() -> void:
 func _on_spawn_timer_timeout():
 	print("Timer: Spawning pipes ...")
 	spawn_pipes()
+
+
+# Signal invoked when the Plane has died (from plane_cb).
+func _on_plane_died():
+	GameManager.load_main_scene()
