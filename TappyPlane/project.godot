@@ -24,6 +24,7 @@ DataHelper="*res://singletons/data_helper.gd"
 
 window/size/viewport_width=480
 window/size/viewport_height=854
+window/stretch/mode="canvas_items"
 window/dpi/allow_hidpi=false
 window/handheld/orientation=1
 
