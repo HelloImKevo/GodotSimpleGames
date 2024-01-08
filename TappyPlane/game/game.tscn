@@ -43,7 +43,7 @@ position = Vector2(520, 340)
 position = Vector2(520, 540)
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 1.2
+wait_time = 1.4
 autostart = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
