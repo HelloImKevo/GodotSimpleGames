@@ -12,6 +12,8 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Reset current score to zero!
+	GameManager.set_score(0)
 	GameManager.on_game_over.connect(on_game_over)
 	spawn_pipes()
 
