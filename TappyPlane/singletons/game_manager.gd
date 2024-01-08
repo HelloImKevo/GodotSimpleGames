@@ -18,13 +18,35 @@ signal on_score_updated
 const GROUP_PLANE: String = "plane"
 
 
+const KEY_HIGH_SCORE: String = "high_score"
+
+
 # Load at compile time (baked into game).
 var game_scene: PackedScene = preload("res://game/game.tscn")
 var main_scene: PackedScene = preload("res://main/main.tscn")
 
 
+var _save_data: Dictionary = {}
+
+
 var _score: int = 0
 var _high_score: int = 0
+
+
+func _ready():
+	print("GameManager is loading save data ...")
+	var json: String = DataHelper.load()
+	if json == null or json.is_empty():
+		print("No save data available")
+	else:
+		_save_data = JSON.parse_string(json)
+		print_debug("Loaded Save Data: %s" % [_save_data])
+		load_save_data(_save_data)
+
+
+func load_save_data(data: Dictionary) -> void:
+	if data.has(KEY_HIGH_SCORE):
+		_high_score = int(data.get(KEY_HIGH_SCORE))
 
 
 func get_score() -> int:
@@ -37,7 +59,15 @@ func set_score(v: int) -> void:
 	if _score > _high_score:
 		print("Updating new high score of %d" % [_score])
 		_high_score = _score
+		_save_high_score(_high_score)
 	on_score_updated.emit()
+
+
+func _save_high_score(high_score: int) -> void:
+	var save_dict = {
+		"high_score" : high_score
+	}
+	DataHelper.save(JSON.stringify(save_dict))
 
 
 func increment_score() -> void:

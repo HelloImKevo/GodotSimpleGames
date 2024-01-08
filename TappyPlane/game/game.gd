@@ -47,7 +47,7 @@ func spawn_pipes() -> void:
 
 # Invoked every 1.2 seconds.
 func _on_spawn_timer_timeout():
-	print("Timer: Spawning pipes ...")
+	# print("Timer: Spawning pipes ...")
 	spawn_pipes()
 
 

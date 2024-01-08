@@ -9,7 +9,8 @@ const SCROLL_SPEED: float = 120.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("Pipe created ... %s (%s, %s)" % [name, position.x, position.y])
+	# print("Pipe created ... %s (%s, %s)" % [name, position.x, position.y])
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,5 +39,5 @@ func _on_pipe_body_entered(body):
 
 func _on_laser_body_entered(body):
 	if body.is_in_group(GameManager.GROUP_PLANE) == true:
-		print_debug("Plane has collided with a Laser - invoking player_scored()")
+		# print_debug("Plane has collided with a Laser - invoking player_scored()")
 		player_scored()
