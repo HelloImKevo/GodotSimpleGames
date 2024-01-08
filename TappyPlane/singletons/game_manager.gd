@@ -5,6 +5,9 @@ extends Node
 signal on_game_over
 
 
+const GROUP_PLANE: String = "plane"
+
+
 # Load at compile time (baked into game).
 var game_scene: PackedScene = preload("res://game/game.tscn")
 var main_scene: PackedScene = preload("res://main/main.tscn")

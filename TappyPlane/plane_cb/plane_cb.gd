@@ -12,6 +12,9 @@ const GRAVITY: float = 1900.0
 const POWER: float = -400.0
 
 
+var _dead: bool = false
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -26,6 +29,7 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	if is_on_floor() == true:
+		print_debug("Plane has touched the ground - invoking die()")
 		die()
 
 
@@ -36,6 +40,12 @@ func fly() -> void:
 
 
 func die() -> void:
+	# Minor protection against race conditions.
+	if _dead == true:
+		return
+	
+	_dead = true
+	
 	animated_sprite_2d.stop()
 	# Notify observers that the Plane has died.
 	GameManager.on_game_over.emit()

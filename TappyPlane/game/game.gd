@@ -37,6 +37,15 @@ func _on_spawn_timer_timeout():
 	spawn_pipes()
 
 
+func stop_pipes() -> void:
+	print_debug("Stopping pipe creation ...")
+	
+	spawn_timer.stop()
+	for pipe in pipes_holder.get_children():
+		# Enables of disables processing of a Node.
+		pipe.set_process(false)
+
+
 # Signal invoked when the Plane has died (from plane_cb).
 func on_game_over():
-	pass
+	stop_pipes()
