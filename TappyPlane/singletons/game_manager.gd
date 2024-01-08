@@ -1,6 +1,15 @@
 extends Node
 
 
+## GameManager : game_manager.gd
+##
+## Created by right-clicking on the 'singletons' dir, and clicking
+## 'Create Script'. Then, under Project Settings, select the Autoload tab.
+## Then choose the game_manager.gd file, and name the Node 'GameManager'
+## and finally click the [ADD] button. By default the 'Global Variable'
+## checkbox will already be checked.
+
+
 # Signal Hub / Event Bus / Event Manager.
 signal on_game_over
 signal on_score_updated
