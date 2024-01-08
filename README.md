@@ -7,6 +7,19 @@ Simple game projects powered by the Godot Engine.
 https://godotengine.org/  
 https://docs.godotengine.org/en/stable/  
 
+
+## Godot: Useful Shortcuts
+
+### Quick Open
+To use Quick Open, perform the following keyboard shortcut on Godot editor. 
+Be careful, it does not work on script editor so you need to switch to 2D or 
+3D Workspace if you use it.
+
+Windows: **Shift + Alt + O**  
+macOS: **Shift + Option + O** -or- **Command + P**  
+
+https://www.peanuts-code.com/en/tutorials/gd0009_various_searches/#quick-open  
+
 ## Asset Links
 https://opengameart.org/content/parallax-2d-backgrounds  
 https://craftpix.net/freebies/free-cartoon-parallax-2d-backgrounds/?utm_campaign=Website&utm_source=opengameart.org&utm_medium=public  
