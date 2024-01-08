@@ -15,7 +15,6 @@ extends Node2D
 @onready var game_over_sound = $GameOverSound
 
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Reset current score to zero!
