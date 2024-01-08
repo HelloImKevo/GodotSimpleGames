@@ -1,6 +1,9 @@
 extends Node2D
 
 
+@onready var score_sound = $ScoreSound
+
+
 const SCROLL_SPEED: float = 120.0
 
 
@@ -15,6 +18,7 @@ func _process(delta):
 
 
 func player_scored() -> void:
+	score_sound.play()
 	GameManager.increment_score()
 
 
