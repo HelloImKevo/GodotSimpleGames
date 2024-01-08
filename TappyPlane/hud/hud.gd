@@ -21,6 +21,9 @@ func on_score_updated() -> void:
 	var score: int = GameManager.get_score()
 	score_label.text = str(score)
 	
+	if score == 0:
+		return
+	
 	if (score % 30 == 0) == true:
 		_show_message("Awesome!")
 	elif (score % 20 == 0) == true:
