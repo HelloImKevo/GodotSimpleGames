@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3s3jarsblept"]
+[gd_scene load_steps=11 format=3 uid="uid://d3s3jarsblept"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_8mvgv"]
 [ext_resource type="Texture2D" uid="uid://cipn3jachofck" path="res://assets/background/rocks_2.png" id="1_y1i6m"]
 [ext_resource type="PackedScene" uid="uid://bh6to4cyow4el" path="res://plane_cb/plane_cb.tscn" id="2_u2rx7"]
+[ext_resource type="PackedScene" uid="uid://bflpjpvuhw74t" path="res://scrolling_bg/scrolling_bg.tscn" id="3_04nnj"]
 [ext_resource type="PackedScene" uid="uid://58mvkh7l2x2w" path="res://pipes/pipes.tscn" id="3_wyk8c"]
 [ext_resource type="PackedScene" uid="uid://wktbiy8o2cpp" path="res://game_over/game_over.tscn" id="5_qbgre"]
 [ext_resource type="AudioStream" uid="uid://bcapxgp1s2egh" path="res://assets/audio/engine.mp3" id="6_l5ybw"]
@@ -16,7 +17,10 @@ size = Vector2(543, 20)
 script = ExtResource("1_8mvgv")
 pipes_scene = ExtResource("3_wyk8c")
 
+[node name="ScrollingBg" parent="." instance=ExtResource("3_04nnj")]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(91, 318)
 texture = ExtResource("1_y1i6m")
 
