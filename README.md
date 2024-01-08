@@ -39,3 +39,6 @@ https://pixelfrog-assets.itch.io/pixel-adventure-1
 Initial project setup: Open Project > Project Settings.  
 Go to Display > Window. Set Viewport Width to 480, and Height to 854.  
 Change Handheld > Orientation to **Portrait**.
+
+# Godot GDScript Style Guide
+https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html  

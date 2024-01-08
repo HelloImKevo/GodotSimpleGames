@@ -1,6 +1,12 @@
 extends Control
 
 
+## HUD : hud.gd
+##
+## Our main game scene's Heads-Up Display, showing the current
+## score and periodic special messages to the player.
+
+
 @onready var score_label = $MC/ScoreLabel
 @onready var message_label = $MC2/MessageLabel
 @onready var timer = $Timer

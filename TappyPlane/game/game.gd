@@ -1,6 +1,13 @@
 extends Node2D
 
 
+## Game : game.gd
+##
+## Our primary game loop scene, with a flying airplane and
+## pipes that spawn in at timed intervals, but at random
+## Y-axis coordinates.
+
+
 @export var pipes_scene: PackedScene
 
 
