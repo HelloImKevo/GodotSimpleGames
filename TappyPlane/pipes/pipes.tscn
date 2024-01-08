@@ -20,6 +20,7 @@ position = Vector2(2.08165e-12, 80)
 position = Vector2(-32, 0)
 rect = Rect2(-10, -10, 120, 20)
 
+[connection signal="body_entered" from="Laser" to="." method="_on_laser_body_entered"]
 [connection signal="body_entered" from="Upper" to="." method="_on_pipe_body_entered"]
 [connection signal="body_entered" from="Lower" to="." method="_on_pipe_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_screen_exited"]
