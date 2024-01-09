@@ -1,10 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://vs070bs0mjyv"]
+[gd_scene load_steps=7 format=3 uid="uid://vs070bs0mjyv"]
 
 [ext_resource type="Texture2D" uid="uid://ccgbrywk128km" path="res://assets/scene/colored_castle.png" id="1_03cwb"]
+[ext_resource type="Script" path="res://level/level.gd" id="1_e6on3"]
 [ext_resource type="PackedScene" uid="uid://31tfpel4g7vg" path="res://cup/cup.tscn" id="2_4bikg"]
 [ext_resource type="PackedScene" uid="uid://he0vjg1hwtay" path="res://animal/animal.tscn" id="3_85irj"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1u4x"]
+bg_color = Color(0.6, 0.6, 0.6, 0.588235)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_5r8yb"]
+
 [node name="Level" type="Node2D"]
+script = ExtResource("1_e6on3")
 
 [node name="ColoredCastle" type="Sprite2D" parent="."]
 position = Vector2(515, 268)
@@ -16,3 +27,34 @@ position = Vector2(485, 469)
 
 [node name="Animal" parent="." instance=ExtResource("3_85irj")]
 position = Vector2(509, 238)
+
+[node name="PContainer" type="PanelContainer" parent="."]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 440.0
+offset_bottom = 200.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_l1u4x")
+
+[node name="MContainer" type="MarginContainer" parent="PContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="DebugVBox" type="VBoxContainer" parent="PContainer/MContainer"]
+layout_mode = 2
+
+[node name="DebugTitle" type="Label" parent="PContainer/MContainer/DebugVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "DEBUG CONSOLE"
+label_settings = SubResource("LabelSettings_5r8yb")
+
+[node name="DebugLabel" type="Label" parent="PContainer/MContainer/DebugVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "DEBUG TEXT
+Hello world
+What is happening
+Here is more text"
