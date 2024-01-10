@@ -14,7 +14,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	update_debug_label()
 
 
@@ -39,3 +39,10 @@ func die() -> void:
 	_dead = true
 	SignalManager.on_animal_died.emit()
 	queue_free()
+
+
+# InputEventMouseButton: button_index=1, mods=none, pressed=true, canceled=false,
+# position=((149, 329)), button_mask=1, double_click=false
+func _on_input_event(_viewport, event: InputEvent, _shape_idx):
+	if event.is_action_pressed("drag") == true:
+		print(event)
