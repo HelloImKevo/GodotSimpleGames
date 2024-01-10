@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://vs070bs0mjyv"]
+[gd_scene load_steps=6 format=3 uid="uid://vs070bs0mjyv"]
 
 [ext_resource type="Texture2D" uid="uid://ccgbrywk128km" path="res://assets/scene/colored_castle.png" id="1_03cwb"]
 [ext_resource type="Script" path="res://level/level.gd" id="1_e6on3"]
 [ext_resource type="PackedScene" uid="uid://31tfpel4g7vg" path="res://cup/cup.tscn" id="2_4bikg"]
-[ext_resource type="PackedScene" uid="uid://he0vjg1hwtay" path="res://animal/animal.tscn" id="3_85irj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1u4x"]
 bg_color = Color(0.6, 0.6, 0.6, 0.588235)
@@ -23,10 +22,7 @@ scale = Vector2(1.2, 1.2)
 texture = ExtResource("1_03cwb")
 
 [node name="Cup" parent="." instance=ExtResource("2_4bikg")]
-position = Vector2(485, 469)
-
-[node name="Animal" parent="." instance=ExtResource("3_85irj")]
-position = Vector2(509, 238)
+position = Vector2(209, 469)
 
 [node name="PContainer" type="PanelContainer" parent="."]
 offset_left = 20.0
@@ -58,3 +54,6 @@ text = "DEBUG TEXT
 Hello world
 What is happening
 Here is more text"
+
+[node name="AnimalStart" type="Marker2D" parent="."]
+position = Vector2(150, 330)
