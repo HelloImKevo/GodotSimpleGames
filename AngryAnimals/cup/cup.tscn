@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c166hcikqtj08" path="res://assets/env/elementWood015.png" id="1_roody"]
 [ext_resource type="Texture2D" uid="uid://b7lsf4vgkr642" path="res://assets/env/elementWood004.png" id="2_etcgc"]
 
-[node name="Cup" type="StaticBody2D"]
+[node name="Cup" type="StaticBody2D" groups=["cup"]]
 
 [node name="Sprites" type="Node2D" parent="."]
 scale = Vector2(0.5, 0.5)

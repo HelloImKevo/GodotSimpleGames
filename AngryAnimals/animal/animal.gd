@@ -12,6 +12,9 @@ const IMPULSE_MULTIPLIER: float = 20.0
 # A bit of a hack to pause physics processing of detected collisions
 # for a brief moment after launching the animal.
 const FIRE_DELAY: float = 0.25
+# Small tolerance threshold to detect whether our Angular and Linear velocity
+# is "close enough" to zero for the RigidBody2D.
+const STOPPED_TOLERANCE: float = 0.1
 
 
 var _dead: bool = false
@@ -55,6 +58,7 @@ func _physics_process(delta):
 		_fired_time += delta
 		if _fired_time > FIRE_DELAY:
 			play_collision()
+			check_on_target()
 	else:
 		if _dragging == false:
 			return
@@ -95,6 +99,32 @@ func update_debug_label() -> void:
 func _on_screen_exited():
 	print("%s -> _on_screen_exited() -> die()" % [_to_string()])
 	die()
+
+
+func stopped_rolling() -> bool:
+	if get_contact_count() > 0:
+		if (
+			abs(linear_velocity.y) < STOPPED_TOLERANCE
+			and abs(angular_velocity) < STOPPED_TOLERANCE
+		):
+			return true
+	
+	return false
+
+
+# Detect whether the Animal has stopped rolling and whether it
+# is inside of a "Cup" target.
+func check_on_target() -> void:
+	if !stopped_rolling():
+		return
+	
+	var cb: Array[Node2D] = get_colliding_bodies()
+	if cb.size() == 0:
+		return
+	
+	if cb[0].is_in_group(GameManager.GROUP_CUP):
+		print("Animal landed in a Cup -> die()")
+		die()
 
 
 func play_collision() -> void:
