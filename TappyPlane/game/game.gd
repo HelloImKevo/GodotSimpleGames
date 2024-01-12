@@ -37,6 +37,10 @@ func _process(_delta):
 
 # Spawn a new set of vertical pipes (an upper pipe and a lower pipe)
 # at a random Y-axis coordinate, slightly off-screen on the right side.
+# In order to fix this error:
+# game.gd:45 @ spawn_pipes(): Condition "!is_inside_tree()" is true. Returning: false
+# You need to make sure the 'VisibleOnScreenEnabler2D' is positioned at the bottom
+# of the Pipes Node hierarchy.
 func spawn_pipes() -> void:
 	var y_pos = randf_range(spawn_u.position.y, spawn_l.position.y)
 	var new_pipes = pipes_scene.instantiate()
