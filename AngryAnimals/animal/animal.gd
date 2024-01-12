@@ -131,6 +131,10 @@ func get_impulse() -> Vector2:
 	return _dragged_vector * -1 * IMPULSE_MULTIPLIER
 
 
+# In order to fix this error:
+# level.gd:30 @ on_animal_died(): Condition "!is_inside_tree()" is true. Returning: false
+# You need to make sure the 'VisibleOnScreenEnabler2D' is positioned at the bottom
+# of the Animal Node hierarchy.
 func die() -> void:
 	if _dead == true:
 		return
