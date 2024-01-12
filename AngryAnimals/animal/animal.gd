@@ -2,10 +2,12 @@ extends RigidBody2D
 
 
 @onready var stretch_sound = $StretchSound
+@onready var launch_sound = $LaunchSound
 
 
 const DRAG_LIMIT_MAX: Vector2 = Vector2(0, 60)
 const DRAG_LIMIT_MIN: Vector2 = Vector2(-60, 0)
+const IMPULSE_MULTIPLIER: float = 20.0
 
 
 var _dead: bool = false
@@ -50,8 +52,11 @@ func _physics_process(_delta):
 		if _dragging == false:
 			return
 		else:
-			# We are in 'dragging mode'.
-			drag_it()
+			if Input.is_action_just_released("drag") == true:
+				release_it()
+			else:
+				# We are in 'dragging mode'.
+				drag_it()
 
 
 func update_debug_label() -> void:
@@ -111,6 +116,19 @@ func drag_it() -> void:
 		DRAG_LIMIT_MAX.y
 	)
 	global_position = _start + _dragged_vector
+
+
+func release_it() -> void:
+	_dragging = false
+	_released = true
+	freeze = false
+	apply_central_impulse(get_impulse())
+	stretch_sound.stop()
+	launch_sound.play()
+
+
+func get_impulse() -> Vector2:
+	return _dragged_vector * -1 * IMPULSE_MULTIPLIER
 
 
 func die() -> void:

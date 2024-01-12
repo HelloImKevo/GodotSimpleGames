@@ -22,7 +22,7 @@ scale = Vector2(1.2, 1.2)
 texture = ExtResource("1_03cwb")
 
 [node name="Cup" parent="." instance=ExtResource("2_4bikg")]
-position = Vector2(209, 469)
+position = Vector2(653, 469)
 
 [node name="PContainer" type="PanelContainer" parent="."]
 offset_left = 20.0
