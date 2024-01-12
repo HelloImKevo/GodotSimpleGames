@@ -20,6 +20,11 @@ macOS: **Shift + Option + O** -or- **Command + P**
 
 https://www.peanuts-code.com/en/tutorials/gd0009_various_searches/#quick-open  
 
+### Visible Collision Shapes
+You can turn on Visible Collision Shapes by checking / enabling:  
+- [x] Debug > Visible Collision Shapes
+
+
 ## Asset Links
 https://opengameart.org/content/parallax-2d-backgrounds  
 https://craftpix.net/freebies/free-cartoon-parallax-2d-backgrounds/?utm_campaign=Website&utm_source=opengameart.org&utm_medium=public  

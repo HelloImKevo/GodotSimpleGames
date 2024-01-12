@@ -3,11 +3,15 @@ extends RigidBody2D
 
 @onready var stretch_sound = $StretchSound
 @onready var launch_sound = $LaunchSound
+@onready var collision_sound = $CollisionSound
 
 
 const DRAG_LIMIT_MAX: Vector2 = Vector2(0, 60)
 const DRAG_LIMIT_MIN: Vector2 = Vector2(-60, 0)
 const IMPULSE_MULTIPLIER: float = 20.0
+# A bit of a hack to pause physics processing of detected collisions
+# for a brief moment after launching the animal.
+const FIRE_DELAY: float = 0.25
 
 
 var _dead: bool = false
@@ -31,6 +35,7 @@ var _fired_time: float = 0.0
 # Record the amount we moved the mouse since the previous physics process.
 # Used to play a 'stretching' sound.
 var _last_drag_amount: float = 0.0
+var _last_collision_count: int = 0
 
 
 func _to_string():
@@ -43,11 +48,13 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta):
+func _physics_process(delta):
 	update_debug_label()
 	
 	if _released == true:
-		pass
+		_fired_time += delta
+		if _fired_time > FIRE_DELAY:
+			play_collision()
 	else:
 		if _dragging == false:
 			return
@@ -60,7 +67,10 @@ func _physics_process(_delta):
 
 
 func update_debug_label() -> void:
-	var s = "g_pos:%s" % [Utils.vec2_to_str(global_position)]
+	var s = "g_pos:%s contacts:%s" % [
+		Utils.vec2_to_str(global_position),
+		get_contact_count()
+	]
 	s += "\n_dragging:%s _released:%s" % [
 		_dragging,
 		_released
@@ -85,6 +95,17 @@ func update_debug_label() -> void:
 func _on_screen_exited():
 	print("%s -> _on_screen_exited() -> die()" % [_to_string()])
 	die()
+
+
+func play_collision() -> void:
+	if (
+		_last_collision_count == 0
+		and get_contact_count() > 0
+		and !collision_sound.playing
+	):
+		collision_sound.play()
+	
+	_last_collision_count = get_contact_count()
 
 
 func grab_it() -> void:
