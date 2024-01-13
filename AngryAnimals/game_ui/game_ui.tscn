@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtjbq2180yyh5"]
+
+[ext_resource type="Script" path="res://game_ui/game_ui.gd" id="1_letfd"]
+[ext_resource type="LabelSettings" uid="uid://df1yajl21qer5" path="res://assets/LG_48_white.tres" id="1_v3wxa"]
+[ext_resource type="LabelSettings" uid="uid://hymtu1wmljpr" path="res://assets/LG_24_white.tres" id="2_b51pj"]
+[ext_resource type="LabelSettings" uid="uid://lfnmtrvwn1es" path="res://assets/LG_72_Title.tres" id="2_ftkcr"]
+[ext_resource type="AudioStream" uid="uid://csrkxeingvefa" path="res://assets/audio/jazzyfrenchy.mp3" id="5_fj7ru"]
+
+[node name="GameUi" type="CanvasLayer"]
+script = ExtResource("1_letfd")
+
+[node name="MC" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VB" type="VBoxContainer" parent="MC"]
+layout_mode = 2
+
+[node name="HB" type="HBoxContainer" parent="MC/VB"]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="MC/VB/HB"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LEVEL 999"
+label_settings = ExtResource("2_b51pj")
+vertical_alignment = 1
+
+[node name="GoBackLabel" type="Label" parent="MC/VB/HB"]
+layout_mode = 2
+text = "Press Q to Go Back"
+label_settings = ExtResource("2_b51pj")
+horizontal_alignment = 2
+
+[node name="AttemptsLabel" type="Label" parent="MC/VB"]
+layout_mode = 2
+text = "ATTEMPTS 1000"
+label_settings = ExtResource("2_b51pj")
+vertical_alignment = 1
+
+[node name="VB2" type="VBoxContainer" parent="MC"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="MC/VB2"]
+layout_mode = 2
+text = "LEVEL COMPLETE!"
+label_settings = ExtResource("2_ftkcr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="MC/VB2"]
+layout_mode = 2
+text = "PRESS SPACE"
+label_settings = ExtResource("1_v3wxa")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_fj7ru")
+volume_db = -10.0

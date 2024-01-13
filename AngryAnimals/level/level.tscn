@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://vs070bs0mjyv"]
+[gd_scene load_steps=7 format=3 uid="uid://vs070bs0mjyv"]
 
 [ext_resource type="Texture2D" uid="uid://ccgbrywk128km" path="res://assets/scene/colored_castle.png" id="1_03cwb"]
 [ext_resource type="Script" path="res://level/level.gd" id="1_e6on3"]
-[ext_resource type="FontFile" uid="uid://sx661u8jftbe" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="4_0w3sl"]
+[ext_resource type="PackedScene" uid="uid://dtjbq2180yyh5" path="res://game_ui/game_ui.tscn" id="2_c47pp"]
 [ext_resource type="PackedScene" uid="uid://n8tn6xlavyyo" path="res://water/water.tscn" id="4_mhwmi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1u4x"]
@@ -14,15 +14,10 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="LabelSettings" id="LabelSettings_5r8yb"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_vtfgc"]
-font = ExtResource("4_0w3sl")
-font_size = 24
-shadow_size = 4
-shadow_color = Color(0, 0, 0, 0.392157)
-shadow_offset = Vector2(2, 2)
-
 [node name="Level" type="Node2D"]
 script = ExtResource("1_e6on3")
+
+[node name="GameUi" parent="." instance=ExtResource("2_c47pp")]
 
 [node name="ColoredCastle" type="Sprite2D" parent="."]
 position = Vector2(515, 268)
@@ -59,16 +54,6 @@ text = "DEBUG TEXT
 Hello world
 What is happening
 Here is more text"
-
-[node name="Label" type="Label" parent="."]
-offset_left = 789.0
-offset_top = 13.0
-offset_right = 1007.0
-offset_bottom = 38.0
-text = "Press Q to Go Back"
-label_settings = SubResource("LabelSettings_vtfgc")
-horizontal_alignment = 2
-vertical_alignment = 1
 
 [node name="AnimalStart" type="Marker2D" parent="."]
 position = Vector2(150, 330)
