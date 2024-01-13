@@ -76,5 +76,18 @@ Change Handheld > Orientation to **Portrait**.
 | :---: | :---: |
 ![Tappy 1](Screenshot/tappy-01.png) | ![Tappy 1](Screenshot/tappy-02.png)
 
+# Angry Animals
+A clone of the popular "Angry Birds". Under **Project Settings**, 
+Go to Display > Window. Set Viewport Width to 1024, and Height to 600. 
+Set **Stretch > Mode** to `canvas_items`.
+
+| Angry Animals 1 |
+| :---: |
+| ![Angry 1](Screenshot/angry-01.png) |
+
+| Angry Animals 2 |
+| :---: |
+| ![Angry 2](Screenshot/angry-02.png) |
+
 # Godot GDScript Style Guide
 https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html  
