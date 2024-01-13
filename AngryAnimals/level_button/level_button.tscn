@@ -49,7 +49,7 @@ vertical_alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="MC/VB"]
 layout_mode = 2
-text = "1000"
+text = "9999"
 label_settings = SubResource("LabelSettings_cy5uc")
 horizontal_alignment = 1
 vertical_alignment = 1
