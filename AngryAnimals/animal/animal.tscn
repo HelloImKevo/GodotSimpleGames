@@ -14,6 +14,7 @@ radius = 19.0
 
 [node name="Animal" type="RigidBody2D" groups=["animal"]]
 input_pickable = true
+mass = 1.5
 physics_material_override = SubResource("PhysicsMaterial_3yicm")
 freeze = true
 max_contacts_reported = 1

@@ -14,7 +14,8 @@ extends RigidBody2D
 
 const DRAG_LIMIT_MAX: Vector2 = Vector2(0, 60)
 const DRAG_LIMIT_MIN: Vector2 = Vector2(-60, 0)
-const IMPULSE_MULTIPLIER: float = 20.0
+const IMPULSE_MULTIPLIER: float = 25.0
+const FRICTION_MULTIPLIER: float = 0.15
 # A bit of a hack to pause physics processing of detected collisions
 # for a brief moment after launching the animal.
 const FIRE_DELAY: float = 0.25
@@ -66,6 +67,7 @@ func _physics_process(delta):
 		_fired_time += delta
 		if _fired_time > FIRE_DELAY:
 			play_collision()
+			decelerate_if_on_target()
 			check_on_target()
 	else:
 		if _dragging == false:
@@ -118,6 +120,19 @@ func stopped_rolling() -> bool:
 			return true
 	
 	return false
+
+
+## If the [Animal] is touching a [Cup] target, apply a small amount of deceleration
+## on the X-axis to simulate higher friction.
+func decelerate_if_on_target() -> void:
+	if stopped_rolling():
+		return
+	
+	if get_contact_count() > 0:
+		# Produce a small amount of X linear velocity in the reverse direction.
+		var rate_of_deceleration = linear_velocity.x * -1 * FRICTION_MULTIPLIER
+		print("Animal Decelerating : velocity.x:%.3f rate_of_deceleration:%.3f" % [linear_velocity.x, rate_of_deceleration])
+		linear_velocity.x += rate_of_deceleration
 
 
 # Detect whether the Animal has stopped rolling and whether it
