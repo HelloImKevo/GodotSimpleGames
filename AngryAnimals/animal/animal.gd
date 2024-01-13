@@ -10,11 +10,14 @@ extends RigidBody2D
 @onready var stretch_sound = $StretchSound
 @onready var launch_sound = $LaunchSound
 @onready var collision_sound = $CollisionSound
+@onready var arrow_sprite = $ArrowSprite
 
 
 const DRAG_LIMIT_MAX: Vector2 = Vector2(0, 60)
 const DRAG_LIMIT_MIN: Vector2 = Vector2(-60, 0)
 const IMPULSE_MULTIPLIER: float = 25.0
+# Sort of a hack for the theoretical max impulse.
+const IMPULSE_MAX: float = 1200.0
 const FRICTION_MULTIPLIER: float = 0.15
 # A bit of a hack to pause physics processing of detected collisions
 # for a brief moment after launching the animal.
@@ -44,6 +47,7 @@ var _dragged_vector: Vector2 = Vector2.ZERO
 # Allows us to not start detecting collisions with things until the
 # physics engine takes over and starts processing things.
 var _fired_time: float = 0.0
+var _arrow_scale_x: float = 0.0
 # Record the amount we moved the mouse since the previous physics process.
 # Used to play a 'stretching' sound.
 var _last_drag_amount: float = 0.0
@@ -57,6 +61,8 @@ func _to_string():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_start = global_position
+	_arrow_scale_x = arrow_sprite.scale.x
+	arrow_sprite.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -109,6 +115,14 @@ func update_debug_label() -> void:
 func _on_screen_exited():
 	print("%s -> _on_screen_exited() -> die()" % [_to_string()])
 	die()
+
+
+func scale_arrow() -> void:
+	var imp_len = get_impulse().length()
+	var percent = imp_len / IMPULSE_MAX
+	
+	arrow_sprite.scale.x = (_arrow_scale_x * percent) + _arrow_scale_x
+	arrow_sprite.rotation = (_start - global_position).angle()
 
 
 func stopped_rolling() -> bool:
@@ -167,6 +181,7 @@ func grab_it() -> void:
 	_dragging = true
 	_drag_start = get_global_mouse_position()
 	_last_dragged_position = _drag_start
+	arrow_sprite.show()
 
 
 func drag_it() -> void:
@@ -192,6 +207,7 @@ func drag_it() -> void:
 		DRAG_LIMIT_MAX.y
 	)
 	global_position = _start + _dragged_vector
+	scale_arrow()
 
 
 func release_it() -> void:
@@ -202,6 +218,7 @@ func release_it() -> void:
 	stretch_sound.stop()
 	launch_sound.play()
 	ScoreManager.attempt_made()
+	arrow_sprite.hide()
 
 
 func get_impulse() -> Vector2:
