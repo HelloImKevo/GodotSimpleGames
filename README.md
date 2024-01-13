@@ -40,6 +40,33 @@ https://pixelfrog-assets.itch.io/pixel-adventure-1
 3. Go to **Display > Window**.
 4. Un-check **DPI > Allow hiDPI**.
 
+
+# Godot Infrastructure
+
+## Coroutines (and yield)
+
+The `yield` keyword is only for Godot 3.0+. Coroutines are implemented in 
+Godot 4.0+ with the `await` keyword.
+
+The await immediately returns a value that may be ignored such that the calling 
+function code or the game loop continues to run. But, if you call a function 
+containing an `await`, then it becomes a coroutine that can be used with `await` 
+in the calling function so that code execution is paused in that calling 
+function. Here is an example:
+
+```python
+func _ready():
+    print("Started")
+    try_await()
+    print("Done")
+
+func try_await():
+    await get_tree().create_timer(1.0).timeout
+    print("After timeout")
+```
+
+https://gdscript.com/solutions/coroutines-and-yield/
+
 # Tappy Plane
 Initial project setup: Open Project > Project Settings.  
 Go to Display > Window. Set Viewport Width to 480, and Height to 854.  

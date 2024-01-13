@@ -25,7 +25,10 @@ texture = ExtResource("1_03cwb")
 position = Vector2(483, 469)
 
 [node name="Cup2" parent="." instance=ExtResource("2_4bikg")]
-position = Vector2(653, 469)
+position = Vector2(638, 469)
+
+[node name="Cup3" parent="." instance=ExtResource("2_4bikg")]
+position = Vector2(794, 469)
 
 [node name="PContainer" type="PanelContainer" parent="."]
 offset_left = 20.0

@@ -1,9 +1,49 @@
-[gd_scene load_steps=3 format=3 uid="uid://31tfpel4g7vg"]
+[gd_scene load_steps=8 format=3 uid="uid://31tfpel4g7vg"]
 
+[ext_resource type="Script" path="res://cup/cup.gd" id="1_ow51h"]
 [ext_resource type="Texture2D" uid="uid://c166hcikqtj08" path="res://assets/env/elementWood015.png" id="1_roody"]
 [ext_resource type="Texture2D" uid="uid://b7lsf4vgkr642" path="res://assets/env/elementWood004.png" id="2_etcgc"]
+[ext_resource type="AudioStream" uid="uid://iyd1kmlqb3na" path="res://assets/audio/vanish.wav" id="4_0mkuc"]
+
+[sub_resource type="Animation" id="Animation_q7oco"]
+resource_name = "vanish"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(1, 1), Vector2(2.08165e-12, 2.08165e-12)]
+}
+
+[sub_resource type="Animation" id="Animation_sclbu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0voln"]
+_data = {
+"RESET": SubResource("Animation_sclbu"),
+"vanish": SubResource("Animation_q7oco")
+}
 
 [node name="Cup" type="StaticBody2D" groups=["cup"]]
+script = ExtResource("1_ow51h")
 
 [node name="Sprites" type="Node2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -20,5 +60,15 @@ position = Vector2(74, -66)
 texture = ExtResource("2_etcgc")
 flip_h = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0voln")
+}
+
+[node name="VanishSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_0mkuc")
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-53, -49, -53, 16, 53, 16, 53, -49, 20, -17, -20, -17)
+
+[connection signal="finished" from="VanishSound" to="." method="_on_vanish_sound_finished"]

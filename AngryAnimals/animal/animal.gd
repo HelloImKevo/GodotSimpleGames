@@ -18,6 +18,8 @@ const STOPPED_TOLERANCE: float = 0.1
 
 
 var _dead: bool = false
+# Used by coroutine: Are we in the process of dying?
+var _dying: bool = false
 
 # Are we in the process of dragging the animal?
 var _dragging: bool = false
@@ -122,9 +124,11 @@ func check_on_target() -> void:
 	if cb.size() == 0:
 		return
 	
-	if cb[0].is_in_group(GameManager.GROUP_CUP):
-		print("Animal landed in a Cup -> die()")
-		die()
+	var cup: Node2D = cb[0]
+	
+	if cup.is_in_group(GameManager.GROUP_CUP):
+		cup.die()
+		die_async()
 
 
 func play_collision() -> void:
@@ -180,6 +184,17 @@ func release_it() -> void:
 
 func get_impulse() -> Vector2:
 	return _dragged_vector * -1 * IMPULSE_MULTIPLIER
+
+
+# Coroutine that will pause briefly before making the Animal die.
+func die_async() -> void:
+	if _dying:
+		return
+	
+	print("Animal landed in a Cup -> die()")
+	_dying = true
+	await get_tree().create_timer(0.3).timeout
+	die()
 
 
 # In order to fix this error:
