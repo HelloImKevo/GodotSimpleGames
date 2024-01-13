@@ -10,7 +10,14 @@ extends Node
 ## checkbox will already be checked.
 
 
+var main_scene: PackedScene = preload("res://main/main.tscn")
+
+
 ## Node Group for the "Cup" target, used for Animal collision detection.
 const GROUP_CUP: String = "cup"
 ## Node Group for the player "Animal", used for Water Splash collision detection.
 const GROUP_ANIMAL: String = "animal"
+
+
+func load_main_scene() -> void:
+	get_tree().change_scene_to_packed(main_scene)
