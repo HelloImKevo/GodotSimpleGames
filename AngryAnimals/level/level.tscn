@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://vs070bs0mjyv"]
+[gd_scene load_steps=8 format=3 uid="uid://vs070bs0mjyv"]
 
 [ext_resource type="Texture2D" uid="uid://ccgbrywk128km" path="res://assets/scene/colored_castle.png" id="1_03cwb"]
 [ext_resource type="Script" path="res://level/level.gd" id="1_e6on3"]
 [ext_resource type="PackedScene" uid="uid://dtjbq2180yyh5" path="res://game_ui/game_ui.tscn" id="2_c47pp"]
 [ext_resource type="PackedScene" uid="uid://n8tn6xlavyyo" path="res://water/water.tscn" id="4_mhwmi"]
+[ext_resource type="PackedScene" uid="uid://dtt7t8803ntlh" path="res://launch_area/launch_area.tscn" id="5_m3nq0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1u4x"]
 bg_color = Color(0.6, 0.6, 0.6, 0.588235)
@@ -57,6 +58,9 @@ Here is more text"
 
 [node name="AnimalStart" type="Marker2D" parent="."]
 position = Vector2(150, 330)
+
+[node name="LaunchArea" parent="." instance=ExtResource("5_m3nq0")]
+position = Vector2(64, 369)
 
 [node name="Water" parent="." instance=ExtResource("4_mhwmi")]
 z_index = 1

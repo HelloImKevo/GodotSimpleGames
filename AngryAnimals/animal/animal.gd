@@ -126,6 +126,7 @@ func scale_arrow() -> void:
 
 
 func stopped_rolling() -> bool:
+	# TODO: Adjust the Y velocity slightly - right now the animal can stop on a Cup Slope
 	if get_contact_count() > 0:
 		if (
 			abs(linear_velocity.y) < STOPPED_TOLERANCE
@@ -145,7 +146,7 @@ func decelerate_if_on_target() -> void:
 	if get_contact_count() > 0:
 		# Produce a small amount of X linear velocity in the reverse direction.
 		var rate_of_deceleration = linear_velocity.x * -1 * FRICTION_MULTIPLIER
-		print("Animal Decelerating : velocity.x:%.3f rate_of_deceleration:%.3f" % [linear_velocity.x, rate_of_deceleration])
+		# print("Animal Decelerating : velocity.x:%.3f rate_of_deceleration:%.3f" % [linear_velocity.x, rate_of_deceleration])
 		linear_velocity.x += rate_of_deceleration
 
 
