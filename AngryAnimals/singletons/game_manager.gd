@@ -12,3 +12,5 @@ extends Node
 
 ## Node Group for the "Cup" target, used for Animal collision detection.
 const GROUP_CUP: String = "cup"
+## Node Group for the player "Animal", used for Water Splash collision detection.
+const GROUP_ANIMAL: String = "animal"
