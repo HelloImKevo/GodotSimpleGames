@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfae3305ovojk"]
+
+[ext_resource type="Texture2D" uid="uid://b0v2afvlyso0b" path="res://assets/ui/panel_beige.png" id="1_0st8k"]
+[ext_resource type="LabelSettings" uid="uid://df1yajl21qer5" path="res://assets/LG_48_white.tres" id="2_mmkcr"]
+[ext_resource type="Script" path="res://level_button/level_button.gd" id="2_up74o"]
+[ext_resource type="FontFile" uid="uid://sx661u8jftbe" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="3_vbitf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cy5uc"]
+font = ExtResource("3_vbitf")
+font_size = 24
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.392157)
+shadow_offset = Vector2(2, 2)
+
+[node name="LevelButton" type="TextureButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(50, 50)
+texture_normal = ExtResource("1_0st8k")
+script = ExtResource("2_up74o")
+
+[node name="MC" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 8
+
+[node name="VB" type="VBoxContainer" parent="MC"]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="MC/VB"]
+layout_mode = 2
+text = "1"
+label_settings = ExtResource("2_mmkcr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="MC/VB"]
+layout_mode = 2
+text = "1000"
+label_settings = SubResource("LabelSettings_cy5uc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

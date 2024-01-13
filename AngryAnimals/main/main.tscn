@@ -2,15 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://emu71o0uwhra" path="res://assets/env/MainBG.png" id="1_4ncvq"]
 [ext_resource type="AudioStream" uid="uid://c63rgqghp7as2" path="res://assets/audio/birdsong.wav" id="2_pis3w"]
-[ext_resource type="FontFile" uid="uid://sx661u8jftbe" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="3_lsvyp"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_dbmqv"]
-font = ExtResource("3_lsvyp")
-font_size = 72
-font_color = Color(0.207843, 0.909804, 0.8, 1)
-shadow_size = 3
-shadow_color = Color(0, 0, 0, 0.470588)
-shadow_offset = Vector2(2, 2)
+[ext_resource type="LabelSettings" uid="uid://lfnmtrvwn1es" path="res://assets/LG_72_Title.tres" id="3_pyh2d"]
+[ext_resource type="PackedScene" uid="uid://cfae3305ovojk" path="res://level_button/level_button.tscn" id="4_7suav"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -47,7 +40,7 @@ theme_override_constants/margin_top = 32
 [node name="Label" type="Label" parent="MC"]
 layout_mode = 2
 text = "ANGRY ANIMALS"
-label_settings = SubResource("LabelSettings_dbmqv")
+label_settings = ExtResource("3_pyh2d")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -64,3 +57,15 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 48
+
+[node name="LevelButton" parent="HB" instance=ExtResource("4_7suav")]
+layout_mode = 2
+
+[node name="LevelButton2" parent="HB" instance=ExtResource("4_7suav")]
+layout_mode = 2
+level_number = 2
+
+[node name="LevelButton3" parent="HB" instance=ExtResource("4_7suav")]
+layout_mode = 2
+level_number = 3
