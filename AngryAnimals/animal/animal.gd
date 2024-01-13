@@ -1,6 +1,12 @@
 extends RigidBody2D
 
 
+## Animal : animal.gd
+##
+## An [Animal] that can be launched with an impulse, and land inside
+## of a [Cup] target. It can also fall into the [Water] and die.
+
+
 @onready var stretch_sound = $StretchSound
 @onready var launch_sound = $LaunchSound
 @onready var collision_sound = $CollisionSound
@@ -180,6 +186,7 @@ func release_it() -> void:
 	apply_central_impulse(get_impulse())
 	stretch_sound.stop()
 	launch_sound.play()
+	ScoreManager.attempt_made()
 
 
 func get_impulse() -> Vector2:
@@ -217,5 +224,5 @@ func _on_input_event(_viewport, event: InputEvent, _shape_idx):
 		return
 	
 	if event.is_action_pressed("drag") == true:
-		print(event)
+		# print(_to_string(), " ", event)
 		grab_it()

@@ -60,5 +60,32 @@ func set_target_cups(t: int) -> void:
 	print("set_target_cups: ", _target_cups)
 
 
+## Should be called each time the [Animal] is launched.
+func attempt_made() -> void:
+	_attempts += 1
+	SignalManager.on_attempt_made.emit()
+	print("attempt_made() _target_cups:%s, _attempts:%s, _cups_hit:%s" % [
+		_target_cups, _attempts, _cups_hit
+	])
+
+
+## Should be called each time the [Animal] lands inside of a cup, and it gets destroyed.
 func on_cup_destroyed() -> void:
 	_cups_hit += 1
+	print("on_cup_destroyed() _target_cups:%s, _attempts:%s, _cups_hit:%s" % [
+		_target_cups, _attempts, _cups_hit
+	])
+	check_game_over()
+
+
+## Checks whether the number of cups that have been hit is greater than the specified
+## number of target cups (determined by the current [Level]).
+func check_game_over() -> void:
+	if _cups_hit < _target_cups:
+		return
+
+	print("GAME OVER ", _level_scores)
+	SignalManager.on_game_over.emit()
+	if _level_scores[_level_selected] > _attempts:
+		_level_scores[_level_selected] = _attempts
+		print("record set: ", _level_scores)
