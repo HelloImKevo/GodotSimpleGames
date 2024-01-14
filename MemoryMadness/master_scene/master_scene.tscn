@@ -1,8 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2jnybck261ft"]
+[gd_scene load_steps=6 format=3 uid="uid://d2jnybck261ft"]
 
+[ext_resource type="Script" path="res://master_scene/master_scene.gd" id="1_24rsn"]
 [ext_resource type="Texture2D" uid="uid://2yko0ntjw4xx" path="res://assets/images/backgroundEmpty.png" id="1_tapyw"]
+[ext_resource type="FontFile" uid="uid://cd245dsgkw0ls" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="3_lkqm1"]
+[ext_resource type="PackedScene" uid="uid://cg2njbjflj0v2" path="res://widgets/loading_spinner.tscn" id="4_r6hn1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bapw0"]
+font = ExtResource("3_lkqm1")
+font_size = 24
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.54902)
 
 [node name="MasterScene" type="CanvasLayer"]
+script = ExtResource("1_24rsn")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 15
@@ -11,3 +21,38 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_tapyw")
+
+[node name="MC" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="LoadingWidget" type="Node2D" parent="MC"]
+
+[node name="LoadingDataLabel" type="Label" parent="MC/LoadingWidget"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 783.0
+offset_top = 717.0
+offset_right = 950.0
+offset_bottom = 742.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Loading Data..."
+label_settings = SubResource("LabelSettings_bapw0")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="LoadingSpinner" parent="MC/LoadingWidget" instance=ExtResource("4_r6hn1")]
+position = Vector2(981, 726)

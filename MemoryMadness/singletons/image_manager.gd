@@ -11,26 +11,27 @@ extends Node
 var _item_images: Array = []
 
 
+func _to_string() -> String:
+	return "ImageManager"
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	load_item_images()
+	_load_async()
+	print(_to_string(), " _ready() -> Loading images ...")
 
 
-func add_file_to_list(fn: String, path: String) -> void:
-	var full_path = path + "/" + fn
-	
-	var image_info_dict = {
-		"item_name": fn.rstrip(".png"),
-		"item_texture": load(full_path)
-	}
-	
-	_item_images.append(image_info_dict)
-
-
-func load_item_images() -> void:
+## Experimental: This hasn't been heavily tested.
+## Spins up a Coroutine that will wait for all image data to load into memory,
+## and then emit the [SignalManager.on_load_game_data_complete] signal.
+func _load_async() -> void:
 	print("Start Loading @ %d ms" % [Time.get_ticks_msec()])
 	SignalManager.loading_game_data.emit()
-	
+	await get_tree().create_timer(4.0).timeout
+	_load_item_images()
+
+
+func _load_item_images() -> void:
 	var path = "res://assets/glitch"
 	var dir = DirAccess.open(path)
 	
@@ -43,17 +44,19 @@ func load_item_images() -> void:
 	
 	for fn in file_names:
 		if ".import" not in fn:
-			add_file_to_list(fn, path)
+			_add_file_to_list(fn, path)
 	
 	# OS.delay_msec(5000)
 	print("Finished Loading %d images @ %d ms" % [_item_images.size(), Time.get_ticks_msec()])
 	SignalManager.on_load_game_data_complete.emit()
 
 
-## Experimental
-## Spins up a new [Thread] that will wait for all image data to load into memory,
-## and then emit the [SignalManager.on_load_game_data_complete] signal.
-func _load_async() -> void:
-	var thread = Thread.new()
-	# Offload the load_item_images() function onto our Thread.
-	thread.start(load_item_images)
+func _add_file_to_list(fn: String, path: String) -> void:
+	var full_path = path + "/" + fn
+	
+	var image_info_dict = {
+		"item_name": fn.rstrip(".png"),
+		"item_texture": load(full_path)
+	}
+	
+	_item_images.append(image_info_dict)
