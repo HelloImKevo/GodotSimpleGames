@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmc0yse81h0nq"]
+
+[ext_resource type="FontFile" uid="uid://cd245dsgkw0ls" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="1_eqxit"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_65baq"]
+font = ExtResource("1_eqxit")
+font_size = 84
+font_color = Color(0.909804, 0.968627, 0.756863, 1)
+outline_size = 4
+outline_color = Color(0.509804, 0.721569, 0.113725, 1)
+shadow_size = 6
+shadow_color = Color(0, 0, 0, 0.470588)
+
+[node name="MainScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.223529, 0.188235, 0.698039, 0.196078)
+
+[node name="VB" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Spacer" type="Control" parent="VB"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GameTitle" type="Label" parent="VB"]
+layout_mode = 2
+text = "MEMORY MADNESS"
+label_settings = SubResource("LabelSettings_65baq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer2" type="Control" parent="VB"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBLevels" type="HBoxContainer" parent="VB"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Spacer3" type="Control" parent="VB"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBSprites" type="HBoxContainer" parent="VB"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Spacer4" type="Control" parent="VB"]
+layout_mode = 2
+size_flags_vertical = 3
