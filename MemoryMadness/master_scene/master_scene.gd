@@ -32,10 +32,6 @@ func _on_game_exit_pressed() -> void:
 
 
 func _on_level_selected(level_num: int) -> void:
-	if !ImageManager.is_data_loaded():
-		print("Game is still loading. Please wait ...")
-		return
-	
 	show_game(true)
 	SoundManager.play_music(music, SoundManager.SOUND_IN_GAME)
 

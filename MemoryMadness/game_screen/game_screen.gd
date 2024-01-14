@@ -18,6 +18,14 @@ func _ready():
 	label_moves.text = tr("MOVES")
 	label_pairs.text = tr("PAIRS")
 	label_exit_btn.text = tr("EXIT")
+	
+	SignalManager.on_level_selected.connect(_on_level_selected)
+
+
+func _on_level_selected(level_num: int) -> void:
+	var level_selection = GameManager.get_level_selection(level_num)
+	var frame_image = ImageManager.get_random_frame_image()
+	pass
 
 
 func _on_exit_button_pressed():

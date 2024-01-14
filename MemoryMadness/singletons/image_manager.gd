@@ -4,6 +4,12 @@ extends Node
 ## ImageManager : image_manager.gd
 
 
+const FRAME_IMAGES: Array = [
+	preload("res://assets/frames/blue_frame.png"),
+	preload("res://assets/frames/red_frame.png"),
+	preload("res://assets/frames/yellow_frame.png"),
+	preload("res://assets/frames/green_frame.png")
+]
 const LOAD_DELAY: float = 4.0
 
 
@@ -21,6 +27,19 @@ func is_data_loaded() -> bool:
 
 func get_random_item_image() -> Dictionary:
 	return _item_images.pick_random()
+
+
+func get_image(index: int) -> Dictionary:
+	assert(is_data_loaded())
+	return _item_images[index]
+
+
+func get_random_frame_image() -> CompressedTexture2D:
+	return FRAME_IMAGES.pick_random()
+
+
+func shuffle_images() -> void:
+	_item_images.shuffle()
 
 
 func _to_string() -> String:

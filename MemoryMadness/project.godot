@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+EventHandler="*res://singletons/event_handler.gd"
 SignalManager="*res://singletons/signal_manager.gd"
 ImageManager="*res://singletons/image_manager.gd"
 SoundManager="*res://singletons/sound_manager.gd"
