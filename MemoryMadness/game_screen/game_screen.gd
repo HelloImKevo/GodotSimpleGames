@@ -6,12 +6,21 @@ extends Control
 
 
 @onready var tile_container = $HB/MCLeft/TileContainer
+
+## Used for translation / localization / internationalization demonstration:
+## https://docs.godotengine.org/en/stable/tutorials/i18n/internationalizing_games.html
 @onready var label_moves = $HB/MCRight/VB/HB/Label
 @onready var label_pairs = $HB/MCRight/VB/HB2/Label
+
+# The actual score values earned by the player.
+@onready var moves_label = $HB/MCRight/VB/HB/MovesLabel
+@onready var pairs_label = $HB/MCRight/VB/HB2/PairsLabel
+
+
 @onready var label_exit_btn = $HB/MCRight/VB/ExitButton/Label
 @onready var sound = $Sound
 
-@onready var scorer = $Scorer
+@onready var scorer: Scorer = $Scorer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,6 +35,11 @@ func _ready():
 	label_exit_btn.text = tr("EXIT")
 	
 	SignalManager.on_level_selected.connect(_on_level_selected)
+
+
+func _process(delta):
+	moves_label.text = scorer.get_moves_made_str()
+	pairs_label.text = scorer.get_pairs_made_str()
 
 
 func _on_level_selected(level_num: int) -> void:

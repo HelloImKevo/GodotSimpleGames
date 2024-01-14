@@ -22,6 +22,14 @@ func _ready():
 	SignalManager.on_game_exit_pressed.connect(_on_game_exit_pressed)
 
 
+func get_moves_made_str() -> String:
+	return str(_moves_made)
+
+
+func get_pairs_made_str() -> String:
+	return "%s / %s" % [_pairs_made, _target_pairs]
+
+
 func clear_new_game(target_pairs: int) -> void:
 	print(_to_string(), ": clear_new_game() -> target_pairs: %d" % [target_pairs])
 	_selections.clear()
