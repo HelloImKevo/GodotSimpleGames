@@ -29,6 +29,10 @@ window/size/viewport_height=768
 window/stretch/mode="canvas_items"
 window/dpi/allow_hidpi=false
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://assets/translations.en.translation", "res://assets/translations.es.translation")
+
 [rendering]
 
 renderer/rendering_method="mobile"
