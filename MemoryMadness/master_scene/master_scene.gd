@@ -28,6 +28,7 @@ func show_game(s: bool) -> void:
 
 func _on_game_exit_pressed() -> void:
 	show_game(false)
+	GameManager.clear_nodes_of_group(GameManager.GROUP_TILE)
 	SoundManager.play_music(music, SoundManager.SOUND_MAIN_MENU)
 
 

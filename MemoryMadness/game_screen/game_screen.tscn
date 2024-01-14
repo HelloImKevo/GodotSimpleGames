@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c18sxvmwbuv54"]
+[gd_scene load_steps=8 format=3 uid="uid://c18sxvmwbuv54"]
 
 [ext_resource type="Script" path="res://game_screen/game_screen.gd" id="1_6ofl6"]
 [ext_resource type="LabelSettings" uid="uid://b8pt1e6pbwxxf" path="res://assets/GM_32_dark.tres" id="1_ixy80"]
+[ext_resource type="PackedScene" uid="uid://dsykhtivvunyh" path="res://memory_tile/memory_tile.tscn" id="2_hah3n"]
 [ext_resource type="Texture2D" uid="uid://qwobqynool30" path="res://assets/ui/blue_button00.png" id="2_pmme1"]
 [ext_resource type="Texture2D" uid="uid://bq7ms65gxybvf" path="res://assets/ui/yellow_button00.png" id="3_axulg"]
 [ext_resource type="Texture2D" uid="uid://byhdcf2qjbaf6" path="res://assets/ui/green_button00.png" id="4_sm82t"]
@@ -15,6 +16,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6ofl6")
+mem_tile_scene = ExtResource("2_hah3n")
 
 [node name="HB" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -32,6 +34,8 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
 
 [node name="MCRight" type="MarginContainer" parent="HB"]
 custom_minimum_size = Vector2(200, 2.08165e-12)
