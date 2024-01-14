@@ -1,0 +1,12 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b8pt1e6pbwxxf"]
+
+[ext_resource type="FontFile" uid="uid://dyltxf0blt5k1" path="res://assets/fonts/gemunu-libre-v8-latin-700.ttf" id="1_8mshy"]
+
+[resource]
+font = ExtResource("1_8mshy")
+font_size = 32
+font_color = Color(0.15, 0.15, 0.15, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.705882)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.470588)

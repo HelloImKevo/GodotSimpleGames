@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2jnybck261ft"]
+[gd_scene load_steps=7 format=3 uid="uid://d2jnybck261ft"]
 
 [ext_resource type="Script" path="res://master_scene/master_scene.gd" id="1_24rsn"]
 [ext_resource type="Texture2D" uid="uid://2yko0ntjw4xx" path="res://assets/images/backgroundEmpty.png" id="1_tapyw"]
 [ext_resource type="PackedScene" uid="uid://dmc0yse81h0nq" path="res://main_screen/main_screen.tscn" id="3_2djc7"]
 [ext_resource type="PackedScene" uid="uid://cg2njbjflj0v2" path="res://widgets/loading_spinner.tscn" id="4_r6hn1"]
 [ext_resource type="LabelSettings" uid="uid://dk71fy1w8p0c5" path="res://assets/LG_24_white.tres" id="4_sne3l"]
+[ext_resource type="PackedScene" uid="uid://c18sxvmwbuv54" path="res://game_screen/game_screen.tscn" id="4_uv7bp"]
 
 [node name="MasterScene" type="CanvasLayer"]
 script = ExtResource("1_24rsn")
@@ -18,6 +19,9 @@ grow_vertical = 2
 texture = ExtResource("1_tapyw")
 
 [node name="MainScreen" parent="." instance=ExtResource("3_2djc7")]
+
+[node name="GameScreen" parent="." instance=ExtResource("4_uv7bp")]
+visible = false
 
 [node name="LoadingWidget" type="Node2D" parent="."]
 
