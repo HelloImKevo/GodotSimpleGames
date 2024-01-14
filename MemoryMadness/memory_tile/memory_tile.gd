@@ -42,4 +42,4 @@ func _on_selection_enabled() -> void:
 
 func _on_pressed():
 	if _can_select_me:
-		reveal(true)
+		SignalManager.on_tile_selected.emit(self)

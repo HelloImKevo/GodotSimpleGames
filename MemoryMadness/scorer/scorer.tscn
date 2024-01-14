@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmegee5x0p1xn"]
+
+[ext_resource type="Script" path="res://scorer/scorer.gd" id="1_by87m"]
+
+[node name="Scorer" type="Node"]
+script = ExtResource("1_by87m")
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+
+[node name="RevealTimer" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true

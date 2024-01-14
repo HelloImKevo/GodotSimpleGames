@@ -12,3 +12,5 @@ signal on_game_exit_pressed
 
 signal on_selection_enabled
 signal on_selection_disabled
+
+signal on_tile_selected(tile: MemoryTile)
