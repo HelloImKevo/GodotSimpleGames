@@ -18,6 +18,8 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_tapyw")
 
+[node name="Music" type="AudioStreamPlayer" parent="."]
+
 [node name="MainScreen" parent="." instance=ExtResource("3_2djc7")]
 
 [node name="GameScreen" parent="." instance=ExtResource("4_uv7bp")]

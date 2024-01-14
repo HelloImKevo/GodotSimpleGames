@@ -102,3 +102,7 @@ text = "EXIT"
 label_settings = ExtResource("5_od7pc")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="HB/MCRight/VB/ExitButton" to="." method="_on_exit_button_pressed"]

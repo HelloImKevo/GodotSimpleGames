@@ -4,18 +4,40 @@ extends CanvasLayer
 ## MasterScene : master_scene.gd
 
 
+@onready var main_screen = $MainScreen
+@onready var game_screen = $GameScreen
+@onready var music = $Music
 @onready var loading_widget = $LoadingWidget
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	SignalManager.loading_game_data.connect(_on_loading_game_data)
 	SignalManager.on_load_game_data_complete.connect(_on_load_game_data_complete)
+	
+	# Get our Main Menu music to start playing by default.
+	_on_game_exit_pressed()
+	
+	SignalManager.on_game_exit_pressed.connect(_on_game_exit_pressed)
+	SignalManager.on_level_selected.connect(_on_level_selected)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+func show_game(s: bool) -> void:
+	game_screen.visible = s
+	main_screen.visible = !s
+
+
+func _on_game_exit_pressed() -> void:
+	show_game(false)
+	SoundManager.play_music(music, SoundManager.SOUND_MAIN_MENU)
+
+
+func _on_level_selected(level_num: int) -> void:
+	if !ImageManager.is_data_loaded():
+		print("Game is still loading. Please wait ...")
+		return
+	
+	show_game(true)
+	SoundManager.play_music(music, SoundManager.SOUND_IN_GAME)
 
 
 #region: Loading Game Data Events

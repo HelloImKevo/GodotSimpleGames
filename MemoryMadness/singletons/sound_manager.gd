@@ -26,17 +26,23 @@ const SOUNDS = {
 
 # Default volume (in decibels) for UI effects.
 var _ui_volume: float = -20.0
+var _music_volume: float = -20.0
 
 
-func play_sound(player: AudioStreamPlayer, key: String) -> void:
+func play_music(player: AudioStreamPlayer, key: String) -> void:
+	player.set_volume_db(_music_volume)
+	_play_sound(player, key)
+
+
+func play_button_click(player: AudioStreamPlayer) -> void:
+	player.set_volume_db(_ui_volume)
+	_play_sound(player, SOUND_SELECT_BUTTON)
+
+
+func _play_sound(player: AudioStreamPlayer, key: String) -> void:
 	if !SOUNDS.has(key):
 		return
 	
 	player.stop()
 	player.stream = SOUNDS[key]
 	player.play()
-
-
-func play_button_click(player: AudioStreamPlayer) -> void:
-	player.set_volume_db(_ui_volume)
-	play_sound(player, SOUND_SELECT_BUTTON)
