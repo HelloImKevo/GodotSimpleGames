@@ -4,7 +4,7 @@ extends CanvasLayer
 ## MasterScene : master_scene.gd
 
 
-@onready var loading_widget = $MC/LoadingWidget
+@onready var loading_widget = $LoadingWidget
 
 
 # Called when the node enters the scene tree for the first time.
