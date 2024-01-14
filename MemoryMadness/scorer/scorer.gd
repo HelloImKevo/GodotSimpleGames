@@ -6,8 +6,7 @@ extends Node
 @onready var sound = $Sound
 @onready var reveal_timer = $RevealTimer
 
-var _tiles: Array = []
-var _selections: Array = []
+var _selections: Array[MemoryTile] = []
 var _target_pairs: int = 0
 var _moves_made: int = 0
 var _pairs_made: int = 0
@@ -29,7 +28,6 @@ func clear_new_game(target_pairs: int) -> void:
 	_pairs_made = 0
 	_moves_made = 0
 	_target_pairs = target_pairs
-	_tiles = get_tree().get_nodes_in_group(GameManager.GROUP_TILE)
 
 
 func _on_game_exit_pressed() -> void:
@@ -38,8 +36,29 @@ func _on_game_exit_pressed() -> void:
 	reveal_timer.stop()
 
 
+func _selections_are_pair() -> bool:
+	var first: MemoryTile = _selections[0]
+	var second: MemoryTile = _selections[1]
+	
+	return (
+		first.get_instance_id() != second.get_instance_id()
+		and
+		first.get_item_name() == second.get_item_name()
+	)
+
+
 func _update_selections() -> void:
 	reveal_timer.start()
+	if _selections_are_pair():
+		_kill_selected_tiles()
+
+
+func _kill_selected_tiles() -> void:
+	for s in _selections:
+		s.kill_on_success()
+	
+	_pairs_made += 1
+	SoundManager.play_sfx(sound, SoundManager.SOUND_SUCCESS)
 
 
 func _on_tile_selected(tile: MemoryTile) -> void:
@@ -65,6 +84,7 @@ func hide_selections() -> void:
 
 
 func _on_reveal_timer_timeout():
-	hide_selections()
+	if !_selections_are_pair():
+		hide_selections()
 	_selections.clear()
 	SignalManager.on_selection_enabled.emit()
