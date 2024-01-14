@@ -39,6 +39,11 @@ func play_button_click(player: AudioStreamPlayer) -> void:
 	_play_sound(player, SOUND_SELECT_BUTTON)
 
 
+func play_tile_click(player: AudioStreamPlayer) -> void:
+	player.set_volume_db(_ui_volume)
+	_play_sound(player, SOUND_SELECT_TILE)
+
+
 func _play_sound(player: AudioStreamPlayer, key: String) -> void:
 	if !SOUNDS.has(key):
 		return

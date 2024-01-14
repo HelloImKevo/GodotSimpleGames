@@ -10,6 +10,10 @@ var _item_name: String
 var _can_select_me: bool = true
 
 
+func _to_string() -> String:
+	return "MemoryTile"
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SignalManager.on_selection_disabled.connect(_on_selection_disabled)
@@ -41,5 +45,8 @@ func _on_selection_enabled() -> void:
 
 
 func _on_pressed():
-	if _can_select_me:
-		SignalManager.on_tile_selected.emit(self)
+	if !_can_select_me:
+		print(_to_string(), ": _on_pressed() -> Two tiles are already showing!")
+		return
+	
+	SignalManager.on_tile_selected.emit(self)

@@ -11,6 +11,8 @@ extends Control
 @onready var label_exit_btn = $HB/MCRight/VB/ExitButton/Label
 @onready var sound = $Sound
 
+@onready var scorer = $Scorer
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,6 +36,8 @@ func _on_level_selected(level_num: int) -> void:
 	
 	for ii_dict in level_selection.image_list:
 		_add_memory_tile(ii_dict, frame_image)
+	
+	scorer.clear_new_game(level_selection.target_pairs)
 
 
 func _add_memory_tile(ii_dict: Dictionary, frame_image: CompressedTexture2D) -> void:
