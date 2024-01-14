@@ -1,6 +1,9 @@
 extends CanvasLayer
 
 
+## MasterScene : master_scene.gd
+
+
 @onready var loading_widget = $MC/LoadingWidget
 
 

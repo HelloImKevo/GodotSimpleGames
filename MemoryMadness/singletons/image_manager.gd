@@ -4,11 +4,23 @@ extends Node
 ## ImageManager : image_manager.gd
 
 
+const LOAD_DELAY: float = 4.0
+
+
 ## [
 ##     {"item_name": "tree", "item_texture": CompressedTexture2D},
 ##     {"item_name": "pear", "item_texture": CompressedTexture2D}
 ## ]
 var _item_images: Array = []
+var _is_data_loaded: bool = false
+
+
+func is_data_loaded() -> bool:
+	return _is_data_loaded
+
+
+func get_random_item_image() -> Dictionary:
+	return _item_images.pick_random()
 
 
 func _to_string() -> String:
@@ -27,7 +39,7 @@ func _ready():
 func _load_async() -> void:
 	print("Start Loading @ %d ms" % [Time.get_ticks_msec()])
 	SignalManager.loading_game_data.emit()
-	await get_tree().create_timer(4.0).timeout
+	await get_tree().create_timer(LOAD_DELAY).timeout
 	_load_item_images()
 
 
@@ -48,6 +60,7 @@ func _load_item_images() -> void:
 	
 	# OS.delay_msec(5000)
 	print("Finished Loading %d images @ %d ms" % [_item_images.size(), Time.get_ticks_msec()])
+	_is_data_loaded = true
 	SignalManager.on_load_game_data_complete.emit()
 
 
