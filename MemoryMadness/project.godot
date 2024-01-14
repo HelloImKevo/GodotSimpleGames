@@ -19,6 +19,8 @@ config/icon="res://icon.png"
 
 SignalManager="*res://singletons/signal_manager.gd"
 ImageManager="*res://singletons/image_manager.gd"
+SoundManager="*res://singletons/sound_manager.gd"
+GameManager="*res://singletons/game_manager.gd"
 
 [display]
 
