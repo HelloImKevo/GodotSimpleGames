@@ -32,7 +32,7 @@ func _on_game_exit_pressed() -> void:
 	SoundManager.play_music(music, SoundManager.SOUND_MAIN_MENU)
 
 
-func _on_level_selected(level_num: int) -> void:
+func _on_level_selected(_level_num: int) -> void:
 	show_game(true)
 	SoundManager.play_music(music, SoundManager.SOUND_IN_GAME)
 

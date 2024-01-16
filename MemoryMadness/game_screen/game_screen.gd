@@ -16,7 +16,7 @@ extends Control
 @onready var moves_label = $HB/MCRight/VB/HB/MovesLabel
 @onready var pairs_label = $HB/MCRight/VB/HB2/PairsLabel
 
-
+@onready var exit_button = $HB/MCRight/VB/ExitButton
 @onready var label_exit_btn = $HB/MCRight/VB/ExitButton/Label
 @onready var sound = $Sound
 
@@ -35,14 +35,17 @@ func _ready():
 	label_exit_btn.text = tr("EXIT")
 	
 	SignalManager.on_level_selected.connect(_on_level_selected)
+	SignalManager.on_game_over.connect(_on_game_over)
 
 
-func _process(delta):
+func _process(_delta):
 	moves_label.text = scorer.get_moves_made_str()
 	pairs_label.text = scorer.get_pairs_made_str()
 
 
 func _on_level_selected(level_num: int) -> void:
+	exit_button.show()
+	
 	var level_selection = GameManager.get_level_selection(level_num)
 	var frame_image = ImageManager.get_random_frame_image()
 	
@@ -63,3 +66,9 @@ func _add_memory_tile(ii_dict: Dictionary, frame_image: CompressedTexture2D) -> 
 func _on_exit_button_pressed():
 	SoundManager.play_button_click(sound)
 	SignalManager.on_game_exit_pressed.emit()
+
+
+func _on_game_over(_moves: int):
+	# The 'Game Over' popup window has its own Exit Button.
+	print("GameScreen: Hiding the Exit Button!")
+	exit_button.hide()

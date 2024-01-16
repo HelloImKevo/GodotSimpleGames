@@ -95,4 +95,10 @@ func _on_reveal_timer_timeout():
 	if !_selections_are_pair():
 		hide_selections()
 	_selections.clear()
+	_check_game_over()
 	SignalManager.on_selection_enabled.emit()
+
+
+func _check_game_over() -> void:
+	if _pairs_made >= _target_pairs:
+		SignalManager.on_game_over.emit(_moves_made)
