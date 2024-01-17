@@ -1,0 +1,27 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="FoxyAntics"
+config/description="FoxyAntics: 2D pixel-art platformer where the player controls a Fox that can jump on moving platforms and shoot enemies."
+config/features=PackedStringArray("4.2", "Mobile")
+config/icon="res://icon.png"
+
+[display]
+
+window/size/viewport_width=1024
+window/size/viewport_height=600
+window/stretch/mode="canvas_items"
+window/dpi/allow_hidpi=false
+
+[rendering]
+
+renderer/rendering_method="mobile"
