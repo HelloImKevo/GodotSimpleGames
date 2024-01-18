@@ -24,4 +24,5 @@ window/dpi/allow_hidpi=false
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
