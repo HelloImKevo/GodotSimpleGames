@@ -1,4 +1,7 @@
 extends Node2D
+## LevelBase : level_base.gd
+##
+## Base level for testing 2D physics and interations with player character.
 
 
 @onready var player_cam = $PlayerCam
