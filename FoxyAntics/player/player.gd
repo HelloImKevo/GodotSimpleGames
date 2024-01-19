@@ -13,12 +13,14 @@ const TERMINAL_VELOCITY = 400.0
 # Defines an invincibility window (iFrames).
 const HURT_TIME: float = 0.3
 
-enum PlayerState { IDLE, RUNNING, JUMPING, FALL, HURT }
+enum PlayerState { IDLE, RUN, JUMP, FALL, HURT }
 
 var _state: PlayerState = PlayerState.IDLE
 
 @onready var sprite_2d = $Sprite2D
 @onready var animation_player = $AnimationPlayer
+@onready var debug_label = $DebugLabel
+@onready var sound_player = $SoundPlayer
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 # Default value of 980 (9.8 m/s^2).
@@ -45,6 +47,16 @@ func _physics_process(delta):
 	
 	# Change state after the physics engine is done processing.
 	_calculate_states()
+	_update_debug_label()
+
+
+func _update_debug_label() -> void:
+	debug_label.text = "floored=%s state=%s\nvel.x=%.1f vel.y=%.1f" % [
+		is_on_floor(),
+		PlayerState.keys()[_state],
+		velocity.x,
+		velocity.y
+	]
 
 
 func _handle_movement_input() -> void:
@@ -61,6 +73,7 @@ func _handle_movement_input() -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		SoundManager.play_sfx(sound_player, SoundManager.SOUND_JUMP)
 	
 	velocity.y = clampf(velocity.y, JUMP_VELOCITY, TERMINAL_VELOCITY)
 
@@ -74,32 +87,42 @@ func _calculate_states() -> void:
 		if velocity.x == 0:
 			_set_state(PlayerState.IDLE)
 		else:
-			_set_state(PlayerState.RUNNING)
+			_set_state(PlayerState.RUN)
 	else:
 		if velocity.y > 0:
 			# Player is falling.
 			_set_state(PlayerState.FALL)
 		else:
-			_set_state(PlayerState.JUMPING)
+			_set_state(PlayerState.JUMP)
 
 
 func _set_state(new_state: PlayerState) -> void:
 	if new_state == _state:
 		return
 	
+	if _did_just_land(new_state):
+		SoundManager.play_sfx(sound_player, SoundManager.SOUND_LAND)
+	
 	_state = new_state
 	
 	match _state:
 		PlayerState.IDLE:
 			animation_player.play("idle")
-		PlayerState.RUNNING:
+		PlayerState.RUN:
 			animation_player.play("run")
-		PlayerState.JUMPING:
+		PlayerState.JUMP:
 			animation_player.play("jump")
 		PlayerState.FALL:
 			animation_player.play("fall")
 		PlayerState.HURT:
 			animation_player.play("hurt")
+
+
+func _did_just_land(new_state: PlayerState) -> bool:
+	if _state == PlayerState.FALL:
+		return new_state == PlayerState.IDLE or new_state == PlayerState.RUN
+	
+	return false
 
 
 # Unused. For reference purposes.
