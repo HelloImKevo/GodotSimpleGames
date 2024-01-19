@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+EventBus="*res://singletons/event_bus.gd"
 SoundManager="*res://singletons/sound_manager.gd"
 
 [display]
