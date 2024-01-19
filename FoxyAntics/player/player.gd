@@ -13,6 +13,10 @@ const TERMINAL_VELOCITY = 400.0
 # Defines an invincibility window (iFrames).
 const HURT_TIME: float = 0.3
 
+enum PlayerState { IDLE, RUNNING, JUMPING, FALL, HURT }
+
+var _state: PlayerState = PlayerState.IDLE
+
 @onready var sprite_2d = $Sprite2D
 @onready var animation_player = $AnimationPlayer
 
@@ -33,10 +37,14 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
+	
+	# Interpret player input before process
 	_handle_movement_input()
-
+	
 	move_and_slide()
+	
+	# Change state after the physics engine is done processing.
+	_calculate_states()
 
 
 func _handle_movement_input() -> void:
@@ -45,14 +53,53 @@ func _handle_movement_input() -> void:
 	# Handle directional movement.
 	if Input.is_action_pressed("left"):
 		velocity.x = -RUN_SPEED
+		sprite_2d.flip_h = true
 	elif Input.is_action_pressed("right"):
 		velocity.x = RUN_SPEED
+		sprite_2d.flip_h = false
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	
 	velocity.y = clampf(velocity.y, JUMP_VELOCITY, TERMINAL_VELOCITY)
+
+
+func _calculate_states() -> void:
+	if _state == PlayerState.HURT:
+		# Player cannot be controlled for the brief invulnerable window.
+		return
+	
+	if is_on_floor():
+		if velocity.x == 0:
+			_set_state(PlayerState.IDLE)
+		else:
+			_set_state(PlayerState.RUNNING)
+	else:
+		if velocity.y > 0:
+			# Player is falling.
+			_set_state(PlayerState.FALL)
+		else:
+			_set_state(PlayerState.JUMPING)
+
+
+func _set_state(new_state: PlayerState) -> void:
+	if new_state == _state:
+		return
+	
+	_state = new_state
+	
+	match _state:
+		PlayerState.IDLE:
+			animation_player.play("idle")
+		PlayerState.RUNNING:
+			animation_player.play("run")
+		PlayerState.JUMPING:
+			animation_player.play("jump")
+		PlayerState.FALL:
+			animation_player.play("fall")
+		PlayerState.HURT:
+			animation_player.play("hurt")
 
 
 # Unused. For reference purposes.
