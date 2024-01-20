@@ -43,7 +43,7 @@ func _fallen_off() -> void:
 
 func die():
 	if _dying:
-		true
+		return
 	
 	_dying = true
 	EventBus.on_enemy_hit(self)
