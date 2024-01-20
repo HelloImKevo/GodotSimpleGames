@@ -13,8 +13,9 @@ const OFF_SCREEN_KILL_ME: float = 1000.0
 @export var default_facing: Facing = Facing.LEFT
 ## How many points does the player earn when killing this enemy?
 @export var points: int = 1
+# How fast does this enemy move?
+@export var speed: float = 30.0
 
-var _speed: float = 30.0
 var _gravity: float = 800.0
 var _facing: Facing = default_facing
 var _player_ref: Player
