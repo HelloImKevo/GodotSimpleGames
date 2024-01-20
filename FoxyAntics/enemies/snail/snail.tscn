@@ -87,9 +87,8 @@ size = Vector2(21, 14)
 
 [node name="Snail" instance=ExtResource("1_k0rjc")]
 script = ExtResource("2_ucca1")
-default_facing = null
-points = null
-speed = null
+points = 2
+hit_points = 1
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 scale = Vector2(0.75, 0.75)

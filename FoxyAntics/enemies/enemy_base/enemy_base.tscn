@@ -9,5 +9,17 @@ script = ExtResource("1_cfmw3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
+[node name="DebugLabel" type="Label" parent="."]
+visible = false
+offset_left = -35.0
+offset_top = -41.0
+offset_right = 622.0
+offset_bottom = 166.0
+scale = Vector2(0.15, 0.15)
+theme_override_font_sizes/font_size = 48
+text = "Enemy Debug Label
+pos.x = 500 pos.y = 800
+velocity.x = 5 velocity.y = -9.8"
+
 [connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_on_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_screen_exited"]

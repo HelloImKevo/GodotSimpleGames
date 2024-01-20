@@ -38,7 +38,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_auknl")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_tbrqa")
 }, {
 "duration": 1.0,
@@ -71,23 +71,23 @@ size = Vector2(17, 11)
 
 [node name="Frog" instance=ExtResource("1_8ff5e")]
 script = ExtResource("2_ituwx")
+points = 4
 speed = 18.0
+hit_points = 3
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_sk15b")
 animation = &"idle"
 autoplay = "idle"
+frame = 4
+frame_progress = 0.587601
 
-[node name="FloorDetection" type="RayCast2D" parent="." index="2"]
-position = Vector2(-11, 0)
-target_position = Vector2(2.08165e-12, 30)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 position = Vector2(-0.5, 2.5)
 shape = SubResource("RectangleShape2D_5nf27")
 debug_color = Color(0.196078, 0.635294, 0.247059, 0.419608)
 
-[node name="JumpTimer" type="Timer" parent="." index="4"]
+[node name="JumpTimer" type="Timer" parent="." index="3"]
 
 [connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]

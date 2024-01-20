@@ -6,9 +6,14 @@ extends EnemyBase
 @onready var animated_sprite_2d = $AnimatedSprite2D
 
 
+func _to_string() -> String:
+	return "Snail(%s, %s)" % [points, global_position]
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	super._ready()
+	_enable_debug_label()
 
 
 func _physics_process(delta):
@@ -24,6 +29,8 @@ func _physics_process(delta):
 	if is_on_floor():
 		if is_on_wall() or !floor_detection.is_colliding():
 			flip_me()
+	
+	_on_post_physics_process()
 
 
 func flip_me() -> void:
