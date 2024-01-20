@@ -5,13 +5,14 @@ extends CharacterBody2D
 ## The player-controlled Fox character. Can run and jump.
 
 
-const RUN_SPEED = 300.0
+const RUN_SPEED = 250.0
 # Velocity applied in the upward direction (gravitational velocity
 # is applied as a downward constant).
-const JUMP_VELOCITY = -300.0
+const JUMP_VELOCITY = -340.0
 const TERMINAL_VELOCITY = 400.0
 # Defines an invincibility window (iFrames).
 const HURT_TIME: float = 0.3
+const ACCELERATION: float = 30.0
 
 enum PlayerState { IDLE, RUN, JUMP, FALL, HURT }
 
@@ -60,15 +61,22 @@ func _update_debug_label() -> void:
 
 
 func _handle_movement_input() -> void:
-	velocity.x = 0
-	
 	# Handle directional movement.
 	if Input.is_action_pressed("left"):
-		velocity.x = -RUN_SPEED
+		velocity.x = max(velocity.x - ACCELERATION, -RUN_SPEED)
 		sprite_2d.flip_h = true
 	elif Input.is_action_pressed("right"):
-		velocity.x = RUN_SPEED
+		velocity.x = min(velocity.x + ACCELERATION, RUN_SPEED)
 		sprite_2d.flip_h = false
+	else:
+		# Quickly decelerate the player (instead of coming to an abrupt stop).
+		# Example values: 150, 90, 54, 32.4, 19.4, 11.6, 7.0, 2.5, 0.54, 0.33
+		var linear_interp: float = lerpf(velocity.x, 0.0, 0.4)
+		# Once we've slowed down, we need to come to a full stop to trigger
+		# the "Idle" animation.
+		if abs(linear_interp) < 5.0:
+			linear_interp = 0.0
+		velocity.x = linear_interp
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
