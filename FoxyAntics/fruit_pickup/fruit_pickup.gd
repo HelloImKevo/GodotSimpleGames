@@ -1,3 +1,4 @@
+class_name FruitPickup
 extends Area2D
 ## FruitPickup : A fruit powerup that is spawned when the player kills an enemy.
 ## The fruit is picked at random: Banana, Cherry, Kiwi or Melon.
@@ -41,3 +42,9 @@ func kill_me() -> void:
 	set_process(false)
 	hide()
 	queue_free()
+
+
+func _on_area_entered(area):
+	print("Pickup collected: %s" % [area])
+	EventBus.on_pickup_collected(self)
+	kill_me()

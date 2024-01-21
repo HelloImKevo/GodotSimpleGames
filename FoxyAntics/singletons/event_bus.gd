@@ -17,6 +17,11 @@ func on_enemy_hit(enemy: EnemyBase) -> void:
 	SignalManager.on_enemy_hit.emit(enemy.points, enemy.global_position)
 
 
+func on_pickup_collected(pickup: FruitPickup) -> void:
+	print(_to_string(), " => on_pickup_collected: %s" % [pickup])
+	SignalManager.on_pickup_hit.emit(pickup.POINTS)
+
+
 func emit_global_event(msg: String) -> void:
 	if _enabled:
 		print(_to_string(), " => Received a global event: %s" % [msg])

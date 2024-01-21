@@ -100,7 +100,8 @@ func die():
 	
 	_dying = true
 	EventBus.on_enemy_hit(self)
-	ObjectMaker.create_explosion(global_position)
+	ObjectMaker.spawn_entity(global_position, ObjectMaker.SceneKey.EXPLOSION)
+	ObjectMaker.spawn_entity(global_position, ObjectMaker.SceneKey.PICKUP)
 	# Stop processing physics for this enemy.
 	set_physics_process(false)
 	hide()
