@@ -121,4 +121,8 @@ func _on_visible_on_screen():
 func _on_not_visible_on_screen():
 	pass # Replace with function body.
 
+
+func _on_enemy_hit_box_area_entered(area):
+	print("Enemy HitBox: ", area)
+
 #endregion: Node Signals

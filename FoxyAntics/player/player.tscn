@@ -154,7 +154,7 @@ velocity.x = 5 velocity.y = -9.8"
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, 5)
