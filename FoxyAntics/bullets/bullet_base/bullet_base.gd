@@ -18,7 +18,7 @@ func _ready():
 
 func _process(delta):
 	_check_expired(delta)
-	position += _direction * delta * 20.0
+	position += _direction * delta
 
 
 func _check_expired(delta: float) -> void:
@@ -34,7 +34,7 @@ func _check_expired(delta: float) -> void:
 
 ## Movement direction for the projectile (typically Vector2.LEFT / RIGHT / UP / DOWN),
 ## how long the bullet should last, and the speed of the projectile as pixels per second.
-func setup(dir: Vector2, life_span: float, speed: float) -> void:
+func setup(dir: Vector2, speed: float, life_span: float) -> void:
 	# The magnitude of the vector in an X and Y is the square root of 1^2 + 1^2.
 	_direction = dir.normalized() * speed
 	_life_span = life_span
