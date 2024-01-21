@@ -146,3 +146,11 @@ func _default_godot_2d_input() -> void:
 		velocity.x = direction * RUN_SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, RUN_SPEED)
+
+
+#region: Node Signals
+
+func _on_hit_box_area_entered(area):
+	print("Player HitBox: ", area)
+
+#endregion: Node Signals

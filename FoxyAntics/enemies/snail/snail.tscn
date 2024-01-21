@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d2a3aqwnr3oig"]
+[gd_scene load_steps=17 format=3 uid="uid://d2a3aqwnr3oig"]
 
 [ext_resource type="PackedScene" uid="uid://b2hq61j31vesa" path="res://enemies/enemy_base/enemy_base.tscn" id="1_k0rjc"]
 [ext_resource type="Script" path="res://enemies/snail/snail.gd" id="2_ucca1"]
@@ -85,6 +85,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nefbj"]
 size = Vector2(21, 14)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tdka0"]
+radius = 7.0
+height = 22.0
+
 [node name="Snail" instance=ExtResource("1_k0rjc")]
 script = ExtResource("2_ucca1")
 points = 2
@@ -104,3 +108,8 @@ target_position = Vector2(2.08165e-12, 30)
 position = Vector2(0.5, 2)
 shape = SubResource("RectangleShape2D_nefbj")
 debug_color = Color(0.992157, 0.0862745, 0, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(1, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_tdka0")

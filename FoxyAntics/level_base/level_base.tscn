@@ -536,7 +536,7 @@ position = Vector2(771, -53)
 position = Vector2(425, -209)
 
 [node name="Eagle" parent="." instance=ExtResource("7_nif1s")]
-position = Vector2(487, -233)
+position = Vector2(548, -291)
 
 [node name="Eagle2" parent="." instance=ExtResource("7_nif1s")]
-position = Vector2(84, -294)
+position = Vector2(87, -326)
