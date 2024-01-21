@@ -41,7 +41,7 @@ func _ready():
 	_player_ref = get_tree().get_nodes_in_group(GameManager.GROUP_PLAYER)[0]
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	assert(_internal_ready_called, "Subclasses must invoke super._ready()")
 	_fallen_off()
 
@@ -79,6 +79,7 @@ func _on_post_physics_process() -> void:
 
 func _fallen_off() -> void:
 	if global_position.y > OFF_SCREEN_KILL_ME:
+		print(_to_string(), " => This enemy went way-off screen. Queuing it for destruction.")
 		# Hasta la vista, baby: Mark this enemy as ready to be destroyed.
 		queue_free()
 
@@ -113,11 +114,11 @@ func get_distance_to_player() -> float:
 
 #region: Node Signals
 
-func _on_screen_entered():
+func _on_visible_on_screen():
 	pass # Replace with function body.
 
 
-func _on_screen_exited():
+func _on_not_visible_on_screen():
 	pass # Replace with function body.
 
 #endregion: Node Signals

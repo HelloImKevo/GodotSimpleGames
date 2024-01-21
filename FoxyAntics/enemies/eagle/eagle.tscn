@@ -63,3 +63,5 @@ target_position = Vector2(2.08165e-12, 200)
 
 [node name="DirectionTimer" type="Timer" parent="." index="5"]
 wait_time = 3.0
+
+[connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]

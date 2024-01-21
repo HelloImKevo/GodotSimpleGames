@@ -7,6 +7,10 @@ extends EnemyBase
 @onready var player_detector = $PlayerDetector
 @onready var direction_timer = $DirectionTimer
 
+const FLY_SPEED: Vector2 = Vector2(35.0, 15.0)
+
+var _fly_direction: Vector2 = Vector2.ZERO
+
 
 func _to_string() -> String:
 	return "Eagle(%s, %s)" % [points, global_position]
@@ -23,41 +27,40 @@ func _ready():
 
 func _physics_process(delta):
 	super._physics_process(delta)
-	
+	velocity = _fly_direction
 	move_and_slide()
-	_flip_me()
 	_on_post_physics_process()
 
 
 #region: Private Functions
 
-func _flip_me() -> void:
-	# The frog always jumps towards the player.
-	if (
-		_player_ref.global_position.x > global_position.x
-		and
-		!animated_sprite_2d.flip_h
-	):
+func _determine_flight_direction_and_flip_sprite() -> void:
+	var x_dir = sign(_player_ref.global_position.x - self.global_position.x)
+	if x_dir > 0:
 		animated_sprite_2d.flip_h = true
 		_facing = Facing.RIGHT
-	elif (
-		_player_ref.global_position.x < global_position.x
-		and
-		animated_sprite_2d.flip_h
-	):
+	else:
 		animated_sprite_2d.flip_h = false
 		_facing = Facing.LEFT
+	
+	_fly_direction = Vector2(x_dir, 1) * FLY_SPEED
+
+
+func _fly_to_player() -> void:
+	_determine_flight_direction_and_flip_sprite()
+	direction_timer.start()
 
 #endregion: Private Functions
 
 
 #region: Node Signals
 
-func _on_screen_entered():
+func _on_visible_on_screen():
 	animated_sprite_2d.play("fly")
+	_fly_to_player()
 
 
-func _on_screen_exited():
-	pass # Replace with function body.
+func _on_direction_timer_timeout():
+	_fly_to_player()
 
 #endregion: Node Signals
