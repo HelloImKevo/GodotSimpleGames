@@ -100,11 +100,11 @@ func _on_jump_timer_timeout():
 	_jump_allowed = true
 
 
-func _on_screen_entered():
+func _on_visible_on_screen():
 	_seen_player = true
 
 
-func _on_screen_exited():
+func _on_not_visible_on_screen():
 	pass # Replace with function body.
 
 #endregion: Node Signals
