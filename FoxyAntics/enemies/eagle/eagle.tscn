@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://b80ns8xq3fj4q"]
+[gd_scene load_steps=12 format=3 uid="uid://b80ns8xq3fj4q"]
 
 [ext_resource type="PackedScene" uid="uid://b2hq61j31vesa" path="res://enemies/enemy_base/enemy_base.tscn" id="1_3cukt"]
 [ext_resource type="Script" path="res://enemies/eagle/eagle.gd" id="2_3oiqt"]
 [ext_resource type="Texture2D" uid="uid://bq47he3fg32qs" path="res://assets/enemies/eagle/eagle-attack.png" id="2_w8omk"]
+[ext_resource type="PackedScene" uid="uid://b0avibk4tqo7l" path="res://shooter/shooter.tscn" id="4_a6elf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fdbj0"]
 atlas = ExtResource("2_w8omk")
@@ -61,11 +62,20 @@ shape = SubResource("CircleShape2D_yshas")
 
 [node name="PlayerDetector" type="RayCast2D" parent="." index="4"]
 target_position = Vector2(2.08165e-12, 200)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="DirectionTimer" type="Timer" parent="." index="5"]
 wait_time = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
 shape = SubResource("CircleShape2D_jponm")
+
+[node name="Shooter" parent="." index="7" instance=ExtResource("4_a6elf")]
+speed = 80.0
+life_span = 12.0
+bullet_key = 1
+shoot_delay = 2.0
 
 [connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
