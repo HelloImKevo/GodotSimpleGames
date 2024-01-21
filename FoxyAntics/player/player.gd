@@ -22,6 +22,7 @@ var _state: PlayerState = PlayerState.IDLE
 @onready var animation_player = $AnimationPlayer
 @onready var debug_label = $DebugLabel
 @onready var sound_player = $SoundPlayer
+@onready var shooter = $Shooter
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 # Default value of 980 (9.8 m/s^2).
@@ -89,15 +90,16 @@ func _handle_movement_input() -> void:
 
 func _handle_other_input() -> void:
 	if Input.is_action_just_pressed("shoot"):
-		var direction: Vector2
-		if sprite_2d.flip_h:
-			direction = Vector2.LEFT
-		else:
-			direction = Vector2.RIGHT
-		var speed = RUN_SPEED + 50.0
-		var life_span = 20.0
-		ObjectMaker.create_bullet(global_position, direction,
-				speed, life_span, ObjectMaker.BulletKey.PLAYER)
+		_shoot()
+
+
+func _shoot() -> void:
+	var direction: Vector2
+	if sprite_2d.flip_h:
+		direction = Vector2.LEFT
+	else:
+		direction = Vector2.RIGHT
+	shooter.shoot(direction)
 
 
 func _calculate_states() -> void:
