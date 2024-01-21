@@ -115,6 +115,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 0
 script = ExtResource("1_o7jsg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

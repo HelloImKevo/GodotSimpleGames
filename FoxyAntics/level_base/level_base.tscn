@@ -511,6 +511,7 @@ texture = ExtResource("1_rs8l0")
 
 [sub_resource type="TileSet" id="TileSet_fd72u"]
 physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_p3loh")
 
 [node name="LevelBase" type="Node2D"]
@@ -529,10 +530,10 @@ zoom = Vector2(2, 2)
 position = Vector2(336, -45)
 
 [node name="Snail" parent="." instance=ExtResource("5_4fe0u")]
-position = Vector2(769, -49)
+position = Vector2(771, -53)
 
 [node name="Frog" parent="." instance=ExtResource("6_iv5j7")]
-position = Vector2(366, -183)
+position = Vector2(425, -209)
 
 [node name="Eagle" parent="." instance=ExtResource("7_nif1s")]
 position = Vector2(487, -233)

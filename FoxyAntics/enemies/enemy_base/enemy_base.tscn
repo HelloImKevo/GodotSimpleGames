@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://enemies/enemy_base/enemy_base.gd" id="1_cfmw3"]
 
 [node name="EnemyBase" type="CharacterBody2D"]
+collision_layer = 0
 script = ExtResource("1_cfmw3")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
