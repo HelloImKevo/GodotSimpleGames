@@ -27,6 +27,7 @@ var _state: PlayerState = PlayerState.IDLE
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 # Default value of 980 (9.8 m/s^2).
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var hit_points: int = 5
 
 
 func _to_string():
@@ -54,7 +55,8 @@ func _physics_process(delta):
 
 
 func _update_debug_label() -> void:
-	debug_label.text = "floored=%s state=%s\nvel.x=%.1f vel.y=%.1f" % [
+	debug_label.text = "HP=%s\nfloored=%s state=%s\nvel.x=%.1f vel.y=%.1f" % [
+		hit_points,
 		is_on_floor(),
 		PlayerState.keys()[_state],
 		velocity.x,
@@ -168,5 +170,6 @@ func _default_godot_2d_input() -> void:
 
 func _on_hit_box_area_entered(area):
 	print("Player HitBox: ", area)
+	hit_points -= 1
 
 #endregion: Node Signals

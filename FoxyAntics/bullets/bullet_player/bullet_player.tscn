@@ -4,3 +4,4 @@
 
 [node name="BulletPlayer" instance=ExtResource("1_vjdnn")]
 collision_layer = 8
+collision_mask = 4

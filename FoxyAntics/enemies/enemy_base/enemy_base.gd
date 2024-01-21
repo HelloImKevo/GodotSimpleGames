@@ -83,6 +83,12 @@ func _fallen_off() -> void:
 		# Hasta la vista, baby: Mark this enemy as ready to be destroyed.
 		queue_free()
 
+
+func _on_hit_by_bullet() -> void:
+	hit_points -= 1
+	if hit_points <= 0:
+		die()
+
 #endregion: Internal / Protected Functions
 
 
@@ -94,6 +100,7 @@ func die():
 	
 	_dying = true
 	EventBus.on_enemy_hit(self)
+	ObjectMaker.create_explosion(global_position)
 	# Stop processing physics for this enemy.
 	set_physics_process(false)
 	hide()
@@ -122,7 +129,7 @@ func _on_not_visible_on_screen():
 	pass # Replace with function body.
 
 
-func _on_enemy_hit_box_area_entered(area):
-	print("Enemy HitBox: ", area)
+func _on_enemy_hit_box_area_entered(_area):
+	_on_hit_by_bullet()
 
 #endregion: Node Signals

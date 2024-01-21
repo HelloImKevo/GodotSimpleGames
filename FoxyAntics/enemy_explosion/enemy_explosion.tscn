@@ -1,0 +1,69 @@
+[gd_scene load_steps=11 format=3 uid="uid://cuk6jrbuvcqkr"]
+
+[ext_resource type="AudioStream" uid="uid://eccdqsjtmugs" path="res://assets/sound/pickup3.ogg" id="1_fkwu6"]
+[ext_resource type="Texture2D" uid="uid://c1ctqx4ba3tge" path="res://assets/explosion/enemy-deadth.png" id="1_pyacn"]
+[ext_resource type="Script" path="res://enemy_explosion/enemy_explosion.gd" id="2_cedjk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8o2q"]
+atlas = ExtResource("1_pyacn")
+region = Rect2(0, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxrqg"]
+atlas = ExtResource("1_pyacn")
+region = Rect2(40, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxk5o"]
+atlas = ExtResource("1_pyacn")
+region = Rect2(80, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ly628"]
+atlas = ExtResource("1_pyacn")
+region = Rect2(120, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6v6p"]
+atlas = ExtResource("1_pyacn")
+region = Rect2(160, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayv10"]
+atlas = ExtResource("1_pyacn")
+region = Rect2(200, 0, 40, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0a5yk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8o2q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vxrqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxk5o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ly628")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6v6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayv10")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="EnemyExplosion" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_0a5yk")
+autoplay = "default"
+frame = 5
+frame_progress = 1.0
+script = ExtResource("2_cedjk")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_fkwu6")
+volume_db = -10.0
+autoplay = true
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

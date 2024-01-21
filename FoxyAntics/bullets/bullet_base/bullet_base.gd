@@ -42,7 +42,7 @@ func setup(dir: Vector2, speed: float, life_span: float) -> void:
 #endregion: Public Functions
 
 
-func _on_area_entered(area):
+func _on_area_entered(_area):
 	# When the bullet hits anything it is supposed to collide with,
 	# it will immediate die (garbage collection).
 	queue_free()
