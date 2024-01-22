@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cca8btqfu1xfp"]
+[gd_scene load_steps=25 format=3 uid="uid://cca8btqfu1xfp"]
 
 [ext_resource type="Texture2D" uid="uid://cdt8vjbghdngl" path="res://assets/enemies/boss/boss.png" id="1_637as"]
 
@@ -185,6 +185,70 @@ _data = {
 "pulse": SubResource("Animation_eons5")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_352un"]
+animation = &"arrive"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_he843"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_deb80"]
+animation = &"hit"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_icqqq"]
+animation = &"initial_position"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_38ioy"]
+animation = &"pulse"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_po8cb"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s6iw0"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"on_trigger"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s8al4"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pvfov"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eik3o"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g7awh"]
+advance_mode = 2
+advance_condition = &"on_hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wahkb"]
+advance_mode = 2
+advance_condition = &"on_hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q3lfr"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_atirg"]
+states/End/position = Vector2(984, 101.172)
+states/Start/position = Vector2(120.5, 99.75)
+states/arrive/node = SubResource("AnimationNodeAnimation_352un")
+states/arrive/position = Vector2(496.5, 99.0625)
+states/attack/node = SubResource("AnimationNodeAnimation_he843")
+states/attack/position = Vector2(831, 49.3711)
+states/hit/node = SubResource("AnimationNodeAnimation_deb80")
+states/hit/position = Vector2(741.838, 205.5)
+states/initial_position/node = SubResource("AnimationNodeAnimation_icqqq")
+states/initial_position/position = Vector2(305.5, 98.4062)
+states/pulse/node = SubResource("AnimationNodeAnimation_38ioy")
+states/pulse/position = Vector2(658, 49.0625)
+transitions = ["Start", "initial_position", SubResource("AnimationNodeStateMachineTransition_po8cb"), "initial_position", "arrive", SubResource("AnimationNodeStateMachineTransition_s6iw0"), "arrive", "pulse", SubResource("AnimationNodeStateMachineTransition_s8al4"), "pulse", "attack", SubResource("AnimationNodeStateMachineTransition_pvfov"), "attack", "pulse", SubResource("AnimationNodeStateMachineTransition_eik3o"), "pulse", "hit", SubResource("AnimationNodeStateMachineTransition_g7awh"), "attack", "hit", SubResource("AnimationNodeStateMachineTransition_wahkb"), "hit", "pulse", SubResource("AnimationNodeStateMachineTransition_q3lfr")]
+graph_offset = Vector2(71.0346, -44.8286)
+
 [node name="Boss" type="Node2D"]
 
 [node name="Visual" type="Node2D" parent="."]
@@ -215,3 +279,12 @@ libraries = {
 "": SubResource("AnimationLibrary_cpy4o")
 }
 autoplay = "arrive"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cpy4o")
+}
+tree_root = SubResource("AnimationNodeStateMachine_atirg")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/on_hit = false
+parameters/conditions/on_trigger = false
