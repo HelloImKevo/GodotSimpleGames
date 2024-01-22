@@ -186,6 +186,10 @@ libraries = {
 wait_time = 1.5
 one_shot = true
 
+[node name="HurtTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
 [node name="DebugLabel" type="Label" parent="."]
 offset_left = -35.0
 offset_top = -41.0
@@ -212,4 +216,5 @@ speed = 275.0
 life_span = 3.0
 
 [connection signal="timeout" from="InvincibleTimer" to="." method="_on_invincible_timer_timeout"]
+[connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

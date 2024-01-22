@@ -521,7 +521,7 @@ animation = &"banana"
 shape = SubResource("CircleShape2D_vvx3f")
 
 [node name="LifeTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 5.0
 one_shot = true
 autostart = true
 
