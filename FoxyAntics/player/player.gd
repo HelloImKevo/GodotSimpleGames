@@ -13,6 +13,8 @@ const TERMINAL_VELOCITY = 400.0
 # Defines an invincibility window (iFrames).
 const HURT_TIME: float = 0.3
 const ACCELERATION: float = 30.0
+# How much the player gets slowed down when hit by an enemy.
+const STUN_AMOUNT: float = 150.0
 
 enum PlayerState { IDLE, RUN, JUMP, FALL, HURT }
 
@@ -20,14 +22,17 @@ var _state: PlayerState = PlayerState.IDLE
 
 @onready var sprite_2d = $Sprite2D
 @onready var animation_player = $AnimationPlayer
+@onready var animation_player_invincible = $AnimationPlayerInvincible
 @onready var debug_label = $DebugLabel
 @onready var sound_player = $SoundPlayer
 @onready var shooter = $Shooter
+@onready var invincible_timer = $InvincibleTimer
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 # Default value of 980 (9.8 m/s^2).
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var hit_points: int = 5
+var _invincible: bool = false
 
 
 func _to_string():
@@ -55,8 +60,9 @@ func _physics_process(delta):
 
 
 func _update_debug_label() -> void:
-	debug_label.text = "HP=%s\nfloored=%s state=%s\nvel.x=%.1f vel.y=%.1f" % [
+	debug_label.text = "HP=%s invinc=%s\nfloored=%s state=%s\nvel.x=%.1f vel.y=%.1f" % [
 		hit_points,
+		_invincible,
 		is_on_floor(),
 		PlayerState.keys()[_state],
 		velocity.x,
@@ -67,10 +73,10 @@ func _update_debug_label() -> void:
 func _handle_movement_input() -> void:
 	# Handle directional movement.
 	if Input.is_action_pressed("left"):
-		velocity.x = max(velocity.x - ACCELERATION, -RUN_SPEED)
+		velocity.x = max(velocity.x - ACCELERATION, _get_run_speed() * -1)
 		sprite_2d.flip_h = true
 	elif Input.is_action_pressed("right"):
-		velocity.x = min(velocity.x + ACCELERATION, RUN_SPEED)
+		velocity.x = min(velocity.x + ACCELERATION, _get_run_speed())
 		sprite_2d.flip_h = false
 	else:
 		# Quickly decelerate the player (instead of coming to an abrupt stop).
@@ -151,6 +157,39 @@ func _did_just_land(new_state: PlayerState) -> bool:
 	return false
 
 
+func _apply_hit() -> void:
+	if _invincible:
+		return
+	
+	hit_points -= 1
+	_go_invincible()
+	SoundManager.play_sfx(sound_player, SoundManager.SOUND_DAMAGE)
+	# Stun the player by slowing them down a little bit.
+	# TODO: This doesn't work that well - it stops the player for a fraction
+	# of a second, and then they immediately hit top speed again.
+	if velocity.x > 0:
+		var result = max(0, velocity.x - STUN_AMOUNT)
+		print("Right vel: ", result)
+		velocity.x = max(0, velocity.x - STUN_AMOUNT)
+	elif velocity.x < 0:
+		var result = min(0, velocity.x + STUN_AMOUNT)
+		print("Left vel: ", result)
+		velocity.x = min(0, velocity.x + STUN_AMOUNT)
+
+
+func _get_run_speed() -> float:
+	if _invincible:
+		return RUN_SPEED - 100.0
+	else:
+		return RUN_SPEED
+
+
+func _go_invincible() -> void:
+	_invincible = true
+	animation_player_invincible.play("invincible")
+	invincible_timer.start()
+
+
 # Unused. For reference purposes.
 func _default_godot_2d_input() -> void:
 	# Handle jump.
@@ -170,6 +209,11 @@ func _default_godot_2d_input() -> void:
 
 func _on_hit_box_area_entered(area):
 	print("Player HitBox: ", area)
-	hit_points -= 1
+	_apply_hit()
+
+
+func _on_invincible_timer_timeout():
+	_invincible = false
+	animation_player_invincible.stop()
 
 #endregion: Node Signals
