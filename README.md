@@ -104,5 +104,15 @@ Set **Stretch > Mode** to `canvas_items`.
 | :---: |
 | ![Memory Madness 2](Screenshot/memory-02.png) |
 
+# Foxy Antics
+A 2D platformer where the player controls a Fox that can shoot projectiles
+to destroy wild enemies: Snails, Frogs and Eagles. Features a Boss Ent that
+uses an `AnimationNodeStateMachine` to manage transitions to multiple
+animations that Scale, Re-Position, and Modulate the Visibility of the boss.
+
+| Boss Animation Node State Machine |
+| :---: |
+| ![Foxy Antics 1](Screenshot/foxy-01.png) |
+
 # Godot GDScript Style Guide
 https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html  
