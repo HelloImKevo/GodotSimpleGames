@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://cca8btqfu1xfp"]
+
+[ext_resource type="Texture2D" uid="uid://cdt8vjbghdngl" path="res://assets/enemies/boss/boss.png" id="1_637as"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0yioc"]
+size = Vector2(20, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vkvsh"]
+size = Vector2(20, 200)
+
+[node name="Boss" type="Node2D"]
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visual"]
+position = Vector2(2.08165e-12, -35)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_637as")
+
+[node name="Area2D" type="Area2D" parent="Visual"]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visual/Area2D"]
+position = Vector2(0, -34)
+shape = SubResource("RectangleShape2D_0yioc")
+
+[node name="Trigger" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]
+position = Vector2(-100, -80.5)
+shape = SubResource("RectangleShape2D_vkvsh")
