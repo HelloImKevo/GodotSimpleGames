@@ -1,6 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://cca8btqfu1xfp"]
+[gd_scene load_steps=26 format=3 uid="uid://cca8btqfu1xfp"]
 
 [ext_resource type="Texture2D" uid="uid://cdt8vjbghdngl" path="res://assets/enemies/boss/boss.png" id="1_637as"]
+[ext_resource type="Script" path="res://enemies/boss/boss.gd" id="1_sk4wd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0yioc"]
 size = Vector2(20, 70)
@@ -134,6 +135,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(0.796078, 0, 0.780392, 1), Color(1, 1, 1, 1), Color(0.796078, 0, 0.780392, 1), Color(1, 1, 1, 1), Color(0.796078, 0, 0.780392, 1), Color(1, 1, 1, 1)]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"_set_invincible"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_gsn08"]
 resource_name = "initial_position"
@@ -250,6 +265,7 @@ transitions = ["Start", "initial_position", SubResource("AnimationNodeStateMachi
 graph_offset = Vector2(71.0346, -44.8286)
 
 [node name="Boss" type="Node2D"]
+script = ExtResource("1_sk4wd")
 
 [node name="Visual" type="Node2D" parent="."]
 
@@ -258,11 +274,11 @@ position = Vector2(2.08165e-12, -35)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_637as")
 
-[node name="Area2D" type="Area2D" parent="Visual"]
+[node name="HitBox" type="Area2D" parent="Visual"]
 collision_layer = 4
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Visual/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visual/HitBox"]
 position = Vector2(0, -34)
 shape = SubResource("RectangleShape2D_0yioc")
 
@@ -288,3 +304,6 @@ tree_root = SubResource("AnimationNodeStateMachine_atirg")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/on_hit = false
 parameters/conditions/on_trigger = false
+
+[connection signal="area_entered" from="Visual/HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="area_entered" from="Trigger" to="." method="_on_trigger_area_entered_by_player"]

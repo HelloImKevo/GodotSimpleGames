@@ -549,4 +549,4 @@ position = Vector2(548, -291)
 position = Vector2(87, -326)
 
 [node name="Boss" parent="." instance=ExtResource("8_tf6gu")]
-position = Vector2(1710, -41)
+position = Vector2(1710, -17)

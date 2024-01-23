@@ -11,10 +11,10 @@ func _to_string() -> String:
 	return "EventBus"
 
 
-## Invoke when an enemy was hit by a player projectile.
-func on_enemy_hit(enemy: EnemyBase) -> void:
-	print(_to_string(), " => on_enemy_hit: %s" % [enemy])
-	SignalManager.on_enemy_hit.emit(enemy.points, enemy.global_position)
+## Invoke when an enemy was killed by a player projectile.
+func on_enemy_killed(enemy: EnemyBase) -> void:
+	print(_to_string(), " => on_enemy_killed: %s" % [enemy])
+	SignalManager.on_enemy_killed.emit(enemy.points, enemy.global_position)
 
 
 func on_pickup_collected(pickup: FruitPickup) -> void:

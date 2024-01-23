@@ -99,7 +99,7 @@ func die():
 		return
 	
 	_dying = true
-	EventBus.on_enemy_hit(self)
+	EventBus.on_enemy_killed(self)
 	ObjectMaker.spawn_entity(global_position, ObjectMaker.SceneKey.EXPLOSION)
 	ObjectMaker.spawn_entity(global_position, ObjectMaker.SceneKey.PICKUP)
 	# Stop processing physics for this enemy.
