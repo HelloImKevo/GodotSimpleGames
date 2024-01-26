@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cqddxr1imsl3x"]
+[gd_scene load_steps=13 format=3 uid="uid://cqddxr1imsl3x"]
 
 [ext_resource type="Script" path="res://level_base/level_base.gd" id="1_h8r6s"]
 [ext_resource type="Texture2D" uid="uid://3nuc4ilth2jt" path="res://assets/tiles/Terrain (16x16).png" id="1_rs8l0"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b80ns8xq3fj4q" path="res://enemies/eagle/eagle.tscn" id="7_nif1s"]
 [ext_resource type="PackedScene" uid="uid://cca8btqfu1xfp" path="res://enemies/boss/boss.tscn" id="8_tf6gu"]
 [ext_resource type="PackedScene" uid="uid://dwwu4rh03mhpk" path="res://checkpoint/checkpoint.tscn" id="9_ulnal"]
+[ext_resource type="PackedScene" uid="uid://cytkjpl0swkkm" path="res://platforms/moving_platform.tscn" id="10_pg3da"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p3loh"]
 texture = ExtResource("1_rs8l0")
@@ -587,3 +588,16 @@ position = Vector2(1710, -17)
 
 [node name="Checkpoint" parent="." instance=ExtResource("9_ulnal")]
 position = Vector2(1723, -16)
+
+[node name="MovingPlatform" parent="." node_paths=PackedStringArray("p1", "p2") instance=ExtResource("10_pg3da")]
+position = Vector2(85, -92)
+p1 = NodePath("../Markers/MP1_1")
+p2 = NodePath("../Markers/MP1_2")
+
+[node name="Markers" type="Node" parent="."]
+
+[node name="MP1_1" type="Marker2D" parent="Markers"]
+position = Vector2(85, -92)
+
+[node name="MP1_2" type="Marker2D" parent="Markers"]
+position = Vector2(85, -166)
