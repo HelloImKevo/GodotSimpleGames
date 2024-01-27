@@ -6,6 +6,8 @@ extends CharacterBody2D
 
 
 const RUN_SPEED = 250.0
+# How far off the bottom of the screen the player can fall before dying.
+const FALLEN_OFF: float = 150.0
 # Velocity applied in the upward direction (gravitational velocity
 # is applied as a downward constant).
 const JUMP_VELOCITY = -340.0
@@ -49,6 +51,8 @@ func _ready():
 
 
 func _physics_process(delta):
+	_check_fallen_off()
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -169,11 +173,22 @@ func _set_state(new_state: PlayerState) -> void:
 			_apply_hurt_jump()
 
 
+## Determine whether to play the "Land" sound effect.
+## Could also be used to reset the number of double jumps.
 func _did_just_land(new_state: PlayerState) -> bool:
 	if _state == PlayerState.FALL:
 		return new_state == PlayerState.IDLE or new_state == PlayerState.RUN
 	
 	return false
+
+
+func _check_fallen_off() -> void:
+	if global_position.y < FALLEN_OFF:
+		return
+	
+	hit_points = 1
+	_set_state(PlayerState.HURT)
+	_apply_hit()
 
 
 func _apply_hit() -> void:

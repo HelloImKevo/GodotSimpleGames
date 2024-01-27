@@ -568,7 +568,7 @@ zoom = Vector2(2, 2)
 limit_left = -2000
 limit_top = -1000
 limit_right = 2000
-limit_bottom = 500
+limit_bottom = 100
 
 [node name="Player" parent="." instance=ExtResource("6_2pvig")]
 position = Vector2(0, -32)
