@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cqddxr1imsl3x"]
+[gd_scene load_steps=17 format=3 uid="uid://cqddxr1imsl3x"]
 
 [ext_resource type="Script" path="res://level_base/level_base.gd" id="1_h8r6s"]
 [ext_resource type="Texture2D" uid="uid://3nuc4ilth2jt" path="res://assets/tiles/Terrain (16x16).png" id="1_rs8l0"]
@@ -8,17 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://dkr5hw14gfp5w" path="res://enemies/frog/frog.tscn" id="6_iv5j7"]
 [ext_resource type="PackedScene" uid="uid://b80ns8xq3fj4q" path="res://enemies/eagle/eagle.tscn" id="7_nif1s"]
 [ext_resource type="PackedScene" uid="uid://cca8btqfu1xfp" path="res://enemies/boss/boss.tscn" id="8_tf6gu"]
+[ext_resource type="PackedScene" uid="uid://b1hb5o2myqcax" path="res://scrolling_bg/scrolling_bg.tscn" id="9_84xtk"]
 [ext_resource type="PackedScene" uid="uid://dwwu4rh03mhpk" path="res://checkpoint/checkpoint.tscn" id="9_ulnal"]
 [ext_resource type="PackedScene" uid="uid://cytkjpl0swkkm" path="res://platforms/moving_platform.tscn" id="10_pg3da"]
 [ext_resource type="PackedScene" uid="uid://dnskut5vrmw1u" path="res://hazards/ball_spikes.tscn" id="11_k68oc"]
 [ext_resource type="PackedScene" uid="uid://b44rvlriv4i7g" path="res://hazards/floor_spikes.tscn" id="12_0mnt1"]
-[ext_resource type="Texture2D" uid="uid://bfmo2l3tckiug" path="res://assets/backgrounds/game_background_1/layers/sky.png" id="13_fcd5n"]
-[ext_resource type="Texture2D" uid="uid://lsqk8r47l78p" path="res://assets/backgrounds/game_background_1/layers/rocks_2.png" id="14_3ui1u"]
-[ext_resource type="Texture2D" uid="uid://b34hi50e0hous" path="res://assets/backgrounds/game_background_1/layers/rocks_1.png" id="14_ok7e0"]
-[ext_resource type="Texture2D" uid="uid://ghft60nds4re" path="res://assets/backgrounds/game_background_1/layers/clouds_2.png" id="15_ie7tg"]
-[ext_resource type="Texture2D" uid="uid://vjus78bu621p" path="res://assets/backgrounds/game_background_1/layers/clouds_3.png" id="16_61aes"]
-[ext_resource type="Texture2D" uid="uid://bkw71rlmjt7h6" path="res://assets/backgrounds/game_background_1/layers/clouds_4.png" id="17_m4fed"]
-[ext_resource type="Texture2D" uid="uid://6jcif8jg54qo" path="res://assets/backgrounds/game_background_1/layers/clouds_1.png" id="18_71rns"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p3loh"]
 texture = ExtResource("1_rs8l0")
@@ -568,6 +562,8 @@ point_count = 5
 [node name="LevelBase" type="Node2D"]
 script = ExtResource("1_h8r6s")
 
+[node name="ScrollingBg" parent="." instance=ExtResource("9_84xtk")]
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_fd72u")
 format = 2
@@ -631,67 +627,3 @@ position = Vector2(197, -16)
 
 [node name="FloorSpikes2" parent="." instance=ExtResource("12_0mnt1")]
 position = Vector2(440, -112)
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(1440, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("13_fcd5n")
-offset = Vector2(0, -540)
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.2, 1)
-motion_mirroring = Vector2(1440, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("14_ok7e0")
-offset = Vector2(0, -540)
-
-[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.3, 1)
-motion_mirroring = Vector2(1440, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("15_ie7tg")
-offset = Vector2(0, -540)
-
-[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.4, 1)
-motion_mirroring = Vector2(1440, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("16_61aes")
-offset = Vector2(0, -540)
-
-[node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.5, 1)
-motion_mirroring = Vector2(1440, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("17_m4fed")
-offset = Vector2(0, -540)
-
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.6, 1)
-motion_mirroring = Vector2(1440, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("18_71rns")
-offset = Vector2(0, -540)
-
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.7, 1)
-motion_mirroring = Vector2(1440, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("14_3ui1u")
-offset = Vector2(0, -540)
