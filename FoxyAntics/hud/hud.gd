@@ -14,10 +14,14 @@ func _ready():
 	SignalManager.on_game_over.connect(_on_game_over)
 
 
-func _process(delta):
+func _process(_delta):
 	if vb_level_complete.visible:
 		if Input.is_action_just_pressed("jump"):
 			GameManager.load_next_level_scene()
+	
+	if vb_game_over.visible:
+		if Input.is_action_just_pressed("jump"):
+			GameManager.load_main_scene()
 
 
 func show_hud() -> void:

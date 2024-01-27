@@ -181,9 +181,16 @@ func _apply_hit() -> void:
 		return
 	
 	hit_points -= 1
+	
+	SoundManager.play_sfx(sound_player, SoundManager.SOUND_DAMAGE)
+	
+	if hit_points <= 0:
+		EventBus.on_game_over()
+		set_physics_process(false)
+		return
+	
 	_go_invincible()
 	_set_state(PlayerState.HURT)
-	SoundManager.play_sfx(sound_player, SoundManager.SOUND_DAMAGE)
 
 
 func _apply_hurt_jump() -> void:
