@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cqddxr1imsl3x"]
+[gd_scene load_steps=16 format=3 uid="uid://cqddxr1imsl3x"]
 
 [ext_resource type="Script" path="res://level_base/level_base.gd" id="1_h8r6s"]
 [ext_resource type="Texture2D" uid="uid://3nuc4ilth2jt" path="res://assets/tiles/Terrain (16x16).png" id="1_rs8l0"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dwwu4rh03mhpk" path="res://checkpoint/checkpoint.tscn" id="9_ulnal"]
 [ext_resource type="PackedScene" uid="uid://cytkjpl0swkkm" path="res://platforms/moving_platform.tscn" id="10_pg3da"]
 [ext_resource type="PackedScene" uid="uid://dnskut5vrmw1u" path="res://hazards/ball_spikes.tscn" id="11_k68oc"]
+[ext_resource type="PackedScene" uid="uid://b44rvlriv4i7g" path="res://hazards/floor_spikes.tscn" id="12_0mnt1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p3loh"]
 texture = ExtResource("1_rs8l0")
@@ -617,3 +618,9 @@ curve = SubResource("Curve2D_e4eaw")
 [node name="BallSpikes" parent="Paths/Spikes1" instance=ExtResource("11_k68oc")]
 position = Vector2(807, -115)
 rotation = -1.5708
+
+[node name="FloorSpikes" parent="." instance=ExtResource("12_0mnt1")]
+position = Vector2(197, -16)
+
+[node name="FloorSpikes2" parent="." instance=ExtResource("12_0mnt1")]
+position = Vector2(440, -112)
