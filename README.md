@@ -114,5 +114,13 @@ animations that Scale, Re-Position, and Modulate the Visibility of the boss.
 | :---: |
 | ![Foxy Antics 1](Screenshot/foxy-01.png) |
 
+| Working with Tile Sets and Collisions |
+| :---: |
+| ![Foxy Antics 2](Screenshot/foxy-02.png) |
+
+| Balls Spikes Hazard moving along a Path2D |
+| :---: |
+| ![Foxy Antics 3](Screenshot/foxy-03.png) |
+
 # Godot GDScript Style Guide
 https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html  
