@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvjpp46i0tsf0"]
+
+[ext_resource type="PackedScene" uid="uid://duypbw8ut3rgc" path="res://level_base/level_base.tscn" id="1_6acda"]
+[ext_resource type="PackedScene" uid="uid://dkr5hw14gfp5w" path="res://enemies/frog/frog.tscn" id="2_ik76m"]
+[ext_resource type="PackedScene" uid="uid://cytkjpl0swkkm" path="res://platforms/moving_platform.tscn" id="2_na4wp"]
+
+[node name="Level_2" instance=ExtResource("1_6acda")]
+
+[node name="MovingPlatform" parent="." index="5" node_paths=PackedStringArray("p1", "p2") instance=ExtResource("2_na4wp")]
+position = Vector2(111, -58)
+p1 = NodePath("../Markers/M1_1")
+p2 = NodePath("../Markers/M1_2")
+
+[node name="M1_1" type="Marker2D" parent="Markers" index="0"]
+position = Vector2(79, -58)
+
+[node name="M1_2" type="Marker2D" parent="Markers" index="1"]
+position = Vector2(202, -58)
+
+[node name="Frog" parent="." index="11" instance=ExtResource("2_ik76m")]
+position = Vector2(155, -27)
+
+[node name="Frog2" parent="." index="12" instance=ExtResource("2_ik76m")]
+position = Vector2(262, -27)

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2vcvkumwxmaw"]
+
+[ext_resource type="PackedScene" uid="uid://duypbw8ut3rgc" path="res://level_base/level_base.tscn" id="1_aetr8"]
+[ext_resource type="PackedScene" uid="uid://b80ns8xq3fj4q" path="res://enemies/eagle/eagle.tscn" id="2_k4xqk"]
+[ext_resource type="PackedScene" uid="uid://b44rvlriv4i7g" path="res://hazards/floor_spikes.tscn" id="3_6s4v0"]
+
+[node name="Level_3" instance=ExtResource("1_aetr8")]
+
+[node name="TileMap" parent="." index="1"]
+layer_0/tile_data = PackedInt32Array(-65536, 458752, 0, -65535, 458752, 0, -65534, 458752, 0, 0, 458752, 1, 1, 458752, 1, 2, 458752, 1, -1, 458752, 0, -2, 458752, 0, -3, 458752, 0, 65535, 458752, 1, 65534, 458752, 1, 65533, 458752, 1, -65533, 458752, 0, 3, 458752, 1, -65532, 458752, 0, 4, 458752, 1, -65531, 458752, 0, 5, 458752, 1, -65530, 458752, 0, 6, 458752, 1, -65529, 458752, 0, 7, 458752, 1, -65528, 458752, 0, 8, 458752, 1, -65527, 458752, 0, 9, 458752, 1, -65526, 458752, 0, 10, 458752, 1, -65525, 458752, 0, 11, 458752, 1, -65524, 458752, 0, 12, 458752, 1, -65523, 458752, 0, 13, 458752, 1, -65522, 458752, 0, 14, 458752, 1, -65521, 458752, 0, 15, 458752, 1, -65520, 458752, 0, 16, 458752, 1, -65519, 458752, 0, 17, 458752, 1, -65518, 458752, 0, 18, 458752, 1, -65517, 458752, 0, 19, 458752, 1, -65516, 458752, 0, 20, 458752, 1, -65515, 458752, 0, 21, 458752, 1, -65514, 458752, 0, 22, 458752, 1, -65513, 458752, 0, 23, 458752, 1, -65512, 458752, 0, 24, 458752, 1, -65511, 458752, 0, 25, 458752, 1, -65510, 458752, 0, 26, 458752, 1, -65509, 458752, 0, 27, 458752, 1, -65508, 458752, 0, 28, 458752, 1, -65507, 458752, 0, 29, 458752, 1, -65506, 458752, 0, 30, 458752, 1, -65505, 458752, 0, 31, 458752, 1, -65504, 458752, 0, 32, 458752, 1, -393205, 393216, 0, -393204, 458752, 0, -393203, 524288, 0)
+
+[node name="Eagle" parent="." index="10" instance=ExtResource("2_k4xqk")]
+position = Vector2(96, -152)
+
+[node name="Eagle2" parent="." index="11" instance=ExtResource("2_k4xqk")]
+position = Vector2(199, -186)
+
+[node name="FloorSpikes" parent="." index="12" instance=ExtResource("3_6s4v0")]
+position = Vector2(108, -15)
+
+[node name="FloorSpikes2" parent="." index="13" instance=ExtResource("3_6s4v0")]
+position = Vector2(124, -15)
+
+[node name="FloorSpikes3" parent="." index="14" instance=ExtResource("3_6s4v0")]
+position = Vector2(140, -15)
