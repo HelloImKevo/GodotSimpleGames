@@ -584,6 +584,7 @@ autoplay = true
 
 [node name="Boss" parent="." instance=ExtResource("10_e1p0o")]
 position = Vector2(455, -17)
+hit_points = 2
 
 [node name="Checkpoint" parent="." instance=ExtResource("11_ywfb1")]
 position = Vector2(489, -16)

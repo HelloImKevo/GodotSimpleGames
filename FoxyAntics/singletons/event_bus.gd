@@ -27,6 +27,16 @@ func on_player_hit(remaining_hit_points: int) -> void:
 	SignalManager.on_player_hit.emit(remaining_hit_points)
 
 
+func on_level_complete(level: int) -> void:
+	print(_to_string(), " => on_level_complete: %s" % [level])
+	SignalManager.on_level_complete.emit()
+
+
+func on_game_over() -> void:
+	print(_to_string(), " => on_game_over")
+	SignalManager.on_game_over.emit()
+
+
 func emit_global_event(msg: String) -> void:
 	if _enabled:
 		print(_to_string(), " => Received a global event: %s" % [msg])

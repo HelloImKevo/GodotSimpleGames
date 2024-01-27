@@ -24,4 +24,4 @@ func _on_boss_killed(_points: int) -> void:
 
 
 func _on_area_entered(_area):
-	print("LEVEL COMPLETE")
+	EventBus.on_level_complete(GameManager.get_current_level())

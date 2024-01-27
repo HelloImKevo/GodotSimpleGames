@@ -4,6 +4,9 @@
 [ext_resource type="Script" path="res://enemies/snail/snail.gd" id="2_ucca1"]
 [ext_resource type="Texture2D" uid="uid://c4nxrf6a8x88t" path="res://assets/enemies/snail/snail.png" id="3_6l3t0"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nefbj"]
+size = Vector2(21, 14)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_f5cw0"]
 atlas = ExtResource("3_6l3t0")
 region = Rect2(0, 0, 38, 24)
@@ -82,9 +85,6 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nefbj"]
-size = Vector2(21, 14)
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tdka0"]
 radius = 7.0
 height = 22.0
@@ -94,20 +94,20 @@ script = ExtResource("2_ucca1")
 points = 2
 hit_points = 1
 
-[node name="AnimatedSprite2D" parent="." index="1"]
-scale = Vector2(0.75, 0.75)
-sprite_frames = SubResource("SpriteFrames_twc21")
-animation = &"walk"
-autoplay = "walk"
-
 [node name="FloorDetection" type="RayCast2D" parent="." index="2"]
 position = Vector2(-15, 2.08165e-12)
-target_position = Vector2(2.08165e-12, 30)
+target_position = Vector2(2.08165e-12, 18)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 position = Vector2(0.5, 2)
 shape = SubResource("RectangleShape2D_nefbj")
 debug_color = Color(0.992157, 0.0862745, 0, 0.419608)
+
+[node name="AnimatedSprite2D" parent="." index="4"]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_twc21")
+animation = &"walk"
+autoplay = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2(1, 2)

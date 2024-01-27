@@ -20,6 +20,10 @@ func pause_game() -> void:
 	Engine.time_scale = 0
 
 
+func get_current_level() -> int:
+	return _current_level
+
+
 # Virtual override.
 func _ready() -> void:
 	_init_level_scenes()
