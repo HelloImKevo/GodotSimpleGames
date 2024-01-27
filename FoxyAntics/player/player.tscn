@@ -166,6 +166,10 @@ texture = ExtResource("1_i5ifk")
 hframes = 19
 frame = 13
 
+[node name="PlatformJumpDetection" type="RayCast2D" parent="."]
+position = Vector2(-22, -6)
+target_position = Vector2(2.08165e-12, 30)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_7p6b2")
