@@ -73,9 +73,9 @@ wait_time = 3.0
 shape = SubResource("CircleShape2D_jponm")
 
 [node name="Shooter" parent="." index="7" instance=ExtResource("4_a6elf")]
-speed = 80.0
-life_span = 12.0
+speed = 90.0
+life_span = 8.0
 bullet_key = 1
-shoot_delay = 1.0
+shoot_delay = 2.5
 
 [connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
