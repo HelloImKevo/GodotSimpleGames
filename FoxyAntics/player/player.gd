@@ -22,6 +22,7 @@ enum PlayerState { IDLE, RUN, JUMP, FALL, HURT }
 var _state: PlayerState = PlayerState.IDLE
 
 @onready var sprite_2d = $Sprite2D
+@onready var platform_jump_detection = $PlatformJumpDetection
 @onready var animation_player = $AnimationPlayer
 @onready var animation_player_invincible = $AnimationPlayerInvincible
 @onready var debug_label = $DebugLabel
@@ -35,6 +36,7 @@ var _state: PlayerState = PlayerState.IDLE
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var hit_points: int = 5
 var _invincible: bool = false
+var _recently_on_floor: bool = false
 
 
 func _to_string():
@@ -50,6 +52,8 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
+	else:
+		_recently_on_floor = true
 	
 	# Interpret player input before process
 	_handle_movement_input()
@@ -82,9 +86,13 @@ func _handle_movement_input() -> void:
 	if Input.is_action_pressed("left"):
 		velocity.x = max(velocity.x - ACCELERATION, _get_run_speed() * -1)
 		sprite_2d.flip_h = true
+		if platform_jump_detection.position.x < 0:
+			platform_jump_detection.position.x *= -1
 	elif Input.is_action_pressed("right"):
 		velocity.x = min(velocity.x + ACCELERATION, _get_run_speed())
 		sprite_2d.flip_h = false
+		if platform_jump_detection.position.x > 0:
+			platform_jump_detection.position.x *= -1
 	else:
 		# Quickly decelerate the player (instead of coming to an abrupt stop).
 		# Example values: 150, 90, 54, 32.4, 19.4, 11.6, 7.0, 2.5, 0.54, 0.33
@@ -96,9 +104,13 @@ func _handle_movement_input() -> void:
 		velocity.x = linear_interp
 	
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if (
+		Input.is_action_just_pressed("jump")
+		and (is_on_floor() or (_recently_on_floor and platform_jump_detection.is_colliding()))
+	):
 		velocity.y = JUMP_VELOCITY
 		SoundManager.play_sfx(sound_player, SoundManager.SOUND_JUMP)
+		_recently_on_floor = false
 	
 	velocity.y = clampf(velocity.y, JUMP_VELOCITY, TERMINAL_VELOCITY)
 
