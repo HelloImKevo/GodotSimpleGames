@@ -18,6 +18,7 @@ const OFF_SCREEN_KILL_ME: float = 1000.0
 # How many Hit Points (HP) does this enemy have?
 @export var hit_points: int = 5
 
+@onready var sound = $Sound
 @onready var debug_label = $DebugLabel
 
 var _gravity: float = 800.0
@@ -85,6 +86,7 @@ func _fallen_off() -> void:
 
 
 func _on_hit_by_bullet() -> void:
+	SoundManager.play_sfx(sound, SoundManager.SOUND_LAND)
 	hit_points -= 1
 	if hit_points <= 0:
 		die()
@@ -105,7 +107,12 @@ func die():
 	# Stop processing physics for this enemy.
 	set_physics_process(false)
 	hide()
-	# TODO: Play the 'death' animation.
+	_destroy_async()
+
+
+## We want sound effects to finish playing before fully destroying this entity.
+func _destroy_async() -> void:
+	await get_tree().create_timer(0.3).timeout
 	queue_free()
 
 

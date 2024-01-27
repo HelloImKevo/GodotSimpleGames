@@ -6,6 +6,8 @@
 collision_layer = 0
 script = ExtResource("1_cfmw3")
 
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

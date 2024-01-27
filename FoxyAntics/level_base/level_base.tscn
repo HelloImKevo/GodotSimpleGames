@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cqddxr1imsl3x"]
+[gd_scene load_steps=18 format=3 uid="uid://cqddxr1imsl3x"]
 
 [ext_resource type="Script" path="res://level_base/level_base.gd" id="1_h8r6s"]
 [ext_resource type="Texture2D" uid="uid://3nuc4ilth2jt" path="res://assets/tiles/Terrain (16x16).png" id="1_rs8l0"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cytkjpl0swkkm" path="res://platforms/moving_platform.tscn" id="10_pg3da"]
 [ext_resource type="PackedScene" uid="uid://dnskut5vrmw1u" path="res://hazards/ball_spikes.tscn" id="11_k68oc"]
 [ext_resource type="PackedScene" uid="uid://b44rvlriv4i7g" path="res://hazards/floor_spikes.tscn" id="12_0mnt1"]
+[ext_resource type="AudioStream" uid="uid://bwi3be0m0b8ds" path="res://assets/sound/Flowing Rocks.ogg" id="14_qpxtv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p3loh"]
 texture = ExtResource("1_rs8l0")
@@ -572,6 +573,15 @@ layer_0/tile_data = PackedInt32Array(-65536, 458752, 0, -65535, 458752, 0, -6553
 [node name="PlayerCam" parent="." instance=ExtResource("2_78mwi")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 zoom = Vector2(2, 2)
+limit_left = -1000
+limit_top = -1000
+limit_right = 1000
+limit_bottom = 500
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_qpxtv")
+volume_db = -22.0
+autoplay = true
 
 [node name="Player" parent="." instance=ExtResource("3_pa5j0")]
 position = Vector2(336, -45)

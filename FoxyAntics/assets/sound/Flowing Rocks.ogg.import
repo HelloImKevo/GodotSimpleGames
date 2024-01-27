@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Flowing Rocks.ogg-cb7cabea6de9a25e96983c52b03
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

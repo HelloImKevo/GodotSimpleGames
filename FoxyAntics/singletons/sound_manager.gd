@@ -41,7 +41,7 @@ var _music_volume: float = -20.0
 # Default volume (in decibels) for UI and sound effects.
 var _ui_volume: float = -20.0
 # Volume for sound effects that are very quiet.
-var _amp_volume: float = -5.0
+var _amp_volume: float = -2.0
 
 
 func play_music(player: AudioStreamPlayer, key: String) -> void:

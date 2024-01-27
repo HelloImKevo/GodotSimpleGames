@@ -5,7 +5,7 @@ extends CharacterBody2D
 ## The player-controlled Fox character. Can run and jump.
 
 
-const RUN_SPEED = 300.0
+const RUN_SPEED = 250.0
 # Velocity applied in the upward direction (gravitational velocity
 # is applied as a downward constant).
 const JUMP_VELOCITY = -340.0

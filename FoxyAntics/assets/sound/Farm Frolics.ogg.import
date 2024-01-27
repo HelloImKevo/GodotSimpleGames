@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Farm Frolics.ogg-dc0510a06d892f1a225dd451abe3
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
