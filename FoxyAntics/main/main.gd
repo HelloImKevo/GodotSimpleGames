@@ -4,7 +4,7 @@ extends CanvasLayer
 
 func _ready():
 	# Resume game at default x1 speed.
-	Engine.time_scale = 1
+	GameManager.resume_game()
 
 
 func _process(_delta):

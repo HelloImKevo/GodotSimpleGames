@@ -12,12 +12,20 @@ var _highest_level_reached: int = 0
 var _level_scenes: Dictionary = {}
 
 
+func resume_game() -> void:
+	Engine.time_scale = 1
+
+
+func pause_game() -> void:
+	Engine.time_scale = 0
+
+
 # Virtual override.
 func _ready() -> void:
-	init_level_scenes()
+	_init_level_scenes()
 
 
-func init_level_scenes() -> void:
+func _init_level_scenes() -> void:
 	for ln in range(1, TOTAL_LEVELS + 1):
 		_level_scenes[ln] = load("res://level_base/levels/level_%s.tscn" % ln)
 

@@ -10,11 +10,20 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	GameManager.resume_game()
 
 
-func _physics_process(_delta):
+func _process(_delta):
 	# Anchor the 2D camera viewport to the player's position.
 	# We want all the physics processing to be calculated before
 	# the camera starts moving around.
 	player_cam.position = player.position
+
+
+## Unused: Add to _process() for testing purposes.
+func _debug_fast_level_transitions() -> void:
+	if Input.is_action_just_pressed("left"):
+		GameManager.load_main_scene()
+	
+	if Input.is_action_just_pressed("right"):
+		GameManager.load_next_level_scene()

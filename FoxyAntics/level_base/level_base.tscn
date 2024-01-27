@@ -571,7 +571,7 @@ limit_right = 2000
 limit_bottom = 500
 
 [node name="Player" parent="." instance=ExtResource("6_2pvig")]
-position = Vector2(0, -45)
+position = Vector2(0, -32)
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_7uj36")
