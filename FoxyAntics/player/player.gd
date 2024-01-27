@@ -185,6 +185,7 @@ func _apply_hit() -> void:
 	SoundManager.play_sfx(sound_player, SoundManager.SOUND_DAMAGE)
 	
 	if hit_points <= 0:
+		EventBus.on_player_hit(0)
 		EventBus.on_game_over()
 		set_physics_process(false)
 		return
