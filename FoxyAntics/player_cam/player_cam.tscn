@@ -4,3 +4,9 @@
 
 [node name="PlayerCam" type="Camera2D"]
 script = ExtResource("1_5n8ra")
+
+[node name="ShakeTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="ShakeTimer" to="." method="_on_shake_timer_timeout"]

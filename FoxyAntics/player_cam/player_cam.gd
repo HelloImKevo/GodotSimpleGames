@@ -1,6 +1,37 @@
 extends Camera2D
 
+@export var shake_enabled: bool = true
+@export var shake_amount: float = 3.0
 
-# Called when the node enters the scene tree for the first time.
+@onready var shake_timer = $ShakeTimer
+
+
 func _ready():
-	pass # Replace with function body.
+	set_process(false)
+	SignalManager.on_player_hit.connect(_on_player_hit)
+
+
+func _process(_delta):
+	offset = get_random_offset()
+
+
+func get_random_offset() -> Vector2:
+	return Vector2(
+		randf_range(-shake_amount, shake_amount),
+		randf_range(-shake_amount, shake_amount)
+	)
+
+
+func shake() -> void:
+	set_process(true)
+	shake_timer.start()
+
+
+func _on_player_hit(_hit_points: int) -> void:
+	if shake_enabled:
+		shake()
+
+
+func _on_shake_timer_timeout():
+	set_process(false)
+	offset = Vector2.ZERO

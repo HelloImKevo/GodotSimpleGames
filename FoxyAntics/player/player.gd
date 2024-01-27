@@ -166,7 +166,7 @@ func _set_state(new_state: PlayerState) -> void:
 		PlayerState.FALL:
 			animation_player.play("fall")
 		PlayerState.HURT:
-			animation_player.play("hurt")
+			_apply_hurt_jump()
 
 
 func _did_just_land(new_state: PlayerState) -> bool:
@@ -182,16 +182,16 @@ func _apply_hit() -> void:
 	
 	hit_points -= 1
 	_go_invincible()
-	_apply_hurt_jump()
+	_set_state(PlayerState.HURT)
 	SoundManager.play_sfx(sound_player, SoundManager.SOUND_DAMAGE)
 
 
 func _apply_hurt_jump() -> void:
 	# Stun the player by slowing them down a little bit.
-	_set_state(PlayerState.HURT)
 	animation_player.play("hurt")
 	velocity = HURT_JUMP_VELOCITY
 	hurt_timer.start()
+	EventBus.on_player_hit(hit_points)
 
 
 func _go_invincible() -> void:

@@ -22,6 +22,11 @@ func on_pickup_collected(pickup: FruitPickup) -> void:
 	SignalManager.on_pickup_hit.emit(pickup.POINTS)
 
 
+func on_player_hit(remaining_hit_points: int) -> void:
+	print(_to_string(), " => on_player_hit => remaining_hit_points: %s" % [remaining_hit_points])
+	SignalManager.on_player_hit.emit(remaining_hit_points)
+
+
 func emit_global_event(msg: String) -> void:
 	if _enabled:
 		print(_to_string(), " => Received a global event: %s" % [msg])
