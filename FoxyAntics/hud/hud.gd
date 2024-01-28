@@ -39,7 +39,7 @@ func _on_player_hit(hit_points: int) -> void:
 		_hearts[life].visible = hit_points > life
 
 
-func _on_level_complete() -> void:
+func _on_level_complete(_level: int) -> void:
 	vb_level_complete.visible = true
 	show_hud()
 

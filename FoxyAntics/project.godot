@@ -59,6 +59,10 @@ shoot={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://assets/translations.en.translation", "res://assets/translations.es.translation")
+
 [layer_names]
 
 2d_physics/layer_1="platforms"
