@@ -9,11 +9,13 @@ const HIT_CONDITION: String = "parameters/conditions/on_hit"
 
 @onready var animation_tree = $AnimationTree
 @onready var visual = $Visual
+@onready var hit_box = $Visual/HitBox
 
 @export var hit_points: int = 3
 @export var points: int = 5
 
 var _invincible: bool = false
+var _has_triggered: bool = false
 
 
 func _to_string() -> String:
@@ -27,8 +29,11 @@ func _ready():
 
 func _on_trigger_area_entered_by_player(area):
 	print(_to_string(), " => Area %s entered the Boss trigger area!" % [area])
+	_has_triggered = true
 	if not animation_tree[TRIGGER_CONDITION]:
 		animation_tree[TRIGGER_CONDITION] = true
+		# Once the Boss is activated, move its hit box onto the 'enemy_hit_box' bit mask layer.
+		hit_box.collision_layer = 4
 
 
 func _on_hit_box_area_entered(_area):
@@ -36,6 +41,9 @@ func _on_hit_box_area_entered(_area):
 
 
 func _take_damage() -> void:
+	if not _has_triggered:
+		return
+	
 	if _invincible:
 		return
 	
