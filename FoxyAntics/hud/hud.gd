@@ -54,4 +54,4 @@ func _on_game_over() -> void:
 
 
 func _on_score_updated() -> void:
-	score_label.text = tr("SCORE") + str(ScoreManager.get_score())
+	score_label.text = tr("SCORE") + str(ScoreManager.get_score()).lpad(4, "0")
