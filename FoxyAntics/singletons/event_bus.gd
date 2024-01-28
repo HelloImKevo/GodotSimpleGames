@@ -29,7 +29,7 @@ func on_player_hit(remaining_hit_points: int) -> void:
 
 func on_level_complete(level: int) -> void:
 	print(_to_string(), " => on_level_complete: %s" % [level])
-	SignalManager.on_level_complete.emit()
+	SignalManager.on_level_complete.emit(level)
 
 
 func on_game_over() -> void:

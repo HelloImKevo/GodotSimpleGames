@@ -27,6 +27,7 @@ func get_current_level() -> int:
 # Virtual override.
 func _ready() -> void:
 	_init_level_scenes()
+	ScoreManager.reset_score()
 
 
 func _init_level_scenes() -> void:
