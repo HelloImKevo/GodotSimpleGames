@@ -13,7 +13,7 @@ func _to_string() -> String:
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
-	_enable_debug_label()
+	# _enable_debug_label()
 
 
 func _physics_process(delta):

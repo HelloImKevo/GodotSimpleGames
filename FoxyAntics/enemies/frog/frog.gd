@@ -29,7 +29,7 @@ func _get_additional_debug_metadata() -> String:
 func _ready():
 	super._ready()
 	start_timer()
-	_enable_debug_label()
+	# _enable_debug_label()
 
 
 func _physics_process(delta):

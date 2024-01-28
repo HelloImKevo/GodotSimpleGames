@@ -68,7 +68,7 @@ func _physics_process(delta):
 	
 	# Change state after the physics engine is done processing.
 	_calculate_states()
-	_update_debug_label()
+	# _update_debug_label()
 
 
 func _update_debug_label() -> void:
