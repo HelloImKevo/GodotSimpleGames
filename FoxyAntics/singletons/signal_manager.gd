@@ -10,6 +10,7 @@ signal on_boss_killed(points: int)
 signal on_player_hit(remaining_hit_points: int)
 signal on_level_complete(level: int)
 signal on_game_over
+signal on_score_updated
 
 
 func _to_string() -> String:

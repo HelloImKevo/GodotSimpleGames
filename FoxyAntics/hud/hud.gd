@@ -7,6 +7,7 @@ extends Control
 @onready var vb_level_complete = $ColorRect/VB_LevelComplete
 @onready var vb_game_over = $ColorRect/VB_GameOver
 @onready var hb_hearts = $MC/HB/HB_Hearts
+@onready var score_label = $MC/HB/ScoreLabel
 
 var _hearts: Array
 
@@ -14,9 +15,12 @@ var _hearts: Array
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_hearts = hb_hearts.get_children()
+	# Set the initial score label.
+	_on_score_updated()
 	SignalManager.on_level_complete.connect(_on_level_complete)
 	SignalManager.on_game_over.connect(_on_game_over)
 	SignalManager.on_player_hit.connect(_on_player_hit)
+	SignalManager.on_score_updated.connect(_on_score_updated)
 
 
 func _process(_delta):
@@ -47,3 +51,7 @@ func _on_level_complete(_level: int) -> void:
 func _on_game_over() -> void:
 	vb_game_over.visible = true
 	show_hud()
+
+
+func _on_score_updated() -> void:
+	score_label.text = tr("SCORE") + str(ScoreManager.get_score())

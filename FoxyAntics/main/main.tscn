@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://v6o6mg57h065"]
+[gd_scene load_steps=8 format=3 uid="uid://v6o6mg57h065"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_amyb8"]
 [ext_resource type="Texture2D" uid="uid://ckvomhfcha43d" path="res://assets/backgrounds/platformer_background_4.png" id="1_biid7"]
 [ext_resource type="FontFile" uid="uid://bvroe2xvktt13" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="2_u40em"]
 [ext_resource type="AudioStream" uid="uid://dkbaoh0m12g3" path="res://assets/sound/Farm Frolics.ogg" id="3_0mh4n"]
+[ext_resource type="ButtonGroup" uid="uid://yvr1og4o78ff" path="res://main/language_button_group.tres" id="5_sruht"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e8tyk"]
 font = ExtResource("2_u40em")
@@ -63,3 +64,41 @@ vertical_alignment = 1
 stream = ExtResource("3_0mh4n")
 volume_db = -18.0
 autoplay = true
+
+[node name="VB2" type="VBoxContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -72.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="VB2"]
+layout_mode = 2
+text = "LANGUAGE"
+label_settings = SubResource("LabelSettings_rn4e7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RadioButtons" type="BoxContainer" parent="VB2"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ChkEnglish" type="CheckBox" parent="VB2/RadioButtons"]
+layout_mode = 2
+button_pressed = true
+button_group = ExtResource("5_sruht")
+text = "ENGLISH"
+
+[node name="ChkSpanish" type="CheckBox" parent="VB2/RadioButtons"]
+layout_mode = 2
+button_group = ExtResource("5_sruht")
+text = "SPANISH"
+
+[connection signal="pressed" from="VB2/RadioButtons/ChkEnglish" to="." method="_on_chk_english_pressed"]
+[connection signal="pressed" from="VB2/RadioButtons/ChkSpanish" to="." method="_on_chk_spanish_pressed"]
