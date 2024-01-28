@@ -7,6 +7,7 @@
 [ext_resource type="LabelSettings" uid="uid://cw7vcq2sj2ta5" path="res://assets/LG_24_Subtitle.tres" id="4_b0nei"]
 
 [node name="HUD" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

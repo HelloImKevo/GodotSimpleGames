@@ -14,10 +14,15 @@ var _level_scenes: Dictionary = {}
 
 func resume_game() -> void:
 	Engine.time_scale = 1
+	# Note: This will actually pause input processing for the Player / HUD.
+	# Additionally, it will pause AudioStreamPlayers in the tree, causing
+	# all the Music to stop.
+	# get_tree().paused = false
 
 
 func pause_game() -> void:
 	Engine.time_scale = 0
+	# get_tree().paused = true
 
 
 func get_current_level() -> int:
