@@ -122,5 +122,13 @@ animations that Scale, Re-Position, and Modulate the Visibility of the boss.
 | :---: |
 | ![Foxy Antics 3](Screenshot/foxy-03.png) |
 
+| Main Menu with Language Selection |
+| :---: |
+| ![Foxy Antics 4](Screenshot/foxy-04.png) |
+
+| Game Level with Enemy Debug Labels |
+| :---: |
+| ![Foxy Antics 5](Screenshot/foxy-05.png) |
+
 # Godot GDScript Style Guide
 https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html  
