@@ -32,6 +32,7 @@ var _state: PlayerState = PlayerState.IDLE
 @onready var shooter = $Shooter
 @onready var invincible_timer = $InvincibleTimer
 @onready var hurt_timer = $HurtTimer
+@onready var hit_box = $HitBox
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 # Default value of 980 (9.8 m/s^2).
@@ -250,6 +251,14 @@ func _on_pickup_hit(points: int) -> void:
 	SoundManager.play_sfx(sound_player, SoundManager.SOUND_PICKUP)
 
 
+func _retake_damage() -> void:
+	for area in hit_box.get_overlapping_areas():
+		if area.is_in_group("Dangers"):
+			_apply_hit()
+			break
+	return
+
+
 #region: Node Signals
 
 func _on_hit_box_area_entered(area):
@@ -260,6 +269,7 @@ func _on_hit_box_area_entered(area):
 func _on_invincible_timer_timeout():
 	_invincible = false
 	animation_player_invincible.stop()
+	_retake_damage()
 
 
 func _on_hurt_timer_timeout():
