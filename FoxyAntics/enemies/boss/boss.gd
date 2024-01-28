@@ -31,7 +31,7 @@ func _on_trigger_area_entered_by_player(area):
 		animation_tree[TRIGGER_CONDITION] = true
 
 
-func _on_hit_box_area_entered(area):
+func _on_hit_box_area_entered(_area):
 	_take_damage()
 
 

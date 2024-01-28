@@ -217,7 +217,7 @@ shape = SubResource("CapsuleShape2D_553aw")
 
 [node name="Shooter" parent="." instance=ExtResource("3_58msf")]
 speed = 275.0
-life_span = 3.0
+life_span = 2.2
 
 [connection signal="timeout" from="InvincibleTimer" to="." method="_on_invincible_timer_timeout"]
 [connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]

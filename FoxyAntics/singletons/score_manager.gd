@@ -50,7 +50,7 @@ func on_boss_killed(points: int) -> void:
 	update_score(points)
 
 
-func on_level_complete(level: int) -> void:
+func on_level_complete(_level: int) -> void:
 	save_high_score()
 
 
