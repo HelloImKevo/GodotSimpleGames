@@ -46,6 +46,10 @@ func _process(delta):
 
 
 func handle_player_input():
+	if Input.is_action_just_pressed("exit"):
+		GameManager.load_main_scene()
+		return
+	
 	if _moving:
 		return
 	
@@ -143,8 +147,10 @@ func box_can_move(box_tile: Vector2i, direction: Vector2i) -> bool:
 #region -- LEVEL SETUP --
 
 func setup_level() -> void:
+	tile_map.visible = false
 	tile_map.clear()
-	var level_data = GameData.get_data_for_level("1")
+	var level_number = GameManager.get_level_selected()
+	var level_data = GameData.get_data_for_level(level_number)
 	# JSON Array entries have "tiles" and "player_start".
 	# Tiles has fields: Floor, Walls, Targets, TargetBoxes, Boxes
 	var level_tiles = level_data.tiles
@@ -155,8 +161,11 @@ func setup_level() -> void:
 	for layer_name in LAYER_MAP.keys():
 		add_layer_tiles(level_tiles[layer_name], layer_name)
 	
-	place_player_on_tile(Vector2i(player_start.x, player_start.y))
 	move_camera()
+	place_player_on_tile(Vector2i(player_start.x, player_start.y))
+	# TODO: The Camera seems to "jump" to the center of the tile map 0.5 seconds after
+	# the Tile Map is constructed and rendered. Maybe use a Coroutine to set the visibility?
+	tile_map.visible = true
 
 
 func add_layer_tiles(layer_tiles: Array, layer_name: String) -> void:
