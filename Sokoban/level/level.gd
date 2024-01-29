@@ -76,11 +76,42 @@ func player_move(direction: Vector2i) -> void:
 	
 	var player_tile = get_player_tile()
 	var new_tile = player_tile + direction
+	var can_move = true
+	var box_seen = false
+	
 	print("direction: ", direction)
 	print("player_tile: ", player_tile)
 	print("new_tile: ", new_tile)
 	
+	if cell_is_wall(new_tile):
+		can_move = false
+	if cell_is_box(new_tile):
+		box_seen = true
+		can_move = box_can_move(new_tile, direction)
+	
+	print("can_move: ", can_move)
+	
 	_moving = false
+
+
+#region -- TARGET CELL CHECKS --
+
+func cell_is_wall(cell: Vector2i) -> bool:
+	return cell in tile_map.get_used_cells(WALL_LAYER)
+
+
+func cell_is_box(cell: Vector2i) -> bool:
+	return cell in tile_map.get_used_cells(BOX_LAYER)
+
+func cell_is_empty(cell: Vector2i) -> bool:
+	return !cell_is_wall(cell) and !cell_is_box(cell)
+
+
+func box_can_move(box_tile: Vector2i, direction: Vector2i) -> bool:
+	var target_cell: Vector2i = box_tile + direction
+	return cell_is_empty(target_cell)
+
+#endregion -- TARGET CELL CHECKS --
 
 
 #region -- LEVEL SETUP --
