@@ -53,6 +53,8 @@ func setup_level() -> void:
 	# Build each Layer, starting with the first layer (Floor)
 	for layer_name in LAYER_MAP.keys():
 		add_layer_tiles(level_tiles[layer_name], layer_name)
+	
+	place_player_on_tile(Vector2i(player_start.x, player_start.y))
 
 
 func add_layer_tiles(layer_tiles: Array, layer_name: String) -> void:
@@ -66,6 +68,15 @@ func add_tile(tile_coord: Dictionary, layer_name: String) -> void:
 	var atlas_vec: Vector2i = get_atlas_coord_for_layer_name(layer_name)
 	
 	tile_map.set_cell(layer_number, coord_vec, SOURCE_ID, atlas_vec)
+
+
+func place_player_on_tile(tile_coord: Vector2i) -> void:
+	var new_pos = Vector2(
+		tile_coord.x * GameData.TILE_SIZE,
+		tile_coord.y * GameData.TILE_SIZE
+	) + tile_map.global_position
+	
+	player.global_position = new_pos
 
 
 func get_atlas_coord_for_layer_name(layer_name: String) -> Vector2i:
