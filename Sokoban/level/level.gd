@@ -90,8 +90,28 @@ func player_move(direction: Vector2i) -> void:
 		can_move = box_can_move(new_tile, direction)
 	
 	print("can_move: ", can_move)
+	if can_move:
+		_total_moves += 1
+		if box_seen:
+			move_box(new_tile, direction)
+		
+		place_player_on_tile(new_tile)
 	
 	_moving = false
+
+
+func move_box(box_tile: Vector2i, direction: Vector2i) -> void:
+	var dest = box_tile + direction
+	
+	# Erase the current Box.
+	tile_map.erase_cell(BOX_LAYER, box_tile)
+	
+	if dest in tile_map.get_used_cells(TARGET_LAYER):
+		# Create a 'Green Box' (floor switch activated).
+		tile_map.set_cell(BOX_LAYER, dest, SOURCE_ID, get_atlas_coord_for_layer_name(LAYER_KEY_TARGET_BOXES))
+	else:
+		# Create a regular Box.
+		tile_map.set_cell(BOX_LAYER, dest, SOURCE_ID, get_atlas_coord_for_layer_name(LAYER_KEY_BOXES))
 
 
 #region -- TARGET CELL CHECKS --
