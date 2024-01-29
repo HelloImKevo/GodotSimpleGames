@@ -56,4 +56,34 @@ func setup_level() -> void:
 
 
 func add_layer_tiles(layer_tiles: Array, layer_name: String) -> void:
-	pass
+	for tile_coord in layer_tiles:
+		add_tile(tile_coord.coord, layer_name)
+
+
+func add_tile(tile_coord: Dictionary, layer_name: String) -> void:
+	var layer_number = LAYER_MAP[layer_name]
+	var coord_vec: Vector2i = Vector2i(tile_coord.x, tile_coord.y)
+	var atlas_vec: Vector2i = get_atlas_coord_for_layer_name(layer_name)
+	
+	tile_map.set_cell(layer_number, coord_vec, SOURCE_ID, atlas_vec)
+
+
+func get_atlas_coord_for_layer_name(layer_name: String) -> Vector2i:
+	match layer_name:
+		LAYER_KEY_FLOOR:
+			# Return a random floor tile (each one has a subtle variation).
+			return Vector2i(randi_range(3, 8), 0)
+		
+		LAYER_KEY_WALLS:
+			return Vector2i(2, 0)
+		
+		LAYER_KEY_TARGETS:
+			return Vector2i(9, 0)
+		
+		LAYER_KEY_TARGET_BOXES:
+			return Vector2i(0, 0)
+		
+		LAYER_KEY_BOXES:
+			return Vector2i(1, 0)
+	
+	return Vector2i.ZERO
