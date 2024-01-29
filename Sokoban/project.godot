@@ -13,6 +13,7 @@ config_version=5
 config/name="Sokoban"
 config/description="Game where the player controls a fox that can push boxes around a puzzle room onto floor switches."
 config/version="0.1"
+run/main_scene="res://main/main.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.png"
 

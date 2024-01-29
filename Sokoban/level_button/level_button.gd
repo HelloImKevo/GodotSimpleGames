@@ -23,4 +23,4 @@ func set_level_number(level_number: String) -> void:
 func _on_gui_input(event: InputEvent):
 	if event.is_action_pressed("select"):
 		texture = GREEN_TEXTURE
-		print("Selected")
+		print("Selected: ", _level_number)
