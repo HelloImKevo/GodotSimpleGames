@@ -92,7 +92,7 @@ func player_move(direction: Vector2i) -> void:
 		box_seen = true
 		can_move = box_can_move(new_tile, direction)
 	
-	print("can_move: ", can_move)
+	# print("can_move: ", can_move)
 	if can_move:
 		_total_moves += 1
 		if box_seen:
@@ -111,6 +111,7 @@ func check_game_state() -> void:
 	
 	hud.hide()
 	game_over_ui.show()
+	ScoreSync.level_completed(GameManager.get_level_selected(), _total_moves)
 
 
 func move_box(box_tile: Vector2i, direction: Vector2i) -> void:
