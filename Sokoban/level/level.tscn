@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgk62lrpmd2h3"]
+[gd_scene load_steps=7 format=3 uid="uid://cgk62lrpmd2h3"]
 
 [ext_resource type="Script" path="res://level/level.gd" id="1_cjaio"]
 [ext_resource type="Texture2D" uid="uid://cv4wbmjxny1g" path="res://assets/spritesheet.png" id="1_h1wjk"]
 [ext_resource type="PackedScene" uid="uid://b6jhow2plcfxt" path="res://player/player.tscn" id="2_tevl3"]
+[ext_resource type="PackedScene" uid="uid://d2xp3mp8e6jkr" path="res://hud/hud.tscn" id="4_1hmym"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s3d7k"]
 resource_name = "level_tiles"
@@ -44,3 +45,7 @@ position = Vector2(231, 175)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(269, 168)
 zoom = Vector2(1.2, 1.2)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("4_1hmym")]

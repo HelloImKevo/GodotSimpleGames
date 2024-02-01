@@ -5,6 +5,7 @@ extends Node2D
 @onready var tile_map = $TileMap
 @onready var player = $Player
 @onready var camera_2d = $Camera2D
+@onready var hud = $CanvasLayer/HUD
 
 const FLOOR_LAYER = 0
 const WALL_LAYER = 1
@@ -42,6 +43,7 @@ func _ready():
 
 
 func _process(delta):
+	hud.set_moves_label(_total_moves)
 	handle_player_input()
 
 
@@ -166,6 +168,7 @@ func setup_level() -> void:
 	# TODO: The Camera seems to "jump" to the center of the tile map 0.5 seconds after
 	# the Tile Map is constructed and rendered. Maybe use a Coroutine to set the visibility?
 	tile_map.visible = true
+	hud.set_level_label(level_number)
 
 
 func add_layer_tiles(layer_tiles: Array, layer_name: String) -> void:
