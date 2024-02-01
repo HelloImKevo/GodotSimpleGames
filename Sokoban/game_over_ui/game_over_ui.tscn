@@ -1,0 +1,112 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1mwfp577xhfh"]
+
+[ext_resource type="Texture2D" uid="uid://ct46il0nw7q37" path="res://assets/Purple.png" id="1_8262t"]
+[ext_resource type="Texture2D" uid="uid://bvkxp18dc8db" path="res://assets/panel_beigeLight.png" id="2_f2kn7"]
+[ext_resource type="LabelSettings" uid="uid://cm4vg1ju88252" path="res://assets/LG_96_White.tres" id="3_x5ocl"]
+[ext_resource type="FontFile" uid="uid://db6j5a5or3ruj" path="res://assets/LuckiestGuy-Regular.ttf" id="4_nhdvb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jclj4"]
+font = ExtResource("4_nhdvb")
+font_size = 48
+font_color = Color(0.427451, 1, 1, 1)
+outline_size = 8
+outline_color = Color(0.0352941, 0.309804, 0.858824, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.784314)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fv6gy"]
+font = ExtResource("4_nhdvb")
+font_size = 48
+font_color = Color(1, 0.678431, 0.431373, 1)
+outline_size = 8
+outline_color = Color(0.0352941, 0.309804, 0.858824, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.784314)
+shadow_offset = Vector2(2, 2)
+
+[node name="GameOverUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8262t")
+stretch_mode = 1
+
+[node name="MC" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="NP" type="NinePatchRect" parent="MC"]
+layout_mode = 2
+texture = ExtResource("2_f2kn7")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="MC2" type="MarginContainer" parent="MC/NP"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MC/NP/MC2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MC/NP/MC2/VBoxContainer"]
+layout_mode = 2
+text = "LEVEL_COMPLETE"
+label_settings = ExtResource("3_x5ocl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="MC/NP/MC2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MovesLabel" type="Label" parent="MC/NP/MC2/VBoxContainer"]
+layout_mode = 2
+text = "XXX Moves Taken"
+label_settings = SubResource("LabelSettings_jclj4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer2" type="Control" parent="MC/NP/MC2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RecordLabel" type="Label" parent="MC/NP/MC2/VBoxContainer"]
+layout_mode = 2
+text = "NEW_RECORD"
+label_settings = SubResource("LabelSettings_fv6gy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer3" type="Control" parent="MC/NP/MC2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3

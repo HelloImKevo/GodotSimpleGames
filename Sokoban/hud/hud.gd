@@ -22,7 +22,3 @@ func set_moves_label(moves: int) -> void:
 
 func set_best_label(best: int) -> void:
 	best_label.text = str(best)
-
-
-func game_over() -> void:
-	hide()

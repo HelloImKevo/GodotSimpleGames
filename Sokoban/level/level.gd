@@ -6,6 +6,7 @@ extends Node2D
 @onready var player = $Player
 @onready var camera_2d = $Camera2D
 @onready var hud = $CanvasLayer/HUD
+@onready var game_over_ui = $CanvasLayer/GameOverUi
 
 const FLOOR_LAYER = 0
 const WALL_LAYER = 1
@@ -108,8 +109,8 @@ func check_game_state() -> void:
 		if not cell_is_box(t):
 			return
 	
-	
-	print("GAME OVER")
+	hud.hide()
+	game_over_ui.show()
 
 
 func move_box(box_tile: Vector2i, direction: Vector2i) -> void:
