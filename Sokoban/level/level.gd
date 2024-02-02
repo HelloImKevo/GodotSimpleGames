@@ -53,6 +53,10 @@ func handle_player_input():
 		GameManager.load_main_scene()
 		return
 	
+	if Input.is_action_just_pressed("reload"):
+		setup_level()
+		return
+	
 	if _moving:
 		return
 	
@@ -110,7 +114,7 @@ func check_game_state() -> void:
 			return
 	
 	hud.hide()
-	game_over_ui.show()
+	game_over_ui.game_over(GameManager.get_level_selected(), _total_moves)
 	ScoreSync.level_completed(GameManager.get_level_selected(), _total_moves)
 
 
@@ -161,6 +165,8 @@ func setup_level() -> void:
 	var player_start = level_data.player_start
 	print("player_start: ", player_start)
 	
+	_total_moves = 0
+	
 	# Build each Layer, starting with the first layer (Floor)
 	for layer_name in LAYER_MAP.keys():
 		add_layer_tiles(level_tiles[layer_name], layer_name)
@@ -170,7 +176,8 @@ func setup_level() -> void:
 	# TODO: The Camera seems to "jump" to the center of the tile map 0.5 seconds after
 	# the Tile Map is constructed and rendered. Maybe use a Coroutine to set the visibility?
 	tile_map.visible = true
-	hud.set_level_label(level_number)
+	hud.new_game(level_number)
+	game_over_ui.new_game()
 
 
 func add_layer_tiles(layer_tiles: Array, layer_name: String) -> void:

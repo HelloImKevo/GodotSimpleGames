@@ -14,6 +14,8 @@ var _level_number: String = "99"
 
 func _ready():
 	level_label.text = _level_number
+	if ScoreSync.has_level_score(_level_number):
+		check_mark.show()
 
 
 func set_level_number(level_number: String) -> void:

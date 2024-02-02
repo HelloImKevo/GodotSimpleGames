@@ -22,3 +22,10 @@ func set_moves_label(moves: int) -> void:
 
 func set_best_label(best: int) -> void:
 	best_label.text = str(best)
+
+
+func new_game(level: String) -> void:
+	set_best_label(ScoreSync.get_level_best_score(level))
+	set_moves_label(0)
+	set_level_label(level)
+	show()

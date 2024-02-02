@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1mwfp577xhfh"]
+[gd_scene load_steps=8 format=3 uid="uid://d1mwfp577xhfh"]
 
 [ext_resource type="Texture2D" uid="uid://ct46il0nw7q37" path="res://assets/Purple.png" id="1_8262t"]
+[ext_resource type="Script" path="res://game_over_ui/game_over_ui.gd" id="1_ii5mx"]
 [ext_resource type="Texture2D" uid="uid://bvkxp18dc8db" path="res://assets/panel_beigeLight.png" id="2_f2kn7"]
 [ext_resource type="LabelSettings" uid="uid://cm4vg1ju88252" path="res://assets/LG_96_White.tres" id="3_x5ocl"]
 [ext_resource type="FontFile" uid="uid://db6j5a5or3ruj" path="res://assets/LuckiestGuy-Regular.ttf" id="4_nhdvb"]
@@ -32,6 +33,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ii5mx")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
