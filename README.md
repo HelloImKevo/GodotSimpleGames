@@ -110,6 +110,9 @@ to destroy wild enemies: Snails, Frogs and Eagles. Features a Boss Ent that
 uses an `AnimationNodeStateMachine` to manage transitions to multiple
 animations that Scale, Re-Position, and Modulate the Visibility of the boss.
 
+Loosely based on CJ's Elephant Antics for the Commodore 64 and Amiga:  
+https://en.wikipedia.org/wiki/CJ's_Elephant_Antics
+
 | Boss Animation Node State Machine |
 | :---: |
 | ![Foxy Antics 1](Screenshot/foxy-01.png) |
@@ -129,6 +132,24 @@ animations that Scale, Re-Position, and Modulate the Visibility of the boss.
 | Game Level with Enemy Debug Labels |
 | :---: |
 | ![Foxy Antics 5](Screenshot/foxy-05.png) |
+
+# Sokoban (ish)
+A puzzle game where the player can push Boxes (Crates) around a 2D tile map
+onto floor switches. The level is complete when all floor switches are
+activated. Based on the original Sokoban / Box World game. Levels are
+programmatically generated using a JSON-to-Tile-Map algorithm using 2D coordinates.
+
+| Level Selection Screen |
+| :---: |
+| ![Sokoban 1](Screenshot/sokoban-01.png) |
+
+| Level Generated from JSON Level Data |
+| :---: |
+| ![Sokoban 2](Screenshot/sokoban-02.png) |
+
+| Level Complete UI |
+| :---: |
+| ![Sokoban 3](Screenshot/sokoban-03.png) |
 
 # Godot GDScript Style Guide
 https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html  
