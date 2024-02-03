@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bhrsbhgnom0is"]
+[gd_scene load_steps=11 format=3 uid="uid://bhrsbhgnom0is"]
 
+[ext_resource type="Script" path="res://main/main.gd" id="1_74oce"]
 [ext_resource type="Texture2D" uid="uid://clg2jk8yiicqe" path="res://assets/backgrounds/GalaxyUno.png" id="1_h2jcd"]
 [ext_resource type="Texture2D" uid="uid://drm0urr6dddmg" path="res://assets/backgrounds/spr_stars01.png" id="2_xo00j"]
 [ext_resource type="Texture2D" uid="uid://cjv151lvmm321" path="res://assets/backgrounds/spr_stars02.png" id="3_yv4lp"]
@@ -11,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cdfpmjw2ng6jj" path="res://sun/sun.tscn" id="9_shl88"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_74oce")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -109,3 +111,5 @@ vertical_alignment = 1
 [node name="Sun" parent="." instance=ExtResource("9_shl88")]
 position = Vector2(48, 24)
 scale = Vector2(0.4, 0.4)
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VB/PlayButton" to="." method="_on_play_button_pressed"]
