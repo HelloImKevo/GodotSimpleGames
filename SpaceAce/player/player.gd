@@ -76,4 +76,4 @@ func on_powerup_hit(powerup: GameData.POWERUP_TYPE) -> void:
 
 
 func _on_area_entered(area):
-	print("Something hit the PLAYER")
+	print("Something hit the PLAYER: ", area)
