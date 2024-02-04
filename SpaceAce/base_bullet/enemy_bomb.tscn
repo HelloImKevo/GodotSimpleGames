@@ -43,6 +43,8 @@ animations = [{
 radius = 8.0
 
 [node name="EnemyBomb" instance=ExtResource("1_wqbrr")]
+collision_layer = 8
+collision_mask = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
 scale = Vector2(0.5, 0.5)

@@ -8,6 +8,8 @@ radius = 2.0
 height = 16.0
 
 [node name="PlayerBullet" instance=ExtResource("1_i8do3")]
+collision_layer = 4
+collision_mask = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="1"]
 scale = Vector2(0.5, 0.5)

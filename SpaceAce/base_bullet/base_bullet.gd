@@ -24,7 +24,9 @@ func _process(delta):
 
 
 func blow_up(area: Node2D) -> void:
-	pass
+	ObjectMaker.create_explosion(global_position)
+	set_process(false)
+	queue_free()
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():

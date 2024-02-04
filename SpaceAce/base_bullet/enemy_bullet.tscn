@@ -8,6 +8,8 @@ radius = 2.0
 height = 16.0
 
 [node name="EnemyBullet" instance=ExtResource("1_qtaep")]
+collision_layer = 8
+collision_mask = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="1"]
 scale = Vector2(0.5, 0.5)

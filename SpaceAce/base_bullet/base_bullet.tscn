@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://base_bullet/base_bullet.gd" id="1_y5hsx"]
 
 [node name="BaseBullet" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_y5hsx")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
