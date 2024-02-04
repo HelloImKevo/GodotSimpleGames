@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d22hiikgsglyy"]
+[gd_scene load_steps=11 format=3 uid="uid://d22hiikgsglyy"]
 
 [ext_resource type="Script" path="res://level/level.gd" id="1_70o4n"]
 [ext_resource type="PackedScene" uid="uid://c2kjs5y47d7ak" path="res://level_bg/level_bg.tscn" id="2_jhbev"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://16sh8v0ayi7k" path="res://enemies/enemy_bomber.tscn" id="5_f8vi2"]
 [ext_resource type="PackedScene" uid="uid://bc1gbajx5kitv" path="res://enemies/enemy_bio.tscn" id="6_4vp8h"]
 [ext_resource type="PackedScene" uid="uid://c6m0viio41swb" path="res://wave_manager/wave_manager.tscn" id="7_ai26j"]
+[ext_resource type="PackedScene" uid="uid://f0fpi5rinkct" path="res://base_bullet/player_bullet.tscn" id="8_rvhch"]
+[ext_resource type="PackedScene" uid="uid://bnk4ijkge03aw" path="res://base_bullet/enemy_bullet.tscn" id="9_ntox1"]
+[ext_resource type="PackedScene" uid="uid://b5rgy7hnuodcb" path="res://base_bullet/enemy_bomb.tscn" id="10_18rh3"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_70o4n")
@@ -29,3 +32,12 @@ position = Vector2(287, 254)
 rotates = true
 
 [node name="WaveManager" parent="." instance=ExtResource("7_ai26j")]
+
+[node name="PlayerBullet" parent="." instance=ExtResource("8_rvhch")]
+position = Vector2(337, 327)
+
+[node name="EnemyBullet" parent="." instance=ExtResource("9_ntox1")]
+position = Vector2(445, 407)
+
+[node name="EnemyBomb" parent="." instance=ExtResource("10_18rh3")]
+position = Vector2(246, 396)

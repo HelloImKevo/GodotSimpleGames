@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://f6nnpicxs7l3"]
+
+[ext_resource type="Script" path="res://base_bullet/base_bullet.gd" id="1_y5hsx"]
+
+[node name="BaseBullet" type="Area2D"]
+script = ExtResource("1_y5hsx")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
