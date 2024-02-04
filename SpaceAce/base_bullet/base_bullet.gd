@@ -24,7 +24,9 @@ func _process(delta):
 
 
 func blow_up(area: Node2D) -> void:
-	ObjectMaker.create_explosion(global_position)
+	# Calculate position relative to the target 'area' node.
+	var net_position = global_position - area.global_position
+	ObjectMaker.create_explosion(net_position, area)
 	set_process(false)
 	queue_free()
 
