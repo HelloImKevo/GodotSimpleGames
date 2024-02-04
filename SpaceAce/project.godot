@@ -22,6 +22,7 @@ SignalManager="*res://singletons/signal_manager.gd"
 GameData="*res://singletons/game_data.gd"
 SoundManager="*res://singletons/sound_manager.gd"
 GameManager="*res://singletons/game_manager.gd"
+ObjectMaker="*res://singletons/object_maker.gd"
 
 [display]
 
