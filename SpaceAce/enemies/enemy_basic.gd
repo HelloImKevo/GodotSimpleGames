@@ -17,11 +17,12 @@ var _player_ref: Player
 var _speed: float = 0.0
 var _can_shoot: bool = false
 var _dead: bool = false
+var _anim_string: String
 
 
 func setup(speed: float, anim_name: String) -> void:
 	_speed = speed
-	animated_sprite_2d.animation = anim_name
+	_anim_string = anim_name
 
 
 func _ready():
@@ -30,7 +31,7 @@ func _ready():
 		queue_free()
 		return
 	
-	animated_sprite_2d.play()
+	animated_sprite_2d.play(_anim_string)
 
 
 func _process(delta):
