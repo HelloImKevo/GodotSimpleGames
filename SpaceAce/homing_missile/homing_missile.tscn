@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://btittgk5vsvla"]
+
+[ext_resource type="Texture2D" uid="uid://ybgk8y7bh1u8" path="res://assets/lasers/spaceMissiles_040.png" id="1_u5xb7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hv5hg"]
+radius = 6.0
+
+[node name="HomingMissile" type="Area2D"]
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_hv5hg")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-20, 2.08165e-12)
+rotation = 1.5708
+amount = 30
+lifetime = 0.4
+speed_scale = 0.7
+explosiveness = 0.27
+randomness = 0.1
+lifetime_randomness = 0.07
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(2, 3)
+radial_accel_min = 15.0
+radial_accel_max = 23.0
+tangential_accel_max = 3.0
+scale_amount_min = 0.6
+scale_amount_max = 1.4
+color = Color(0.921569, 0.666667, 0.027451, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_u5xb7")

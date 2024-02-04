@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d22hiikgsglyy"]
+[gd_scene load_steps=10 format=3 uid="uid://d22hiikgsglyy"]
 
 [ext_resource type="Script" path="res://level/level.gd" id="1_70o4n"]
 [ext_resource type="PackedScene" uid="uid://c2kjs5y47d7ak" path="res://level_bg/level_bg.tscn" id="2_jhbev"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bc1gbajx5kitv" path="res://enemies/enemy_bio.tscn" id="6_4vp8h"]
 [ext_resource type="PackedScene" uid="uid://c6m0viio41swb" path="res://wave_manager/wave_manager.tscn" id="7_ai26j"]
 [ext_resource type="PackedScene" uid="uid://dbnfx5dbuee47" path="res://powerup/powerup.tscn" id="8_2wkrb"]
+[ext_resource type="PackedScene" uid="uid://btittgk5vsvla" path="res://homing_missile/homing_missile.tscn" id="9_ljpn0"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_70o4n")
@@ -33,3 +34,6 @@ rotates = true
 
 [node name="Powerup" parent="." instance=ExtResource("8_2wkrb")]
 position = Vector2(337, 196)
+
+[node name="HomingMissile" parent="." instance=ExtResource("9_ljpn0")]
+position = Vector2(388, 287)
