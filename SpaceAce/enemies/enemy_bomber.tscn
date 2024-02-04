@@ -17,3 +17,9 @@ bullet_wait_time_var = 0.2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_fn8vi")
+
+[node name="HealthBar" parent="." index="5"]
+offset_left = -20.0
+offset_top = -32.0
+offset_right = 20.0
+offset_bottom = -30.0

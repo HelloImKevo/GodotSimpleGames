@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dr8cythers6x8"]
+[gd_scene load_steps=54 format=3 uid="uid://dr8cythers6x8"]
 
 [ext_resource type="Script" path="res://enemies/enemy_basic.gd" id="1_c40h2"]
 [ext_resource type="Texture2D" uid="uid://bjw6okalk12ac" path="res://assets/ships/biomech_1.png" id="1_dq5r8"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://co8kbf6xs3tnm" path="res://assets/ships/zipper_1.png" id="8_8lr0t"]
 [ext_resource type="Texture2D" uid="uid://djtofeglepcom" path="res://assets/ships/zipper_2.png" id="9_3dlem"]
 [ext_resource type="Texture2D" uid="uid://cspm2yupde1iv" path="res://assets/ships/zipper_3.png" id="10_fcq51"]
+[ext_resource type="PackedScene" uid="uid://bcebm08gphdjt" path="res://health_bar/health_bar.tscn" id="12_vmlm7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dshe4"]
 atlas = ExtResource("1_dq5r8")
@@ -365,7 +366,10 @@ collision_mask = 4
 
 [node name="Booms" type="Node2D" parent="."]
 
+[node name="HealthBar" parent="." instance=ExtResource("12_vmlm7")]
+
 [connection signal="timeout" from="LaserTimer" to="." method="_on_laser_timer_timeout"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="died" from="HealthBar" to="." method="_on_health_bar_died"]
