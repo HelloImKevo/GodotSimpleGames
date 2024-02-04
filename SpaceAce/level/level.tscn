@@ -1,14 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://d22hiikgsglyy"]
+[gd_scene load_steps=6 format=3 uid="uid://d22hiikgsglyy"]
 
 [ext_resource type="Script" path="res://level/level.gd" id="1_70o4n"]
 [ext_resource type="PackedScene" uid="uid://c2kjs5y47d7ak" path="res://level_bg/level_bg.tscn" id="2_jhbev"]
 [ext_resource type="PackedScene" uid="uid://bigtwcad5x3yw" path="res://player/player.tscn" id="3_8o5yh"]
-[ext_resource type="PackedScene" uid="uid://ch8ixw7dqiusv" path="res://enemies/enemy_zipper.tscn" id="4_cpjld"]
-[ext_resource type="PackedScene" uid="uid://16sh8v0ayi7k" path="res://enemies/enemy_bomber.tscn" id="5_f8vi2"]
-[ext_resource type="PackedScene" uid="uid://bc1gbajx5kitv" path="res://enemies/enemy_bio.tscn" id="6_4vp8h"]
+[ext_resource type="PackedScene" uid="uid://tu43ukjgv1so" path="res://saucer_manager/saucer_manager.tscn" id="5_e6kq6"]
 [ext_resource type="PackedScene" uid="uid://c6m0viio41swb" path="res://wave_manager/wave_manager.tscn" id="7_ai26j"]
-[ext_resource type="PackedScene" uid="uid://dbnfx5dbuee47" path="res://powerup/powerup.tscn" id="8_2wkrb"]
-[ext_resource type="PackedScene" uid="uid://btittgk5vsvla" path="res://homing_missile/homing_missile.tscn" id="9_ljpn0"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_70o4n")
@@ -18,22 +14,6 @@ script = ExtResource("1_70o4n")
 [node name="Player" parent="." instance=ExtResource("3_8o5yh")]
 position = Vector2(336, 417)
 
-[node name="EnemyZipper" parent="." instance=ExtResource("4_cpjld")]
-position = Vector2(186, 97)
-rotates = true
-
-[node name="EnemyBomber" parent="." instance=ExtResource("5_f8vi2")]
-position = Vector2(439, 202)
-rotates = true
-
-[node name="EnemyBio" parent="." instance=ExtResource("6_4vp8h")]
-position = Vector2(287, 254)
-rotates = true
-
 [node name="WaveManager" parent="." instance=ExtResource("7_ai26j")]
 
-[node name="Powerup" parent="." instance=ExtResource("8_2wkrb")]
-position = Vector2(337, 196)
-
-[node name="HomingMissile" parent="." instance=ExtResource("9_ljpn0")]
-position = Vector2(388, 287)
+[node name="SaucerManager" parent="." instance=ExtResource("5_e6kq6")]
