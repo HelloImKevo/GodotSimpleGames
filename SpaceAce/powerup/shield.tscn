@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://chq2w42c4mahs"]
+[gd_scene load_steps=7 format=3 uid="uid://chq2w42c4mahs"]
 
+[ext_resource type="Script" path="res://powerup/shield.gd" id="1_5n77j"]
 [ext_resource type="Texture2D" uid="uid://0cb40uheeue4" path="res://assets/shield/spr_shield_small.png" id="1_g4rmt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ikp0y"]
@@ -45,6 +46,7 @@ _data = {
 
 [node name="Shield" type="Area2D"]
 collision_mask = 10
+script = ExtResource("1_5n77j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ikp0y")
@@ -62,5 +64,8 @@ libraries = {
 }
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 8.0
 one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

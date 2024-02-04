@@ -11,6 +11,7 @@ extends Area2D
 
 @onready var sprite_2d = $Sprite2D
 @onready var animation_player = $AnimationPlayer
+@onready var shield = $Shield
 
 const MARGIN: float = 32.0
 
@@ -73,6 +74,8 @@ func shoot() -> void:
 
 func on_powerup_hit(powerup: GameData.POWERUP_TYPE) -> void:
 	print("Powerup hit: ", powerup)
+	if GameData.POWERUP_TYPE.SHIELD == powerup:
+		shield.enable_shield()
 
 
 func _on_area_entered(area):
