@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://btittgk5vsvla"]
+[gd_scene load_steps=5 format=3 uid="uid://btittgk5vsvla"]
 
+[ext_resource type="LabelSettings" uid="uid://3qt3crtoxn2c" path="res://assets/GM_34_White.tres" id="1_h430f"]
 [ext_resource type="Texture2D" uid="uid://ybgk8y7bh1u8" path="res://assets/lasers/spaceMissiles_040.png" id="1_u5xb7"]
+[ext_resource type="Script" path="res://homing_missile/homing_missile.gd" id="1_y1fm8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hv5hg"]
 radius = 6.0
@@ -8,12 +10,25 @@ radius = 6.0
 [node name="HomingMissile" type="Area2D"]
 collision_layer = 8
 collision_mask = 5
+script = ExtResource("1_y1fm8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="DebugLabel" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -24.0
+offset_right = 104.0
+offset_bottom = 14.0
+scale = Vector2(0.3, 0.3)
+size_flags_horizontal = 3
+text = "Angle: 90"
+label_settings = ExtResource("1_h430f")
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_hv5hg")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Body"]
 position = Vector2(-20, 2.08165e-12)
 rotation = 1.5708
 amount = 30
@@ -32,6 +47,6 @@ scale_amount_min = 0.6
 scale_amount_max = 1.4
 color = Color(0.921569, 0.666667, 0.027451, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="Body"]
 rotation = 1.5708
 texture = ExtResource("1_u5xb7")
