@@ -19,6 +19,10 @@ var _music_volume: float = -20.0
 var _sfx_volume: float = -20.0
 
 
+func get_sfx_volume() -> float:
+	return _sfx_volume
+
+
 func make_explosion_sound(file_num: int) -> String:
 	return "res://assets/sounds/explosions/sfx_exp_medium%s.wav" % file_num
 
