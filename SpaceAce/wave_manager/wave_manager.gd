@@ -37,7 +37,7 @@ func spawn_wave() -> void:
 	var anim = ANIM_FRAMES[enemy_type].pick_random()
 	
 	for num in range(4):
-		path.add_child(create_enemy(0.2, anim, enemy_type))
+		path.add_child(create_enemy(0.15, anim, enemy_type))
 		# Use a coroutine to suspend execution of current function.
 		# We need a 1-second pause between each enemy, so they don't spawn on
 		# top of each other.

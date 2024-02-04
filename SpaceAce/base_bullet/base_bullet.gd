@@ -24,9 +24,11 @@ func _process(delta):
 
 
 func blow_up(area: Node2D) -> void:
-	# Calculate position relative to the target 'area' node.
-	var net_position = global_position - area.global_position
-	ObjectMaker.create_explosion(net_position, area)
+	if not area.is_in_group(GameData.GROUP_HOMING_MISSILE):
+		# Calculate position relative to the target 'area' node.
+		var net_position = global_position - area.global_position
+		ObjectMaker.create_explosion(net_position, area)
+	
 	set_process(false)
 	queue_free()
 

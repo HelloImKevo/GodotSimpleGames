@@ -8,8 +8,8 @@
 radius = 6.0
 
 [node name="HomingMissile" type="Area2D"]
-collision_layer = 8
-collision_mask = 5
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_y1fm8")
 
 [node name="DebugLabel" type="Label" parent="."]
@@ -22,7 +22,9 @@ size_flags_horizontal = 3
 text = "Angle: 90"
 label_settings = ExtResource("1_h430f")
 
-[node name="Body" type="Node2D" parent="."]
+[node name="Body" type="Area2D" parent="." groups=["homing_missile"]]
+collision_layer = 24
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 rotation = 1.5708
@@ -50,3 +52,5 @@ color = Color(0.921569, 0.666667, 0.027451, 1)
 [node name="Sprite2D" type="Sprite2D" parent="Body"]
 rotation = 1.5708
 texture = ExtResource("1_u5xb7")
+
+[connection signal="area_entered" from="Body" to="." method="_on_body_area_entered"]

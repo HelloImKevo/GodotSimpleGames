@@ -54,3 +54,14 @@ func turn(delta: float) -> void:
 		body.rotation_degrees += signf(angle_to_turn) * delta * ROTATION_SPEED
 	else:
 		body.rotation_degrees += signf(angle_to_turn) * -1 * delta * ROTATION_SPEED
+
+
+func _on_body_area_entered(area):
+	print("MISSILE - ON AREA ENTERED")
+	blow_up()
+
+
+func blow_up() -> void:
+	ObjectMaker.create_explosion(global_position, get_tree().current_scene)
+	set_process(false)
+	queue_free()

@@ -3,8 +3,8 @@ extends Node2D
 ## SaucerManager : Spawns large Saucer enemies.
 
 
-const WAIT_TIME: float = 8.0
-const WAIT_VAR: float = 1.0
+const WAIT_TIME: float = 10.0
+const WAIT_VAR: float = 1.5
 
 var saucer_scene: PackedScene = preload("res://enemies/saucer.tscn")
 

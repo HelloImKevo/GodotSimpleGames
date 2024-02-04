@@ -10,7 +10,7 @@ height = 38.0
 [node name="EnemyBio" instance=ExtResource("1_kblxm")]
 shoots = true
 bullet_scene = ExtResource("2_vwuu1")
-bullet_speed = 160.0
+bullet_speed = 170.0
 bullet_wait_time = 1.5
 bullet_wait_time_var = 0.1
 
