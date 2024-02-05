@@ -19,6 +19,11 @@ const MARGIN: float = 32.0
 var _upper_left: Vector2
 var _lower_right: Vector2
 
+var logger = LogStream.new(_to_string(), LogStream.LogLevel.DEBUG)
+
+
+func _to_string() -> String:
+	return "Player"
 
 func _ready():
 	set_limits()
@@ -74,7 +79,7 @@ func shoot() -> void:
 
 
 func on_powerup_hit(powerup: GameData.POWERUP_TYPE) -> void:
-	print("Powerup hit: ", powerup)
+	logger.info("Powerup hit: ", powerup)
 	if GameData.POWERUP_TYPE.SHIELD == powerup:
 		shield.enable_shield()
 	elif GameData.POWERUP_TYPE.HEALTH == powerup:
@@ -82,7 +87,7 @@ func on_powerup_hit(powerup: GameData.POWERUP_TYPE) -> void:
 
 
 func _on_area_entered(area):
-	print("Something hit the PLAYER: %s , %s" % [area, area.get_groups()])
+	logger.debug("Something hit the PLAYER: %s , %s" % [area, area.get_groups()])
 	if area.is_in_group(GameData.GROUP_ENEMY_SHIP):
 		SignalManager.on_player_hit.emit(GameData.COLLISION_DAMAGE)
 	elif area.is_in_group(GameData.GROUP_SAUCER):

@@ -24,6 +24,7 @@ SignalManager="*res://singletons/signal_manager.gd"
 GameManager="*res://singletons/game_manager.gd"
 ObjectMaker="*res://singletons/object_maker.gd"
 ScoreManager="*res://singletons/score_manager.gd"
+Log="*res://addons/logger/logger.gd"
 
 [display]
 
@@ -32,6 +33,10 @@ window/size/viewport_height=960
 window/stretch/mode="canvas_items"
 window/stretch/scale=2.0
 window/dpi/allow_hidpi=false
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/logger/plugin.cfg")
 
 [input]
 

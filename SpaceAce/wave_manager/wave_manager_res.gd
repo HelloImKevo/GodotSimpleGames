@@ -23,6 +23,12 @@ var _paths_list: Array = []
 var _wave_count: int = 0
 var _last_path_index: int = -1
 
+var logger = LogStream.new(_to_string(), LogStream.LogLevel.DEBUG)
+
+
+func _to_string() -> String:
+	return "WaveManagerRes"
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,7 +46,7 @@ func update_speeds() -> void:
 	if _wave_count % len(_paths_list) == 0 and _wave_count != 0:
 		wave_list.speed_factor *= 1.05
 		wave_list.wave_gap *= 0.95
-		print("update_speeds(): _wave_count: %s _speed_factor: %.2f _wave_gap: %.2f" % [
+		logger.warn("update_speeds(): _wave_count: %s _speed_factor: %.2f _wave_gap: %.2f" % [
 			_wave_count, wave_list.speed_factor, wave_list.wave_gap
 		])
 
@@ -71,7 +77,7 @@ func spawn_wave() -> void:
 		# top of each other.
 		await get_tree().create_timer(wave_res.gap).timeout
 	
-	print("spawn_wave() spawned, waiting: %.2f" % [wave_list.wave_gap])
+	logger.info("spawn_wave() spawned, waiting: %.2f" % [wave_list.wave_gap])
 	_wave_count += 1
 	await get_tree().create_timer(wave_list.wave_gap).timeout
 	update_speeds()
