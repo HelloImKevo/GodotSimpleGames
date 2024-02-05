@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhrsbhgnom0is"]
+[gd_scene load_steps=12 format=3 uid="uid://bhrsbhgnom0is"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_74oce"]
 [ext_resource type="Texture2D" uid="uid://clg2jk8yiicqe" path="res://assets/backgrounds/GalaxyUno.png" id="1_h2jcd"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c18vlb7d0xi7" path="res://assets/ui/green_button00.png" id="7_45brw"]
 [ext_resource type="LabelSettings" uid="uid://3qt3crtoxn2c" path="res://assets/GM_34_White.tres" id="8_jp15b"]
 [ext_resource type="PackedScene" uid="uid://cdfpmjw2ng6jj" path="res://sun/sun.tscn" id="9_shl88"]
+[ext_resource type="AudioStream" uid="uid://d2g77uk02f28x" path="res://assets/sounds/loops/TitleScreen.mp3" id="11_q7ah6"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_74oce")
@@ -112,4 +113,9 @@ vertical_alignment = 1
 position = Vector2(48, 24)
 scale = Vector2(0.4, 0.4)
 
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_q7ah6")
+autoplay = true
+
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VB/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VB/ExitButton" to="." method="_on_exit_button_pressed"]
