@@ -4,7 +4,7 @@ extends Area2D
 
 
 const ROTATION_SPEED: float = 100.0
-const SPEED: float = 40.0
+const SPEED: float = 55.0
 const SCORE: int = 5
 
 @onready var debug_label = $DebugLabel
