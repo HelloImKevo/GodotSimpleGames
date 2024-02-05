@@ -11,8 +11,8 @@ height = 38.0
 shoots = true
 bullet_scene = ExtResource("2_vwuu1")
 bullet_speed = 170.0
-bullet_wait_time = 1.5
-bullet_wait_time_var = 0.1
+bullet_wait_time = 2.2
+bullet_wait_time_var = 0.25
 kill_me_score = 20
 damage_taken = 20
 

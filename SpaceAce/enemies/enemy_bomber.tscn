@@ -12,7 +12,7 @@ shoots = true
 aims_at_player = true
 bullet_scene = ExtResource("2_0i7nf")
 bullet_wait_time = 3.5
-bullet_wait_time_var = 0.3
+bullet_wait_time_var = 0.4
 kill_me_score = 40
 damage_taken = 15
 
