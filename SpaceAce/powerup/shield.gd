@@ -43,5 +43,5 @@ func _on_timer_timeout():
 	disable_shield()
 
 
-func _on_area_entered(area):
+func _on_area_entered(_area):
 	hit()

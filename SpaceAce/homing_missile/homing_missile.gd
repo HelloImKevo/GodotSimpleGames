@@ -57,8 +57,7 @@ func turn(delta: float) -> void:
 		body.rotation_degrees += signf(angle_to_turn) * -1 * delta * ROTATION_SPEED
 
 
-func _on_body_area_entered(area):
-	print("MISSILE - ON AREA ENTERED")
+func _on_body_area_entered(_area):
 	blow_up()
 
 

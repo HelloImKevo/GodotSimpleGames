@@ -37,11 +37,11 @@ func spawn_wave() -> void:
 	var anim = ANIM_FRAMES[enemy_type].pick_random()
 	
 	for num in range(4):
-		path.add_child(create_enemy(0.15, anim, enemy_type))
+		path.add_child(create_enemy(0.1, anim, enemy_type))
 		# Use a coroutine to suspend execution of current function.
 		# We need a 1-second pause between each enemy, so they don't spawn on
 		# top of each other.
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(1.5).timeout
 
 
 func _on_spawn_timer_timeout():
