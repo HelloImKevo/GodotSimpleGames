@@ -3,6 +3,11 @@ extends TextureProgressBar
 ## HealthBar : A health bar that can be associated with the Player or an Enemy.
 
 
+## TODO: Another solution to the "Rotating Health Bar" problem is to make this
+## have a Node2D parent, and then reference the @onready texture_progress_bar
+## and programmatically update that way. Then, the parent global_rotation could
+## be fixed to 0.
+
 signal died
 
 @export var level_low: int = 30
