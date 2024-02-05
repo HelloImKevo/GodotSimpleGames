@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://jc7erdy85xq4"]
+
+[ext_resource type="Script" path="res://game_over/game_over.gd" id="1_768tu"]
+[ext_resource type="LabelSettings" uid="uid://bq8cv8b5x8ks1" path="res://assets/LG_72_Yellow.tres" id="1_klxrk"]
+[ext_resource type="LabelSettings" uid="uid://3qt3crtoxn2c" path="res://assets/GM_34_White.tres" id="2_wnven"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_768tu")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1905, 0.04, 0.25, 0.627451)
+
+[node name="VB" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.5
+offset_top = -36.5
+offset_right = 184.5
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="VB"]
+layout_mode = 2
+text = "GAME_OVER"
+label_settings = ExtResource("1_klxrk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="VB"]
+layout_mode = 2
+text = "Score: 10000 (High: 10000)"
+label_settings = ExtResource("2_wnven")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PressShootLabel" type="Label" parent="VB"]
+visible = false
+layout_mode = 2
+text = "Press 'Shoot' to Continue"
+label_settings = ExtResource("2_wnven")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

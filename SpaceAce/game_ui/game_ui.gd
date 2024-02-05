@@ -14,8 +14,6 @@ func _ready():
 
 func _on_health_bar_died():
 	SignalManager.on_player_died.emit()
-	# Later on, we'll pause the game and show the score.
-	GameManager.load_main_scene()
 
 
 func on_player_hit(dmg: int) -> void:

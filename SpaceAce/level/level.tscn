@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://d22hiikgsglyy"]
+[gd_scene load_steps=9 format=3 uid="uid://d22hiikgsglyy"]
 
 [ext_resource type="Script" path="res://level/level.gd" id="1_70o4n"]
 [ext_resource type="PackedScene" uid="uid://c2kjs5y47d7ak" path="res://level_bg/level_bg.tscn" id="2_jhbev"]
 [ext_resource type="PackedScene" uid="uid://bigtwcad5x3yw" path="res://player/player.tscn" id="3_8o5yh"]
 [ext_resource type="PackedScene" uid="uid://tu43ukjgv1so" path="res://saucer_manager/saucer_manager.tscn" id="5_e6kq6"]
 [ext_resource type="PackedScene" uid="uid://dbgx3pgk12wo7" path="res://game_ui/game_ui.tscn" id="6_vravj"]
+[ext_resource type="PackedScene" uid="uid://jc7erdy85xq4" path="res://game_over/game_over.tscn" id="7_6rfdo"]
 [ext_resource type="PackedScene" uid="uid://c6m0viio41swb" path="res://wave_manager/wave_manager.tscn" id="7_ai26j"]
 [ext_resource type="PackedScene" uid="uid://b5pjpf1ipuel4" path="res://shake_cam/shake_cam.tscn" id="7_kx3go"]
 
@@ -23,6 +24,9 @@ position = Vector2(336, 417)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GameUi" parent="CanvasLayer" instance=ExtResource("6_vravj")]
+
+[node name="GameOver" parent="CanvasLayer" instance=ExtResource("7_6rfdo")]
+visible = false
 
 [node name="ShakeCam" parent="." instance=ExtResource("7_kx3go")]
 anchor_mode = 0
