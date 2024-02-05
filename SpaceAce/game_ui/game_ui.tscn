@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbgx3pgk12wo7"]
+
+[ext_resource type="PackedScene" uid="uid://bcebm08gphdjt" path="res://health_bar/health_bar.tscn" id="1_53rcn"]
+[ext_resource type="Script" path="res://game_ui/game_ui.gd" id="1_f841w"]
+[ext_resource type="LabelSettings" uid="uid://3qt3crtoxn2c" path="res://assets/GM_34_White.tres" id="2_ef603"]
+
+[node name="GameUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f841w")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+color = Color(0.360784, 0.0901961, 0.6, 0.235294)
+
+[node name="MC" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+
+[node name="HB" type="HBoxContainer" parent="ColorRect/MC"]
+layout_mode = 2
+
+[node name="HealthBar" parent="ColorRect/MC/HB" instance=ExtResource("1_53rcn")]
+custom_minimum_size = Vector2(150, 18)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ScoreLabel" type="Label" parent="ColorRect/MC/HB"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00000"
+label_settings = ExtResource("2_ef603")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="died" from="ColorRect/MC/HB/HealthBar" to="." method="_on_health_bar_died"]
