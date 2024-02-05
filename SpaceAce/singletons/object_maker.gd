@@ -17,7 +17,8 @@ func get_random_powerup():
 
 
 func add_child_deferred(child_to_add, parent: Node2D) -> void:
-	parent.add_child(child_to_add)
+	if is_instance_valid(parent):
+		parent.add_child(child_to_add)
 
 
 func call_add_child(child_to_add, parent: Node2D) -> void:
