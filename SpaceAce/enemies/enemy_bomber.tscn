@@ -13,6 +13,8 @@ aims_at_player = true
 bullet_scene = ExtResource("2_0i7nf")
 bullet_wait_time = 3.5
 bullet_wait_time_var = 0.3
+kill_me_score = 40
+damage_taken = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 position = Vector2(0, 3)

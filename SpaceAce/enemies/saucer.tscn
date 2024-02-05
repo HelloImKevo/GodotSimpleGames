@@ -242,6 +242,9 @@ offset_left = -30.0
 offset_top = -41.0
 offset_right = 30.0
 offset_bottom = -38.0
+level_low = 80
+level_med = 200
+start_health = 400
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="died" from="HealthBar" to="." method="_on_health_bar_died"]

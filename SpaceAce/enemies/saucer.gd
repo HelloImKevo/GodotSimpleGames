@@ -8,6 +8,7 @@ const SHOOT_PROGRESS: float = 0.02
 const FIRE_OFFSETS = [0.25, 0.5, 0.75]
 const BOOM_DELAY: float = 0.2
 const HIT_DAMAGE: int = 40
+const SCORE: int = 150
 
 @onready var sound = $Sound
 @onready var state_machine = $AnimationTree["parameters/playback"]
@@ -58,6 +59,7 @@ func shoot() -> void:
 
 
 func die() -> void:
+	ScoreManager.increment_score(SCORE)
 	queue_free()
 
 

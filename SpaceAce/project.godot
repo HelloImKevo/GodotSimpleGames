@@ -23,12 +23,14 @@ GameData="*res://singletons/game_data.gd"
 SignalManager="*res://singletons/signal_manager.gd"
 GameManager="*res://singletons/game_manager.gd"
 ObjectMaker="*res://singletons/object_maker.gd"
+ScoreManager="*res://singletons/score_manager.gd"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=480
+window/size/viewport_width=1280
+window/size/viewport_height=960
 window/stretch/mode="canvas_items"
+window/stretch/scale=2.0
 window/dpi/allow_hidpi=false
 
 [input]

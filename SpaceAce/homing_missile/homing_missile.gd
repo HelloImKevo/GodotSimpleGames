@@ -5,6 +5,7 @@ extends Area2D
 
 const ROTATION_SPEED: float = 100.0
 const SPEED: float = 40.0
+const SCORE: int = 5
 
 @onready var debug_label = $DebugLabel
 @onready var body = $Body
@@ -64,4 +65,5 @@ func _on_body_area_entered(area):
 func blow_up() -> void:
 	ObjectMaker.create_explosion(global_position, get_tree().current_scene)
 	set_process(false)
+	ScoreManager.increment_score(SCORE)
 	queue_free()
