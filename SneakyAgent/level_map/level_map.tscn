@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bpbgydqiwgqg8"]
+[gd_scene load_steps=16 format=3 uid="uid://bpbgydqiwgqg8"]
 
 [ext_resource type="Texture2D" uid="uid://cec5qekjk52kf" path="res://assets/spritesheets/grass.png" id="1_ljqmx"]
 [ext_resource type="Texture2D" uid="uid://bh3f7651jhlr4" path="res://assets/spritesheets/concrete.png" id="2_1lok7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://3rmibxhvc8yr" path="res://assets/spritesheets/walls.png" id="4_5hsel"]
 [ext_resource type="Texture2D" uid="uid://bosbbc72hi8ia" path="res://assets/spritesheets/objects.png" id="5_1kqxy"]
 [ext_resource type="Texture2D" uid="uid://brk5r5h3gc75q" path="res://assets/spritesheets/playeholder_tiles_64.png" id="6_45xla"]
+[ext_resource type="PackedScene" uid="uid://kc2gojbeofim" path="res://npc/npc.tscn" id="7_3k8id"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ce7ug"]
 texture = ExtResource("1_ljqmx")
@@ -372,3 +373,6 @@ layer_5/tile_data = PackedInt32Array(1835040, 65540, 0, 1376280, 458756, 0, 1376
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(700, 466)
+
+[node name="NPC" parent="." instance=ExtResource("7_3k8id")]
+position = Vector2(862, 356)

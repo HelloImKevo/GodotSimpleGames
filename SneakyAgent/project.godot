@@ -13,8 +13,17 @@ config_version=5
 config/name="Sneaky Agent"
 config/description="The player controls a sneaky agent that can be spotted by patrolling enemy units, just like in Metal Gear Solid!"
 config/version="0.0.1"
+run/main_scene="res://level_map/level_map.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
+
+[input]
+
+set_target={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(222, 26),"global_position":Vector2(230, 106),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
 
 [rendering]
 
