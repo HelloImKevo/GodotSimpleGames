@@ -1,28 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://dgyyu22e0ikq6"]
+[gd_scene load_steps=17 format=3 uid="uid://dgyyu22e0ikq6"]
 
 [ext_resource type="Texture2D" uid="uid://cui0887eodf7i" path="res://assets/ships/saucer_2.png" id="1_5am30"]
 [ext_resource type="Script" path="res://enemies/saucer.gd" id="1_tr84y"]
 [ext_resource type="AudioStream" uid="uid://c81pc3l77f3kw" path="res://assets/sounds/misc/sci-fi-door.wav" id="3_upda8"]
+[ext_resource type="PackedScene" uid="uid://bcebm08gphdjt" path="res://health_bar/health_bar.tscn" id="4_vdsox"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1bdpg"]
 radius = 35.0
-
-[sub_resource type="Animation" id="Animation_o7kqi"]
-resource_name = "spin"
-length = 6.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Area2D/Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 6.28319]
-}
 
 [sub_resource type="Animation" id="Animation_jbvx7"]
 length = 0.001
@@ -61,6 +45,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Area2D/Sprite2D:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_bvfy8"]
@@ -112,12 +108,69 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_o7kqi"]
+resource_name = "spin"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D/Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_s2tjg"]
+resource_name = "death"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D/Sprite2D:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.760784, 0.101961, 1, 1), Color(0.760784, 0.101961, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [false],
+"method": &"set_process"
+}, {
+"args": [],
+"method": &"make_booms"
+}, {
+"args": [],
+"method": &"die"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7o4yk"]
 _data = {
 "RESET": SubResource("Animation_jbvx7"),
+"death": SubResource("Animation_s2tjg"),
 "shoot": SubResource("Animation_bvfy8"),
 "spin": SubResource("Animation_o7kqi")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qdd2q"]
+animation = &"death"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x81mw"]
 animation = &"shoot"
@@ -133,6 +186,8 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6plax"]
+states/death/node = SubResource("AnimationNodeAnimation_qdd2q")
+states/death/position = Vector2(746.5, 221.5)
 states/shoot/node = SubResource("AnimationNodeAnimation_x81mw")
 states/shoot/position = Vector2(597.5, 100.25)
 states/spin/node = SubResource("AnimationNodeAnimation_c2oqe")
@@ -140,6 +195,7 @@ states/spin/position = Vector2(379, 100.125)
 transitions = ["Start", "spin", SubResource("AnimationNodeStateMachineTransition_0yo81"), "shoot", "spin", SubResource("AnimationNodeStateMachineTransition_cj48o")]
 
 [node name="Saucer" type="PathFollow2D"]
+rotates = false
 script = ExtResource("1_tr84y")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -180,3 +236,12 @@ libraries = {
 }
 tree_root = SubResource("AnimationNodeStateMachine_6plax")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="HealthBar" parent="." instance=ExtResource("4_vdsox")]
+offset_left = -30.0
+offset_top = -41.0
+offset_right = 30.0
+offset_bottom = -38.0
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="died" from="HealthBar" to="." method="_on_health_bar_died"]
