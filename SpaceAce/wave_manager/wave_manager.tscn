@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://c6m0viio41swb"]
 
-[ext_resource type="Script" path="res://wave_manager/wave_manager.gd" id="1_26j2g"]
+[ext_resource type="Script" path="res://wave_manager/wave_manager_res.gd" id="1_yl0wx"]
 
 [sub_resource type="Curve2D" id="Curve2D_n3m6k"]
 _data = {
@@ -45,7 +45,7 @@ _data = {
 point_count = 4
 
 [node name="WaveManager" type="Node2D"]
-script = ExtResource("1_26j2g")
+script = ExtResource("1_yl0wx")
 
 [node name="Paths" type="Node2D" parent="."]
 

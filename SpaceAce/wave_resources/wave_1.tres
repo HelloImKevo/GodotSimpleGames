@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WaveResource" load_steps=2 format=3 uid="uid://ckpxp7gd1cakx"]
+
+[ext_resource type="Script" path="res://wave_resources/wave_resource.gd" id="1_b3xaq"]
+
+[resource]
+script = ExtResource("1_b3xaq")
+enemy_type = 0
+speed = 0.1
+gap = 0.6
+min = 6
+max = 10
