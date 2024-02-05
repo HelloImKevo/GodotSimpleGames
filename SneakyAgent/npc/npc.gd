@@ -3,7 +3,7 @@ extends CharacterBody2D
 ## NPC : Non-Playable Character that uses Godot's NavigationAgent2D for pathfinding.
 
 
-const SPEED: float = 80.0
+const SPEED: float = 250.0
 
 @onready var nav_agent = $NavAgent
 @onready var sprite_2d = $Sprite2D
