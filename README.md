@@ -133,6 +133,7 @@ https://en.wikipedia.org/wiki/CJ's_Elephant_Antics
 | :---: |
 | ![Foxy Antics 5](Screenshot/foxy-05.png) |
 
+
 # Sokoban (ish)
 A puzzle game where the player can push Boxes (Crates) around a 2D tile map
 onto floor switches. The level is complete when all floor switches are
@@ -150,6 +151,24 @@ programmatically generated using a JSON-to-Tile-Map algorithm using 2D coordinat
 | Level Complete UI |
 | :---: |
 | ![Sokoban 3](Screenshot/sokoban-03.png) |
+
+
+# Space Ace (ish)
+A top-down Space shooter where the Player controls a Ship that can shoot
+lasers and collect Health and Shield powerups. The Game UI and on-screen
+enemies have Health Bars that use the `TextureProgressBar` built-in type.
+Waves of enemies are driven by Custom Godot Resources, and the enemies
+are assigned to a random `Path2D` to follow. The difficulty scales indefinitely
+until enemies are so fast, the Player will eventually be overwhelmed.
+
+| Main Menu Screen |
+| :---: |
+| ![Space Ace 1](Screenshot/ace-01.png) |
+
+| Player Ship Being Attacked by Waves of Enemies |
+| :---: |
+| ![Space Ace 2](Screenshot/ace-02.png) |
+
 
 # Godot GDScript Style Guide
 https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html  
