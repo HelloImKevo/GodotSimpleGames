@@ -43,6 +43,8 @@ func create_wp() -> void:
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("set_target"):
+		# TODO: After navigation is finished, reset the Current Waypoint to the
+		# closest Waypoint, using a distance_to() function.
 		nav_agent.target_position = get_global_mouse_position()
 	
 	update_navigation()
