@@ -4,9 +4,8 @@
 [ext_resource type="Script" path="res://npc/npc.gd" id="1_cq0lw"]
 [ext_resource type="LabelSettings" uid="uid://cv7xijaojknit" path="res://assets/GM_32_White.tres" id="2_5lrl6"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qmn1y"]
-radius = 12.0
-height = 34.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_atcvo"]
+radius = 15.0
 
 [node name="NPC" type="CharacterBody2D"]
 script = ExtResource("1_cq0lw")
@@ -16,7 +15,7 @@ texture = ExtResource("1_7kina")
 offset = Vector2(10, 2.08165e-12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_qmn1y")
+shape = SubResource("CircleShape2D_atcvo")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
 path_desired_distance = 10.0
