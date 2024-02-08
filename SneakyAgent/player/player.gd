@@ -3,7 +3,9 @@ extends CharacterBody2D
 ## Player : Survivor character controlled by the user.
 
 
-const SPEED: float = 180.0
+const SPEED: float = 300.0
+
+var _last_input_velocity: Vector2 = Vector2.ZERO
 
 
 func _to_string() -> String:
@@ -17,10 +19,7 @@ func _ready():
 func _physics_process(delta):
 	get_input()
 	move_and_slide()
-	# TODO: Figure out how to retain the last velocity angle based on player
-	# input, so the sprite rotation doesn't reset to zero when there's no input.
-	rotation = velocity.angle()
-	print("velocity: ", velocity, " angle: ", velocity.angle())
+	rotation = _last_input_velocity.angle()
 
 
 func get_input() -> void:
@@ -29,3 +28,12 @@ func get_input() -> void:
 	new_velocity.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	new_velocity.y = Input.get_action_strength("down") - Input.get_action_strength("up")
 	velocity = new_velocity.normalized() * SPEED
+	
+	if (Input.is_action_pressed("right") 
+			or Input.get_action_strength("left") 
+			or Input.get_action_strength("down") 
+			or Input.get_action_strength("up")):
+		# TODO: There's probably a more elegant way to solve this using the Sprite2D's
+		# last updated rotation.
+		_last_input_velocity = velocity
+		# print("_last_input_velocity.angle(): ", _last_input_velocity.angle())

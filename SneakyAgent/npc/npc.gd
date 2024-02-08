@@ -10,9 +10,12 @@ const SPEED: float = 250.0
 @onready var nav_agent = $NavAgent
 @onready var sprite_2d = $Sprite2D
 @onready var debug_label = $DebugLabel
+@onready var player_detect = $PlayerDetect
+@onready var ray_cast = $PlayerDetect/RayCast
 
 var _waypoints: Array = []
 var _current_wp: int = 0
+var _player_ref: Player
 
 # Reference error that can be resolved by using call_deferred("set_physics_process", true)
 '''
@@ -27,6 +30,7 @@ E 0:00:01:0603   npc.gd:66 @ set_label(): NavigationServer map query failed beca
 func _ready():
 	set_physics_process(false)
 	create_wp()
+	_player_ref = get_tree().get_first_node_in_group("player")
 	call_deferred("set_physics_process", true)
 	# call_deferred("set_temp_target")
 
@@ -47,9 +51,21 @@ func _physics_process(_delta):
 		# closest Waypoint, using a distance_to() function.
 		nav_agent.target_position = get_global_mouse_position()
 	
+	raycast_to_player()
 	update_navigation()
 	process_patrolling()
 	set_label()
+
+
+func raycast_to_player() -> void:
+	player_detect.look_at(_player_ref.global_position)
+
+
+func player_detected() -> bool:
+	var collider: Object = ray_cast.get_collider() # Gets first collider
+	if collider != null:
+		return collider.is_in_group("player")
+	return false
 
 
 func update_navigation() -> void:
@@ -76,8 +92,8 @@ func navigate_wp() -> void:
 
 
 func set_label():
-	var s = "DONE: %s\n" % [nav_agent.is_navigation_finished()]
-	s += "REACH: %s\n" % [nav_agent.is_target_reachable()]
-	s += "REACHED: %s\n" % [nav_agent.is_target_reached()]
-	s += "TARGET: %s\n" % [nav_agent.target_position]
+	var s = "Done: %s\n" % [nav_agent.is_navigation_finished()]
+	s += "P.Detected: %s\n" % [player_detected()]
+	s += "Reached: %s\n" % [nav_agent.is_target_reached()]
+	s += "TargetPos: %s\n" % [nav_agent.target_position]
 	debug_label.text = s
