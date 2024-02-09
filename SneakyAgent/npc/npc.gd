@@ -7,6 +7,8 @@ extends CharacterBody2D
 
 const SPEED: float = 100.0
 
+enum EnemyState { PATROLLING, CHASING, SEARCHING }
+
 @onready var nav_agent = $NavAgent
 @onready var sprite_2d = $Sprite2D
 @onready var debug_label = $DebugLabel
@@ -16,6 +18,7 @@ const SPEED: float = 100.0
 var _waypoints: Array = []
 var _current_wp: int = 0
 var _player_ref: Player
+var _state: EnemyState = EnemyState.PATROLLING
 
 # Reference error that can be resolved by using call_deferred("set_physics_process", true)
 '''
@@ -52,8 +55,9 @@ func _physics_process(_delta):
 		nav_agent.target_position = get_global_mouse_position()
 	
 	raycast_to_player()
+	update_state()
+	update_movement()
 	update_navigation()
-	process_patrolling()
 	set_label()
 
 
@@ -101,6 +105,10 @@ func player_detected() -> bool:
 	return false
 
 
+func can_see_player() -> bool:
+	return player_in_fov() and player_detected()
+
+
 func update_navigation() -> void:
 	if nav_agent.is_navigation_finished():
 		return
@@ -117,6 +125,37 @@ func process_patrolling() -> void:
 		navigate_wp()
 
 
+func process_chasing() -> void:
+	set_nav_to_player()
+
+
+func update_movement() -> void:
+	match _state:
+		EnemyState.PATROLLING:
+			process_patrolling()
+		EnemyState.CHASING:
+			process_chasing()
+
+
+func set_state(new_state: EnemyState) -> void:
+	if new_state == _state:
+		return
+	
+	_state = new_state
+
+
+func update_state() -> void:
+	var new_state = _state
+	var can_see = can_see_player()
+	
+	if can_see:
+		new_state = EnemyState.CHASING
+	else:
+		new_state = EnemyState.PATROLLING
+	
+	set_state(new_state)
+
+
 func navigate_wp() -> void:
 	if _current_wp >= len(_waypoints):
 		_current_wp = 0
@@ -124,11 +163,15 @@ func navigate_wp() -> void:
 	_current_wp += 1
 
 
+func set_nav_to_player() -> void:
+	nav_agent.target_position = _player_ref.global_position
+
+
 func set_label():
 	var s = "Done: %s\n" % [nav_agent.is_navigation_finished()]
 	s += "P.Detected: %s\n" % [player_detected()]
 	s += "LOS Angle: %.2f\n" % [get_los_angle_to_player()]
-	s += "In FOV: %s\n" % [player_in_fov()]
+	s += "In FOV: %s State: %s\n" % [player_in_fov(), EnemyState.keys()[_state]]
 	s += "Reached: %s\n" % [nav_agent.is_target_reached()]
 	s += "TargetPos: %s\n" % [nav_agent.target_position]
 	debug_label.text = s
