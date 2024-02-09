@@ -3,7 +3,7 @@ extends CharacterBody2D
 ## Player : Survivor character controlled by the user.
 
 
-const SPEED: float = 300.0
+const SPEED: float = 350.0
 
 var _last_input_velocity: Vector2 = Vector2.ZERO
 

@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 @export var patrol_points: NodePath
 
-const SPEED: float = 250.0
+const SPEED: float = 100.0
 
 @onready var nav_agent = $NavAgent
 @onready var sprite_2d = $Sprite2D
@@ -57,10 +57,43 @@ func _physics_process(_delta):
 	set_label()
 
 
+## Get the Line of Sight angle (in degrees) from the face of the [NPC] to the [Player].
+## 0 degrees = Player is directly in front of NPC.
+## 90 degrees = Player is directly to the left or the right of the NPC.
+## 180 degrees = Player is directly behind the NPC.
+func get_los_angle_to_player() -> float:
+	var direction = global_position.direction_to(_player_ref.global_position)
+	var dot_product = direction.dot(velocity.normalized())
+	# The result should be between -1.0 and 1.0, but due to quirks of physics
+	# processing and frames updating, it might not be.
+	if dot_product >= -1.0 and dot_product <= 1.0:
+		return rad_to_deg(acos(dot_product))
+	
+	return 0.0
+
+
+## Returns true if the [Player] is within the Field of View (Line of Sight)
+## angle at the face (front) of the [NPC]. The FOV angle threshold is dynamic;
+## if the [NPC] is doing a routine patrol, their FOV is shallow, but if they
+## are actively chasing (pursuing) the [Player], it is a wider angle.
+## Should be used in conjunction with [player_detected()].
+func player_in_fov() -> bool:
+	return get_los_angle_to_player() < get_fov_angle_threshold()
+
+
+func get_fov_angle_threshold() -> float:
+	# This will be updated to be dynamic, based on whether the NPC is currently
+	# doing a routine patrol or if they are chasing Player.
+	return 60.0
+
+
+## Continually aim the RayCast2D at the [Player].
 func raycast_to_player() -> void:
 	player_detect.look_at(_player_ref.global_position)
 
 
+## Detect whether the [Player] is within range of the RayCast2D,
+## and whether the [NPC] vision is obstructed by a wall.
 func player_detected() -> bool:
 	var collider: Object = ray_cast.get_collider() # Gets first collider
 	if collider != null:
@@ -94,6 +127,8 @@ func navigate_wp() -> void:
 func set_label():
 	var s = "Done: %s\n" % [nav_agent.is_navigation_finished()]
 	s += "P.Detected: %s\n" % [player_detected()]
+	s += "LOS Angle: %.2f\n" % [get_los_angle_to_player()]
+	s += "In FOV: %s\n" % [player_in_fov()]
 	s += "Reached: %s\n" % [nav_agent.is_target_reached()]
 	s += "TargetPos: %s\n" % [nav_agent.target_position]
 	debug_label.text = s
