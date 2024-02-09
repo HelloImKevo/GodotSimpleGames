@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://kc2gojbeofim"]
+[gd_scene load_steps=6 format=3 uid="uid://kc2gojbeofim"]
 
 [ext_resource type="Texture2D" uid="uid://42kv5qoketch" path="res://assets/images/soldier1_gun.png" id="1_7kina"]
 [ext_resource type="Script" path="res://npc/npc.gd" id="1_cq0lw"]
 [ext_resource type="LabelSettings" uid="uid://cv7xijaojknit" path="res://assets/GM_32_White.tres" id="2_5lrl6"]
+[ext_resource type="Texture2D" uid="uid://qmliq8vq2s1x" path="res://assets/images/running_1.png" id="4_6rwc6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_atcvo"]
 radius = 15.0
@@ -41,3 +42,15 @@ vertical_alignment = 2
 rotation = -1.5708
 target_position = Vector2(2.08165e-12, 400)
 collision_mask = 5
+
+[node name="Warning" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-17, -2)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_6rwc6")
+
+[node name="LostSightTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="LostSightTimer" to="." method="_on_lost_sight_timer_timeout"]

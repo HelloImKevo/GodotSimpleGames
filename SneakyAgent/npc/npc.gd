@@ -14,11 +14,16 @@ enum EnemyState { PATROLLING, CHASING, SEARCHING }
 @onready var debug_label = $DebugLabel
 @onready var player_detect = $PlayerDetect
 @onready var ray_cast = $PlayerDetect/RayCast
+@onready var warning = $Warning
+@onready var lost_sight_timer = $LostSightTimer
 
 var _waypoints: Array = []
 var _current_wp: int = 0
 var _player_ref: Player
 var _state: EnemyState = EnemyState.PATROLLING
+## Used after the NPC performs a Search, and has lost sight of the player,
+## to briefly pause the NPC before returning to its normal patrol.
+var _lost_sight_of_player: bool = false
 
 # Reference error that can be resolved by using call_deferred("set_physics_process", true)
 '''
@@ -56,7 +61,7 @@ func _physics_process(_delta):
 	
 	raycast_to_player()
 	update_state()
-	update_movement()
+	update_movement_destination()
 	update_navigation()
 	set_label()
 
@@ -110,6 +115,10 @@ func can_see_player() -> bool:
 
 
 func update_navigation() -> void:
+	# The NPC will briefly pause if they lost sight of the player.
+	if _lost_sight_of_player:
+		return
+	
 	if nav_agent.is_navigation_finished():
 		return
 	
@@ -125,14 +134,21 @@ func process_patrolling() -> void:
 		navigate_wp()
 
 
+func process_searching() -> void:
+	if nav_agent.is_navigation_finished():
+		set_state(EnemyState.PATROLLING)
+
+
 func process_chasing() -> void:
 	set_nav_to_player()
 
 
-func update_movement() -> void:
+func update_movement_destination() -> void:
 	match _state:
 		EnemyState.PATROLLING:
 			process_patrolling()
+		EnemyState.SEARCHING:
+			process_searching()
 		EnemyState.CHASING:
 			process_chasing()
 
@@ -140,6 +156,26 @@ func update_movement() -> void:
 func set_state(new_state: EnemyState) -> void:
 	if new_state == _state:
 		return
+	
+	if new_state == EnemyState.CHASING:
+		warning.self_modulate = Color.FIREBRICK
+		warning.show()
+	else:
+		if (_state == EnemyState.SEARCHING):
+			# If the NPC is currently Searching, then it may be
+			# transitioning to either Patrolling or Chasing.
+			warning.hide()
+			
+			if new_state != EnemyState.SEARCHING:
+				_lost_sight_of_player = true
+				warning.self_modulate = Color.DODGER_BLUE
+				warning.show()
+				lost_sight_timer.start()
+		
+		if new_state == EnemyState.SEARCHING:
+			# Return the Sprite to its default color.
+			warning.self_modulate = Color.WHITE
+			warning.show()
 	
 	_state = new_state
 
@@ -150,8 +186,8 @@ func update_state() -> void:
 	
 	if can_see:
 		new_state = EnemyState.CHASING
-	else:
-		new_state = EnemyState.PATROLLING
+	elif not can_see and new_state == EnemyState.CHASING:
+		new_state = EnemyState.SEARCHING
 	
 	set_state(new_state)
 
@@ -175,3 +211,8 @@ func set_label():
 	s += "Reached: %s\n" % [nav_agent.is_target_reached()]
 	s += "TargetPos: %s\n" % [nav_agent.target_position]
 	debug_label.text = s
+
+
+func _on_lost_sight_timer_timeout():
+	_lost_sight_of_player = false
+	warning.hide()
