@@ -5,7 +5,17 @@ extends CharacterBody2D
 
 @export var patrol_points: NodePath
 
-const SPEED: float = 100.0
+const FOV: Dictionary = {
+	EnemyState.PATROLLING: 60.0,
+	EnemyState.CHASING: 120.0,
+	EnemyState.SEARCHING: 100.0
+}
+
+const SPEED: Dictionary = {
+	EnemyState.PATROLLING: 80.0,
+	EnemyState.CHASING: 140.0,
+	EnemyState.SEARCHING: 100.0
+}
 
 enum EnemyState { PATROLLING, CHASING, SEARCHING }
 
@@ -24,6 +34,7 @@ var _state: EnemyState = EnemyState.PATROLLING
 ## Used after the NPC performs a Search, and has lost sight of the player,
 ## to briefly pause the NPC before returning to its normal patrol.
 var _lost_sight_of_player: bool = false
+var _default_sight_distance: float
 
 # Reference error that can be resolved by using call_deferred("set_physics_process", true)
 '''
@@ -37,6 +48,7 @@ E 0:00:01:0603   npc.gd:66 @ set_label(): NavigationServer map query failed beca
 
 func _ready():
 	set_physics_process(false)
+	_default_sight_distance = ray_cast.target_position.y
 	create_wp()
 	_player_ref = get_tree().get_first_node_in_group("player")
 	call_deferred("set_physics_process", true)
@@ -61,6 +73,7 @@ func _physics_process(_delta):
 	
 	raycast_to_player()
 	update_state()
+	adjust_sight_distance()
 	update_movement_destination()
 	update_navigation()
 	set_label()
@@ -91,9 +104,9 @@ func player_in_fov() -> bool:
 
 
 func get_fov_angle_threshold() -> float:
-	# This will be updated to be dynamic, based on whether the NPC is currently
+	# This is dynamic, based on whether the NPC is currently
 	# doing a routine patrol or if they are chasing Player.
-	return 60.0
+	return FOV[_state]
 
 
 ## Continually aim the RayCast2D at the [Player].
@@ -117,6 +130,7 @@ func can_see_player() -> bool:
 func update_navigation() -> void:
 	# The NPC will briefly pause if they lost sight of the player.
 	if _lost_sight_of_player:
+		## TODO: Make the Sprite look both ways confused, with an Animation player.
 		return
 	
 	if nav_agent.is_navigation_finished():
@@ -125,7 +139,7 @@ func update_navigation() -> void:
 	var next_path_position: Vector2 = nav_agent.get_next_path_position()
 	sprite_2d.look_at(next_path_position)
 	# Normalize vector of magnitude 1.
-	velocity = global_position.direction_to(next_path_position) * SPEED
+	velocity = global_position.direction_to(next_path_position) * SPEED[_state]
 	move_and_slide()
 
 
@@ -192,6 +206,16 @@ func update_state() -> void:
 	set_state(new_state)
 
 
+func adjust_sight_distance() -> void:
+	match _state:
+		EnemyState.PATROLLING:
+			ray_cast.target_position.y = _default_sight_distance
+		EnemyState.SEARCHING:
+			ray_cast.target_position.y = _default_sight_distance + 50.0
+		EnemyState.CHASING:
+			ray_cast.target_position.y = _default_sight_distance + 100.0
+
+
 func navigate_wp() -> void:
 	if _current_wp >= len(_waypoints):
 		_current_wp = 0
@@ -205,7 +229,7 @@ func set_nav_to_player() -> void:
 
 func set_label():
 	var s = "Done: %s\n" % [nav_agent.is_navigation_finished()]
-	s += "P.Detected: %s\n" % [player_detected()]
+	s += "P.Detected: %s Speed: %.2f\n" % [player_detected(), SPEED[_state]]
 	s += "LOS Angle: %.2f\n" % [get_los_angle_to_player()]
 	s += "In FOV: %s State: %s\n" % [player_in_fov(), EnemyState.keys()[_state]]
 	s += "Reached: %s\n" % [nav_agent.is_target_reached()]
