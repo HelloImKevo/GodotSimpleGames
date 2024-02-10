@@ -55,8 +55,13 @@ func _ready():
 	set_physics_process(false)
 	_default_sight_distance = ray_cast.target_position.y
 	create_wp()
-	call_deferred("set_physics_process", true)
+	call_deferred("late_setup")
 	# call_deferred("set_temp_target")
+
+
+func late_setup():
+	await get_tree().physics_frame
+	call_deferred("set_physics_process", true)
 
 
 func _get_player_ref() -> Player:
@@ -280,3 +285,7 @@ func shoot() -> void:
 	b.init(target, global_position)
 	get_tree().root.add_child(b)
 	SoundManager.play_laser(gasp_sound)
+
+
+func _on_hit_area_body_entered(_body):
+	SignalManager.on_game_over.emit()

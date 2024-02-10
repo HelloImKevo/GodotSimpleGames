@@ -11,5 +11,5 @@ func _on_show_exit() -> void:
 	show()
 
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	SignalManager.on_exit.emit()

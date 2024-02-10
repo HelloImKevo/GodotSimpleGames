@@ -88,3 +88,5 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Well done, you took XX seconds"
 label_settings = SubResource("LabelSettings_jb0qn")
+horizontal_alignment = 1
+vertical_alignment = 1
