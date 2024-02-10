@@ -80,6 +80,17 @@ Now you should be able to run the game by clicking on the `TappyPlane.html` file
 If you follow the above steps, Memory Madness will kind of work... Except all
 of the image assets will be missing!
 
+This has to do with the relative path reference of `var path = "res://assets/glitch"`
+in our `ImageManager` singleton.
+
+| Resource Editor Tool for Memory Madness |
+| :---: |
+| ![Create Resource Icon 1](Screenshot/export-02.png) |
+
+| Saving the Resource for Memory Madness |
+| :---: |
+| ![Save Resource 1](Screenshot/export-03.png) |
+
 
 ## Asset Links
 https://opengameart.org/content/parallax-2d-backgrounds  

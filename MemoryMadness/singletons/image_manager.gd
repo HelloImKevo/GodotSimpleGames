@@ -63,6 +63,27 @@ func _load_async() -> void:
 
 
 func _load_item_images() -> void:
+	var image_resource: ImageFilesList = load("res://image_resources/ImageFilesList.tres")
+	
+	for fn in image_resource.file_names:
+		_add_file_to_list(fn)
+	
+	# OS.delay_msec(5000)
+	print("Finished Loading %d images @ %d ms" % [_item_images.size(), Time.get_ticks_msec()])
+	_is_data_loaded = true
+	SignalManager.on_load_game_data_complete.emit()
+
+
+func _add_file_to_list(file_with_full_path: String) -> void:
+	var image_info_dict = {
+		"item_name": file_with_full_path.rstrip(".png"),
+		"item_texture": load(file_with_full_path)
+	}
+	
+	_item_images.append(image_info_dict)
+
+
+func _load_item_images_old() -> void:
 	var path = "res://assets/glitch"
 	var dir = DirAccess.open(path)
 	
@@ -75,7 +96,7 @@ func _load_item_images() -> void:
 	
 	for fn in file_names:
 		if ".import" not in fn:
-			_add_file_to_list(fn, path)
+			_add_file_to_list_old(fn, path)
 	
 	# OS.delay_msec(5000)
 	print("Finished Loading %d images @ %d ms" % [_item_images.size(), Time.get_ticks_msec()])
@@ -83,7 +104,7 @@ func _load_item_images() -> void:
 	SignalManager.on_load_game_data_complete.emit()
 
 
-func _add_file_to_list(fn: String, path: String) -> void:
+func _add_file_to_list_old(fn: String, path: String) -> void:
 	var full_path = path + "/" + fn
 	
 	var image_info_dict = {
