@@ -37,6 +37,7 @@ var _state: EnemyState = EnemyState.PATROLLING
 ## to briefly pause the NPC before returning to its normal patrol.
 var _lost_sight_of_player: bool = false
 var _default_sight_distance: float
+var _tween: Tween
 
 # Reference error that can be resolved by using call_deferred("set_physics_process", true)
 '''
@@ -176,7 +177,7 @@ func set_state(new_state: EnemyState) -> void:
 		animation.play("alert")
 		warning.self_modulate = Color.FIREBRICK
 		warning.show()
-		gasp_sound.play()
+		SoundManager.play_gasp(gasp_sound)
 	else:
 		if (_state == EnemyState.SEARCHING):
 			# If the NPC is currently Searching, then it may be
@@ -185,10 +186,9 @@ func set_state(new_state: EnemyState) -> void:
 			
 			if new_state != EnemyState.SEARCHING:
 				_lost_sight_of_player = true
-				# TODO: The rotate animation is causing the Sprite2D to always
-				# default to the 0 degrees rotation. This should be done programmatically,
-				# probably with a Tween.
-				animation.play("confused")
+				stop_confused_animation()
+				_tween = get_tree().create_tween()
+				TweenUtils.tween_rotate_back_and_forth(sprite_2d, _tween, 30.0)
 				warning.self_modulate = Color.DODGER_BLUE
 				warning.show()
 				lost_sight_timer.start()
@@ -234,6 +234,13 @@ func set_nav_to_player() -> void:
 	nav_agent.target_position = _player_ref.global_position
 
 
+func stop_confused_animation() -> void:
+	if _tween != null:
+		print("killing tween ...")
+		_tween.kill()
+		_tween = null
+
+
 func set_label():
 	var s = "Done: %s\n" % [nav_agent.is_navigation_finished()]
 	s += "P.Detected: %s Speed: %.2f\n" % [player_detected(), SPEED[_state]]
@@ -246,5 +253,6 @@ func set_label():
 
 func _on_lost_sight_timer_timeout():
 	_lost_sight_of_player = false
+	stop_confused_animation()
 	animation.stop()
 	warning.hide()
