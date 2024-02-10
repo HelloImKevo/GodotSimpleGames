@@ -12,6 +12,8 @@ func play_sound() -> void:
 
 
 func _on_body_entered(_body):
+	# Prevent multiple signals from being emitted.
+	set_deferred("monitoring", false)
 	SignalManager.on_pickup.emit()
 	animation.play("vanish")
 	play_sound()

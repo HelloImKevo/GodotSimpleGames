@@ -22,6 +22,12 @@ config/icon="res://icon.svg"
 SignalManager="*res://singletons/signal_manager.gd"
 SoundManager="*res://singletons/sound_manager.gd"
 
+[display]
+
+window/size/viewport_width=1536
+window/size/viewport_height=1152
+window/dpi/allow_hidpi=false
+
 [input]
 
 set_target={

@@ -236,7 +236,6 @@ func set_nav_to_player() -> void:
 
 func stop_confused_animation() -> void:
 	if _tween != null:
-		print("killing tween ...")
 		_tween.kill()
 		_tween = null
 
