@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bpbgydqiwgqg8"]
+[gd_scene load_steps=19 format=3 uid="uid://bpbgydqiwgqg8"]
 
 [ext_resource type="Texture2D" uid="uid://cec5qekjk52kf" path="res://assets/spritesheets/grass.png" id="1_ljqmx"]
 [ext_resource type="Texture2D" uid="uid://bh3f7651jhlr4" path="res://assets/spritesheets/concrete.png" id="2_1lok7"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://kc2gojbeofim" path="res://npc/npc.tscn" id="7_3k8id"]
 [ext_resource type="PackedScene" uid="uid://sfsy3oc6wqjt" path="res://waypoint/waypoint.tscn" id="8_jdc5t"]
 [ext_resource type="PackedScene" uid="uid://drx20cebn54t5" path="res://player/player.tscn" id="9_j7tyh"]
+[ext_resource type="PackedScene" uid="uid://yxk4ph5ds3a0" path="res://pickup/pickup.tscn" id="10_fqri0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ce7ug"]
 texture = ExtResource("1_ljqmx")
@@ -385,6 +386,14 @@ polygon = PackedVector2Array(763, 1725, 1473, 1724, 1477, 1989, 766, 1987)
 [node name="Polygon2D2" type="Polygon2D" parent="Navigation/NavigationRegion2D"]
 color = Color(1, 0.14902, 0.14902, 0)
 polygon = PackedVector2Array(950, 436, 1033, 436, 1032, 775, 948, 774)
+
+[node name="Pickups" type="Node" parent="."]
+
+[node name="Pickup" parent="Pickups" instance=ExtResource("10_fqri0")]
+position = Vector2(1455, 736)
+
+[node name="Pickup2" parent="Pickups" instance=ExtResource("10_fqri0")]
+position = Vector2(1552, 736)
 
 [node name="Path1" type="Node2D" parent="."]
 

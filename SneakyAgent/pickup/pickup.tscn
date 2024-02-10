@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=3 uid="uid://yxk4ph5ds3a0"]
+
+[ext_resource type="Texture2D" uid="uid://cn7kmh6yc5wqo" path="res://assets/images/pill2.png" id="1_3v5bq"]
+[ext_resource type="Script" path="res://pickup/pickup.gd" id="1_7y437"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fns2s"]
+radius = 9.19239
+height = 35.3553
+
+[sub_resource type="Animation" id="Animation_bak6s"]
+resource_name = "flash"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.886275, 0.0196078, 1), Color(1, 0.886275, 0.0196078, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.7, 0.7), Vector2(0.85, 0.85), Vector2(0.85, 0.85), Vector2(0.7, 0.7)]
+}
+
+[sub_resource type="Animation" id="Animation_it538"]
+resource_name = "vanish"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.7, 0.7), Vector2(1.4, 1.4), Vector2(0.01, 0.01)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uwfod"]
+_data = {
+"flash": SubResource("Animation_bak6s"),
+"vanish": SubResource("Animation_it538")
+}
+
+[node name="Pickup" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_7y437")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.785398
+shape = SubResource("CapsuleShape2D_fns2s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("1_3v5bq")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uwfod")
+}
+autoplay = "flash"
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+volume_db = -18.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="Sound" to="." method="_on_sound_finished"]

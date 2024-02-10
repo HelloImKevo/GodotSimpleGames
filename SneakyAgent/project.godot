@@ -17,6 +17,11 @@ run/main_scene="res://level_map/level_map.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SignalManager="*res://singletons/signal_manager.gd"
+SoundManager="*res://singletons/sound_manager.gd"
+
 [input]
 
 set_target={
