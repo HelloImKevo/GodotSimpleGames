@@ -30,6 +30,53 @@ The Navigation Agent will by default cap the maximum speed of a `CharacterBody2D
 be sure to update the upper limit from the default 100 px/s.
 
 
+## Deployment with Python Web Server
+Go to Editor > **Manage Export Templates...**.
+
+If you see "Export templates are missing. Download them or install from a file."
+Select the "Best Available Mirror" and click **Download and Install**. The
+download is about 850 MB. Then close the window.
+
+Then to go Project > Export. It will open a "Presets" window. Click the "Web"
+option from the dropdown.
+
+Export the Project to a new `web_export` folder (which you need to create).
+
+| Web Export for Tappy Plane |
+| :---: |
+| ![Web Export Window 1](Screenshot/export-01.png) |
+
+In a Terminal instance, navigate to:
+```
+cd ~/GitProjects/GodotSimpleGames/TappyPlane/web_export
+```
+
+Then run this with Python 3 and confirm "Serving HTTP ..." output:
+```
+$ python -m http.server
+
+Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+```
+
+Open this URL in a Browser: http://localhost:8000/  
+
+Click on the `TappyPlane.html` file and you'll see this error:
+```
+Error
+The following features required to run Godot projects on the Web are missing:
+Cross Origin Isolation - Check web server configuration (send correct headers)
+SharedArrayBuffer - Check web server configuration (send correct headers)
+```
+
+Run the `create_server.py` script to create a local server with the proper
+configuration:
+```
+python ./create_server.py
+```
+
+Now you should be able to run the game by clicking on the `TappyPlane.html` file!
+
+
 ## Asset Links
 https://opengameart.org/content/parallax-2d-backgrounds  
 https://craftpix.net/freebies/free-cartoon-parallax-2d-backgrounds/?utm_campaign=Website&utm_source=opengameart.org&utm_medium=public  
