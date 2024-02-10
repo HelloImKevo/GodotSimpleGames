@@ -1,12 +1,81 @@
-[gd_scene load_steps=6 format=3 uid="uid://kc2gojbeofim"]
+[gd_scene load_steps=11 format=3 uid="uid://kc2gojbeofim"]
 
 [ext_resource type="Texture2D" uid="uid://42kv5qoketch" path="res://assets/images/soldier1_gun.png" id="1_7kina"]
 [ext_resource type="Script" path="res://npc/npc.gd" id="1_cq0lw"]
 [ext_resource type="LabelSettings" uid="uid://cv7xijaojknit" path="res://assets/GM_32_White.tres" id="2_5lrl6"]
 [ext_resource type="Texture2D" uid="uid://qmliq8vq2s1x" path="res://assets/images/running_1.png" id="4_6rwc6"]
+[ext_resource type="AudioStream" uid="uid://ddsa407e4a2v" path="res://assets/sounds/gasp1.wav" id="5_1hk5l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_atcvo"]
 radius = 15.0
+
+[sub_resource type="Animation" id="Animation_n7b8n"]
+resource_name = "alert"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.741176, 0.0313726, 0.0313726, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8h70q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ww6ul"]
+resource_name = "confused"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.523599, 0.0, 0.523599, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aab74"]
+_data = {
+"RESET": SubResource("Animation_8h70q"),
+"alert": SubResource("Animation_n7b8n"),
+"confused": SubResource("Animation_ww6ul")
+}
 
 [node name="NPC" type="CharacterBody2D"]
 script = ExtResource("1_cq0lw")
@@ -52,5 +121,14 @@ texture = ExtResource("4_6rwc6")
 [node name="LostSightTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_aab74")
+}
+
+[node name="GaspSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_1hk5l")
+volume_db = -10.0
 
 [connection signal="timeout" from="LostSightTimer" to="." method="_on_lost_sight_timer_timeout"]

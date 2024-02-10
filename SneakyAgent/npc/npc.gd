@@ -26,6 +26,8 @@ enum EnemyState { PATROLLING, CHASING, SEARCHING }
 @onready var ray_cast = $PlayerDetect/RayCast
 @onready var warning = $Warning
 @onready var lost_sight_timer = $LostSightTimer
+@onready var animation = $Animation
+@onready var gasp_sound = $GaspSound
 
 var _waypoints: Array = []
 var _current_wp: int = 0
@@ -130,7 +132,6 @@ func can_see_player() -> bool:
 func update_navigation() -> void:
 	# The NPC will briefly pause if they lost sight of the player.
 	if _lost_sight_of_player:
-		## TODO: Make the Sprite look both ways confused, with an Animation player.
 		return
 	
 	if nav_agent.is_navigation_finished():
@@ -172,8 +173,10 @@ func set_state(new_state: EnemyState) -> void:
 		return
 	
 	if new_state == EnemyState.CHASING:
+		animation.play("alert")
 		warning.self_modulate = Color.FIREBRICK
 		warning.show()
+		gasp_sound.play()
 	else:
 		if (_state == EnemyState.SEARCHING):
 			# If the NPC is currently Searching, then it may be
@@ -182,6 +185,10 @@ func set_state(new_state: EnemyState) -> void:
 			
 			if new_state != EnemyState.SEARCHING:
 				_lost_sight_of_player = true
+				# TODO: The rotate animation is causing the Sprite2D to always
+				# default to the 0 degrees rotation. This should be done programmatically,
+				# probably with a Tween.
+				animation.play("confused")
 				warning.self_modulate = Color.DODGER_BLUE
 				warning.show()
 				lost_sight_timer.start()
@@ -239,4 +246,5 @@ func set_label():
 
 func _on_lost_sight_timer_timeout():
 	_lost_sight_of_player = false
+	animation.stop()
 	warning.hide()
