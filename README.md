@@ -76,6 +76,10 @@ python ./create_server.py
 
 Now you should be able to run the game by clicking on the `TappyPlane.html` file!
 
+### Quirk with Memory Madness Deployment
+If you follow the above steps, Memory Madness will kind of work... Except all
+of the image assets will be missing!
+
 
 ## Asset Links
 https://opengameart.org/content/parallax-2d-backgrounds  
