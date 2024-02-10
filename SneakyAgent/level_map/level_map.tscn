@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bpbgydqiwgqg8"]
+[gd_scene load_steps=21 format=3 uid="uid://bpbgydqiwgqg8"]
 
 [ext_resource type="Script" path="res://level_map/level_map.gd" id="1_epqol"]
 [ext_resource type="Texture2D" uid="uid://cec5qekjk52kf" path="res://assets/spritesheets/grass.png" id="1_ljqmx"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://sfsy3oc6wqjt" path="res://waypoint/waypoint.tscn" id="8_jdc5t"]
 [ext_resource type="PackedScene" uid="uid://drx20cebn54t5" path="res://player/player.tscn" id="9_j7tyh"]
 [ext_resource type="PackedScene" uid="uid://yxk4ph5ds3a0" path="res://pickup/pickup.tscn" id="10_fqri0"]
+[ext_resource type="PackedScene" uid="uid://dpdevrk752bfe" path="res://exit/exit.tscn" id="12_2khxm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ce7ug"]
 texture = ExtResource("1_ljqmx")
@@ -376,6 +377,14 @@ layer_4/tile_data = PackedInt32Array(1835040, 65540, 0, 1376280, 458756, 0, 1376
 position = Vector2(862, 356)
 patrol_points = NodePath("../Path1")
 
+[node name="NPC2" parent="." instance=ExtResource("7_3k8id")]
+position = Vector2(2530, 1318)
+patrol_points = NodePath("../Path2")
+
+[node name="NPC3" parent="." instance=ExtResource("7_3k8id")]
+position = Vector2(3634, 1708)
+patrol_points = NodePath("../Path3")
+
 [node name="Navigation" type="Node" parent="."]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Navigation"]
@@ -423,5 +432,43 @@ position = Vector2(1914, 969)
 [node name="Waypoint4" parent="Path1" instance=ExtResource("8_jdc5t")]
 position = Vector2(1262, 969)
 
+[node name="Path2" type="Node2D" parent="."]
+
+[node name="Waypoint" parent="Path2" instance=ExtResource("8_jdc5t")]
+position = Vector2(2453, 1376)
+
+[node name="Waypoint2" parent="Path2" instance=ExtResource("8_jdc5t")]
+position = Vector2(2453, 1978)
+
+[node name="Waypoint3" parent="Path2" instance=ExtResource("8_jdc5t")]
+position = Vector2(1793, 1978)
+
+[node name="Waypoint4" parent="Path2" instance=ExtResource("8_jdc5t")]
+position = Vector2(1793, 1475)
+
+[node name="Path3" type="Node2D" parent="."]
+position = Vector2(2784, 1734)
+
+[node name="Waypoint" parent="Path3" instance=ExtResource("8_jdc5t")]
+position = Vector2(772, 420)
+
+[node name="Waypoint2" parent="Path3" instance=ExtResource("8_jdc5t")]
+position = Vector2(1417, 420)
+
+[node name="Waypoint3" parent="Path3" instance=ExtResource("8_jdc5t")]
+position = Vector2(1417, 35)
+
+[node name="Waypoint4" parent="Path3" instance=ExtResource("8_jdc5t")]
+position = Vector2(479, 35)
+
+[node name="Waypoint5" parent="Path3" instance=ExtResource("8_jdc5t")]
+position = Vector2(479, 454)
+
+[node name="Waypoint6" parent="Path3" instance=ExtResource("8_jdc5t")]
+position = Vector2(207, 454)
+
 [node name="Player" parent="." instance=ExtResource("9_j7tyh")]
 position = Vector2(561, 293)
+
+[node name="Exit" parent="." instance=ExtResource("12_2khxm")]
+position = Vector2(3951, 147)
