@@ -25,6 +25,11 @@ You can turn on Visible Collision Shapes by checking / enabling:
 - [x] Debug > Visible Collision Shapes
 
 
+### Nav Agent Avoidance
+The Navigation Agent will by default cap the maximum speed of a `CharacterBody2D`,
+be sure to update the upper limit from the default 100 px/s.
+
+
 ## Asset Links
 https://opengameart.org/content/parallax-2d-backgrounds  
 https://craftpix.net/freebies/free-cartoon-parallax-2d-backgrounds/?utm_campaign=Website&utm_source=opengameart.org&utm_medium=public  
@@ -168,6 +173,22 @@ until enemies are so fast, the Player will eventually be overwhelmed.
 | Player Ship Being Attacked by Waves of Enemies |
 | :---: |
 | ![Space Ace 2](Screenshot/ace-02.png) |
+
+
+# Sneaky Agent
+A top-down stealth game (like Metal Gear Solid) where the enemy soldiers have
+a Field of View and a Line of Sight to the player. The enemies will pursue
+and chase the player, and eventually lose sight of the player if outrun.
+Enemies will also shoot bullets at the player, and the player must collect
+medication pill `Pickups` to reveal the level exit.
+
+| Main Menu Screen |
+| :---: |
+| ![Sneaky Agent 1](Screenshot/sneaky-01.png) |
+
+| Player Spotted by Enemy Soldiers |
+| :---: |
+| ![Sneaky Agent 2](Screenshot/sneaky-02.png) |
 
 
 # Godot GDScript Style Guide

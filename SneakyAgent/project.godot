@@ -27,6 +27,7 @@ GameManager="*res://singletons/game_manager.gd"
 
 window/size/viewport_width=1536
 window/size/viewport_height=1152
+window/stretch/mode="canvas_items"
 window/dpi/allow_hidpi=false
 
 [input]
