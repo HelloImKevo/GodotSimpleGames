@@ -93,6 +93,7 @@ target_desired_distance = 20.0
 debug_enabled = true
 
 [node name="DebugLabel" type="Label" parent="."]
+visible = false
 offset_left = -61.0
 offset_top = -158.0
 offset_right = 143.0
