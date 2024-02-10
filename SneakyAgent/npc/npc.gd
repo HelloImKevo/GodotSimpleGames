@@ -19,6 +19,8 @@ const SPEED: Dictionary = {
 
 enum EnemyState { PATROLLING, CHASING, SEARCHING }
 
+const BULLET = preload("res://bullet/bullet.tscn")
+
 @onready var nav_agent = $NavAgent
 @onready var sprite_2d = $Sprite2D
 @onready var debug_label = $DebugLabel
@@ -31,7 +33,6 @@ enum EnemyState { PATROLLING, CHASING, SEARCHING }
 
 var _waypoints: Array = []
 var _current_wp: int = 0
-var _player_ref: Player
 var _state: EnemyState = EnemyState.PATROLLING
 ## Used after the NPC performs a Search, and has lost sight of the player,
 ## to briefly pause the NPC before returning to its normal patrol.
@@ -53,9 +54,12 @@ func _ready():
 	set_physics_process(false)
 	_default_sight_distance = ray_cast.target_position.y
 	create_wp()
-	_player_ref = get_tree().get_first_node_in_group("player")
 	call_deferred("set_physics_process", true)
 	# call_deferred("set_temp_target")
+
+
+func _get_player_ref() -> Player:
+	return get_tree().get_first_node_in_group("player")
 
 
 # Unused: For testing purposes.
@@ -87,7 +91,7 @@ func _physics_process(_delta):
 ## 90 degrees = Player is directly to the left or the right of the NPC.
 ## 180 degrees = Player is directly behind the NPC.
 func get_los_angle_to_player() -> float:
-	var direction = global_position.direction_to(_player_ref.global_position)
+	var direction = global_position.direction_to(_get_player_ref().global_position)
 	var dot_product = direction.dot(velocity.normalized())
 	# The result should be between -1.0 and 1.0, but due to quirks of physics
 	# processing and frames updating, it might not be.
@@ -114,7 +118,7 @@ func get_fov_angle_threshold() -> float:
 
 ## Continually aim the RayCast2D at the [Player].
 func raycast_to_player() -> void:
-	player_detect.look_at(_player_ref.global_position)
+	player_detect.look_at(_get_player_ref().global_position)
 
 
 ## Detect whether the [Player] is within range of the RayCast2D,
@@ -231,7 +235,7 @@ func navigate_wp() -> void:
 
 
 func set_nav_to_player() -> void:
-	nav_agent.target_position = _player_ref.global_position
+	nav_agent.target_position = _get_player_ref().global_position
 
 
 func stop_confused_animation() -> void:
@@ -255,3 +259,18 @@ func _on_lost_sight_timer_timeout():
 	stop_confused_animation()
 	animation.stop()
 	warning.hide()
+
+
+func _on_shoot_timer_timeout():
+	if _state != EnemyState.CHASING:
+		return
+	
+	shoot()
+
+
+func shoot() -> void:
+	var target = _get_player_ref().global_position
+	var b: Bullet = BULLET.instantiate()
+	b.init(target, global_position)
+	get_tree().root.add_child(b)
+	SoundManager.play_laser(gasp_sound)

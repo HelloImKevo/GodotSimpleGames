@@ -77,6 +77,7 @@ _data = {
 }
 
 [node name="NPC" type="CharacterBody2D"]
+collision_layer = 0
 script = ExtResource("1_cq0lw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -108,7 +109,7 @@ vertical_alignment = 2
 
 [node name="RayCast" type="RayCast2D" parent="PlayerDetect"]
 rotation = -1.5708
-target_position = Vector2(2.08165e-12, 350)
+target_position = Vector2(2.08165e-12, 400)
 collision_mask = 5
 
 [node name="Warning" type="Sprite2D" parent="."]
@@ -129,4 +130,9 @@ libraries = {
 [node name="GaspSound" type="AudioStreamPlayer2D" parent="."]
 volume_db = -10.0
 
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
 [connection signal="timeout" from="LostSightTimer" to="." method="_on_lost_sight_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
