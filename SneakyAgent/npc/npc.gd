@@ -13,8 +13,8 @@ const FOV: Dictionary = {
 
 const SPEED: Dictionary = {
 	EnemyState.PATROLLING: 80.0,
-	EnemyState.CHASING: 140.0,
-	EnemyState.SEARCHING: 100.0
+	EnemyState.CHASING: 220.0,
+	EnemyState.SEARCHING: 140.0
 }
 
 enum EnemyState { PATROLLING, CHASING, SEARCHING }
@@ -151,8 +151,10 @@ func update_navigation() -> void:
 	var next_path_position: Vector2 = nav_agent.get_next_path_position()
 	sprite_2d.look_at(next_path_position)
 	# Normalize vector of magnitude 1.
-	velocity = global_position.direction_to(next_path_position) * SPEED[_state]
-	move_and_slide()
+	#velocity = global_position.direction_to(next_path_position) * SPEED[_state]
+	#move_and_slide()
+	var initial_velocity = global_position.direction_to(next_path_position) * SPEED[_state]
+	nav_agent.set_velocity(initial_velocity)
 
 
 func process_patrolling() -> void:
@@ -186,6 +188,7 @@ func set_state(new_state: EnemyState) -> void:
 	if new_state == EnemyState.CHASING:
 		animation.play("alert")
 		warning.self_modulate = Color.FIREBRICK
+		resume_chasing()
 		warning.show()
 		SoundManager.play_gasp(gasp_sound)
 	else:
@@ -253,18 +256,23 @@ func stop_confused_animation() -> void:
 func set_label():
 	var s = "Done: %s\n" % [nav_agent.is_navigation_finished()]
 	s += "P.Detected: %s Speed: %.2f\n" % [player_detected(), SPEED[_state]]
-	s += "LOS Angle: %.2f\n" % [get_los_angle_to_player()]
-	s += "In FOV: %s State: %s\n" % [player_in_fov(), EnemyState.keys()[_state]]
-	s += "Reached: %s\n" % [nav_agent.is_target_reached()]
-	s += "TargetPos: %s\n" % [nav_agent.target_position]
+	s += "LOS Angle: %.1f\n" % [get_los_angle_to_player()]
+	# s += "In FOV: %s State: %s\n" % [player_in_fov(), EnemyState.keys()[_state]]
+	# s += "Reached: %s\n" % [nav_agent.is_target_reached()]
+	# s += "TargetPos: %s\n" % [nav_agent.target_position]
+	s += "Velocity: %s\n" % [velocity]
 	debug_label.text = s
 
 
 func _on_lost_sight_timer_timeout():
+	resume_chasing()
+	warning.hide()
+
+
+func resume_chasing() -> void:
 	_lost_sight_of_player = false
 	stop_confused_animation()
 	animation.stop()
-	warning.hide()
 
 
 func _on_shoot_timer_timeout():
@@ -277,6 +285,7 @@ func _on_shoot_timer_timeout():
 func stop_action() -> void:
 	set_physics_process(false)
 	shoot_timer.stop()
+	nav_agent.set_velocity(Vector2.ZERO)
 
 
 func shoot() -> void:
@@ -289,3 +298,8 @@ func shoot() -> void:
 
 func _on_hit_area_body_entered(_body):
 	SignalManager.on_game_over.emit()
+
+
+func _on_nav_agent_velocity_computed(safe_velocity):
+	velocity = safe_velocity
+	move_and_slide()
