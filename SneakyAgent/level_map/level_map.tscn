@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bpbgydqiwgqg8"]
+[gd_scene load_steps=22 format=3 uid="uid://bpbgydqiwgqg8"]
 
 [ext_resource type="Script" path="res://level_map/level_map.gd" id="1_epqol"]
 [ext_resource type="Texture2D" uid="uid://cec5qekjk52kf" path="res://assets/spritesheets/grass.png" id="1_ljqmx"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://drx20cebn54t5" path="res://player/player.tscn" id="9_j7tyh"]
 [ext_resource type="PackedScene" uid="uid://yxk4ph5ds3a0" path="res://pickup/pickup.tscn" id="10_fqri0"]
 [ext_resource type="PackedScene" uid="uid://dpdevrk752bfe" path="res://exit/exit.tscn" id="12_2khxm"]
+[ext_resource type="PackedScene" uid="uid://ci5hcaa4xeebu" path="res://game_ui/game_ui.tscn" id="13_qbolh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ce7ug"]
 texture = ExtResource("1_ljqmx")
@@ -472,3 +473,7 @@ position = Vector2(561, 293)
 
 [node name="Exit" parent="." instance=ExtResource("12_2khxm")]
 position = Vector2(3951, 147)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameUi" parent="CanvasLayer" instance=ExtResource("13_qbolh")]

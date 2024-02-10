@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://ci5hcaa4xeebu"]
+
+[ext_resource type="Script" path="res://game_ui/game_ui.gd" id="1_3exlu"]
+[ext_resource type="LabelSettings" uid="uid://cv7xijaojknit" path="res://assets/GM_32_White.tres" id="1_r0nux"]
+[ext_resource type="FontFile" uid="uid://ws8ik1r04ohi" path="res://assets/fonts/gemunu-libre-v8-latin-700.ttf" id="2_m2gc3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vsptk"]
+font = ExtResource("2_m2gc3")
+font_size = 56
+font_color = Color(0.317647, 0.890196, 0.054902, 1)
+outline_size = 2
+outline_color = Color(0.04, 0.04, 0.04, 1)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.470588)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jb0qn"]
+font = ExtResource("2_m2gc3")
+font_size = 72
+outline_size = 2
+outline_color = Color(0.04, 0.04, 0.04, 1)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.470588)
+
+[node name="GameUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3exlu")
+
+[node name="MC" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="ScoreLabel" type="Label" parent="MC"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "0 / 100"
+label_settings = ExtResource("1_r0nux")
+
+[node name="ExitLabel" type="Label" parent="MC"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "GO TO EXIT!!"
+label_settings = SubResource("LabelSettings_vsptk")
+
+[node name="TimeLabel" type="Label" parent="MC"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "1000s"
+label_settings = ExtResource("1_r0nux")
+
+[node name="GameOver" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.113725, 0.423529, 0.509804, 0.313726)
+
+[node name="GameOverLabel" type="Label" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -426.5
+offset_top = -39.5
+offset_right = 426.5
+offset_bottom = 39.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Well done, you took XX seconds"
+label_settings = SubResource("LabelSettings_jb0qn")
