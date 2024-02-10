@@ -1,3 +1,4 @@
+class_name GameUi
 extends Control
 
 
@@ -28,3 +29,7 @@ func _on_exit() -> void:
 func _process(delta):
 	_time += delta
 	time_label.text = "%.1fs" % _time
+
+
+func update_score(actual: int, target: int) -> void:
+	score_label.text = "%s / %s" % [actual, target]

@@ -30,6 +30,7 @@ const BULLET = preload("res://bullet/bullet.tscn")
 @onready var lost_sight_timer = $LostSightTimer
 @onready var animation = $Animation
 @onready var gasp_sound = $GaspSound
+@onready var shoot_timer = $ShootTimer
 
 var _waypoints: Array = []
 var _current_wp: int = 0
@@ -266,6 +267,11 @@ func _on_shoot_timer_timeout():
 		return
 	
 	shoot()
+
+
+func stop_action() -> void:
+	set_physics_process(false)
+	shoot_timer.stop()
 
 
 func shoot() -> void:
